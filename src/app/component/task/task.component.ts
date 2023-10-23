@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {TaskService} from "../../shared/service/task.service";
-import {Task} from "../../shared/model/Task";
+import {Task} from "../../shared/model/task";
 
 @Component({
   selector: 'app-task',
@@ -19,19 +19,18 @@ export class TaskComponent implements OnInit {
   capturedLines: Array<Array<{ x: number; y: number }>> = [];
   currentLine: { x: number; y: number }[] = [];
 
-  tasks: Task[] = [];
+  tasks!: Task[];
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
+      //TODO: capturedLines is already defined in Task Mode -> update Model with the same id
     this.capturedLines = [];
-    // @ts-ignore
-    this.tasks = this.taskService.tasks;
-    console.log(this.tasks);
+    this.tasks = this.taskService.initData("ger");
   }
 
   onImageLoad() {
-    this.canvas = this.drawingCanvas.nativeElement;
+      this.canvas = this.drawingCanvas.nativeElement;
     this.context = this.canvas!.getContext('2d');
 
     if (this.context && this.canvas) {

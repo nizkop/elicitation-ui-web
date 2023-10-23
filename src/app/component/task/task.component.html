@@ -21,7 +21,7 @@
   </mat-grid-tile>
 </mat-grid-list>
 <div style="position: relative;">
-  <img #backgroundImage [src]="backgroundImageUrl" (load)="onImageLoad()">
+  <img #backgroundImage [src]="backgroundImageUrl" style="max-width: 90%;" (load)="onImageLoad()">
   <canvas #drawingCanvas
           (mousedown)="onMouseDown($event)"
           (mousemove)="onMouseMove($event)"

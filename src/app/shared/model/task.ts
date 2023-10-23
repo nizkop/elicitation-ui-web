@@ -1,11 +1,15 @@
 import {Time} from "@angular/common";
+import {Group} from "./group.enum";
+import {Language} from "./language.enum";
 
 export class Task {
+    taskNumber!: number;
     id: number;
     title: string;
     description: string;
-    group: string;
+    group: Group;
     resets: number;
+    language: Language;
 
     //Captured during runtime
     capturedLines: Array<Array<{ x: number; y: number }>> = [];
@@ -19,12 +23,14 @@ export class Task {
     constructor(id: number,
                 title: string,
                 description: string,
-                group: string,
-               resets: number) {
+                group: Group,
+                resets: number,
+                language: Language) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.group = group;
         this.resets = resets;
+        this.language = language;
     }
 }

@@ -1,6 +1,9 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {TaskService} from "../../shared/service/task.service";
 import {Task} from "../../shared/model/task";
+import {Language} from "../../shared/model/language.enum";
+import {ActivatedRoute} from "@angular/router";
+import {Group} from "../../shared/model/group.enum";
 
 @Component({
   selector: 'app-task',
@@ -19,14 +22,25 @@ export class TaskComponent implements OnInit {
   capturedLines: Array<Array<{ x: number; y: number }>> = [];
   currentLine: { x: number; y: number }[] = [];
 
-  tasks!: Task[];
+  tasks: Task[] | undefined;
+  currentTask: Task | undefined;
 
-  constructor(private taskService: TaskService) {}
+  protected readonly Language = Language;
+
+  constructor(private taskService: TaskService, private route: ActivatedRoute) {}
 
   ngOnInit() {
       //TODO: capturedLines is already defined in Task Mode -> update Model with the same id
     this.capturedLines = [];
-    this.tasks = this.taskService.initData("ger");
+    this.tasks = this.taskService.initDataGerman();
+      const taskNumber = +this.route.snapshot.params['taskNumber'];
+      this.currentTask = this.tasks?.find(task => task.taskNumber === taskNumber);
+
+      if (this.currentTask) {
+          console.log(this.currentTask);
+      } else {
+          console.log('Aufgabe nicht gefunden');
+      }
   }
 
   onImageLoad() {

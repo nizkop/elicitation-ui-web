@@ -105,28 +105,57 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  saveDrawing() {
-    console.log("Save drawings...")
-    if (this.canvas && this.context) {
-      const drawingData: { lines: { points: { x: number; y: number }[]; color: string; width: number }[] } = {
-        lines: []
-      };
+    saveDrawing() {
+        if (this.canvas && this.context) {
+            const saveCanvas = document.createElement('canvas');
+            const saveContext = saveCanvas.getContext('2d');
+            if (saveContext) {
+                saveCanvas.width = this.canvas.width;
+                saveCanvas.height = this.canvas.height;
+                for (const line of this.capturedLines) {
+                    saveContext.beginPath();
+                    saveContext.moveTo(line[0].x, line[0].y);
+                    for (let i = 1; i < line.length; i++) {
+                        saveContext.lineTo(line[i].x, line[i].y);
+                    }
+                    saveContext.strokeStyle = this.context.strokeStyle as string;
+                    saveContext.lineWidth = this.context.lineWidth;
+                    saveContext.stroke();
+                }
+                //PNG
+                const dataUrl = saveCanvas.toDataURL('image/png');
+                const a = document.createElement('a');
+                a.href = dataUrl;
+                a.download = 'drawing.png';
 
-      for (const line of this.capturedLines) {
-        const lineData = {
-          points: [...line],
-          color: this.context.strokeStyle as string,
-          width: this.context.lineWidth,
-        };
-        drawingData.lines.push(lineData);
-      }
+                //JSON
+                const drawingData = {
+                    lines: this.capturedLines,
+                };
+                const jsonData = JSON.stringify(drawingData);
+                const blob = new Blob([jsonData], { type: 'application/json' });
+                const b = document.createElement('a');
+                b.href = URL.createObjectURL(blob);
+                b.download = 'drawing.json';
 
-      //TODO: Save drawing data
-      console.log('Drawing Data:', drawingData);
+                //PNG
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                //JSON
+                document.body.appendChild(b);
+                b.click();
+                document.body.removeChild(b);
+
+                //Clean up
+                saveCanvas.remove();
+            }
+        }
+        this.resetDrawing();
     }
-  }
 
-  resetDrawing() {
+    resetDrawing() {
     console.log("Reset drawings...")
     this.capturedLines = [];
     this.drawOnCanvas();

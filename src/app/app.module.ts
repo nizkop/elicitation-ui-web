@@ -12,6 +12,7 @@ import { AcknowledgementComponent } from './component/acknowledgement/acknowledg
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {TaskService} from "./shared/service/task.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MatIconModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [
+    TaskService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

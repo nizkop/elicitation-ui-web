@@ -1,0 +1,25 @@
+<div class="grid">
+  <div class="col-6 col-offset-3">
+    <p-card header="Login" subheader="Bitte melden Sie sich bei PBL an">
+      <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+      </ng-template>
+      <form (ngSubmit)="onSubmitLogin()">
+        <span class="p-float-label mb-4">
+          <input pInputText id="username" name="username" [(ngModel)]="username" />
+          <label for="username">Username</label>
+        </span>
+        <span class="p-float-label mb-4">
+          <p-password id="password" name="password" [(ngModel)]="password" [feedback]="false"></p-password>
+          <label for="password">Password</label>
+        </span>
+        <span class="p-float-label mb-4">
+          <p-button type="submit" label="Login" />
+        </span>
+        <span class="p-float-label">
+          <p-button label="Registrieren" styleClass="p-button-secondary" [routerLink]="'/registration'" />
+        </span>
+      </form>
+    </p-card>
+  </div>
+</div>

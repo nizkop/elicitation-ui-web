@@ -1,0 +1,30 @@
+<mat-grid-list cols="3" rowHeight="6:1">
+  <mat-grid-tile>
+    <h2>Aufgabe 1 von 18</h2>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <h2>Werte löschen</h2>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-raised-button color="primary" (click)="resetDrawing()">Zurücksetzen</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-raised-button color="primary">Vorherige Seite</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-raised-button color="primary" (click)="saveDrawing()">Nächste Seite</button>
+  </mat-grid-tile>
+</mat-grid-list>
+<div style="position: relative;">
+  <img #backgroundImage [src]="backgroundImageUrl" (load)="onImageLoad()">
+  <canvas #drawingCanvas
+          (mousedown)="onMouseDown($event)"
+          (mousemove)="onMouseMove($event)"
+          (mouseup)="onMouseUp()"
+          style="position: absolute; top: 0; left: 0;"></canvas>
+</div>

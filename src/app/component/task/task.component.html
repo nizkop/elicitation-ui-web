@@ -2,7 +2,7 @@
 <div style="background-color: lightblue;">
     <mat-grid-list cols="3" rowHeight="6:1">
       <mat-grid-tile>
-          <img src="/assets/UDE_logo.png" style="max-width: 150px;">
+          <img src="./assets/UDE_logo.png" style="max-width: 150px;">
       </mat-grid-tile>
       <mat-grid-tile>
           <h2 *ngIf="currentTask?.language === Language.GERMAN">Aufgabe {{currentTask?.taskNumber}} von 18: {{currentTask?.title}}</h2>
@@ -41,10 +41,14 @@
     <!--Spreatching Section-->
     <div style="position: relative;">
       <img #backgroundImage [src]="backgroundImageUrl" style="max-width: 90%;" (load)="onImageLoad()">
-      <canvas #drawingCanvas
-              (mousedown)="onMouseDown($event)"
-              (mousemove)="onMouseMove($event)"
-              (mouseup)="onMouseUp()"
-              style="position: absolute; top: 0; left: 0;"></canvas>
+        <canvas #drawingCanvas
+                (touchstart)="onTouchStart($event)"
+                (touchmove)="onTouchMove($event)"
+                (touchend)="onTouchEnd($event)"
+                (mousedown)="onMouseDown($event)"
+                (mousemove)="onMouseMove($event)"
+                (mouseup)="onMouseUp()"
+                style="position: absolute; top: 0; left: 0;"></canvas>
+
     </div>
 </div>

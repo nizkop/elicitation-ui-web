@@ -14,7 +14,7 @@ export class TaskComponent implements OnInit {
   @ViewChild('backgroundImage') backgroundImage!: ElementRef;
   @ViewChild('drawingCanvas', { static: false }) drawingCanvas!: ElementRef;
 
-  backgroundImageUrl = '/assets/Spreadsheet_DE.png';
+  backgroundImageUrl = './assets/Spreadsheet_DE.png';
   canvas: HTMLCanvasElement | null = null;
   context: CanvasRenderingContext2D | null = null;
   drawing = false;
@@ -56,23 +56,28 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  onMouseDown(event: MouseEvent) {
-    if (this.context) {
-      this.drawing = true;
-      this.context.beginPath();
-      this.context.moveTo(event.offsetX, event.offsetY);
+    onMouseDown(event: MouseEvent | Touch) {
+        if (this.context && this.canvas) {
+            this.drawing = true;
+            const x = ('offsetX' in event) ? (event as MouseEvent).offsetX : (event as Touch).clientX - this.canvas.getBoundingClientRect().left;
+            const y = ('offsetY' in event) ? (event as MouseEvent).offsetY : (event as Touch).clientY - this.canvas.getBoundingClientRect().top;
+            this.context.beginPath();
+            this.context.moveTo(x, y);
+        }
     }
-  }
 
-  onMouseMove(event: MouseEvent) {
-    if (this.drawing) {
-      const point = { x: event.offsetX, y: event.offsetY };
-      this.currentLine.push(point);
-      this.drawOnCanvas();
+    onMouseMove(event: MouseEvent | Touch) {
+        if (this.drawing && this.canvas) {
+            const x = ('offsetX' in event) ? (event as MouseEvent).offsetX : (event as Touch).clientX - this.canvas.getBoundingClientRect().left;
+            const y = ('offsetY' in event) ? (event as MouseEvent).offsetY : (event as Touch).clientY - this.canvas.getBoundingClientRect().top;
+            const point = { x, y };
+            this.currentLine.push(point);
+            this.drawOnCanvas();
+        }
     }
-  }
 
-  drawOnCanvas() {
+
+    drawOnCanvas() {
     if (this.context) {
       this.context.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
       for (const line of this.capturedLines) {
@@ -160,4 +165,25 @@ export class TaskComponent implements OnInit {
     this.capturedLines = [];
     this.drawOnCanvas();
   }
+
+    /**
+     * Tablet Section
+     */
+
+    onTouchStart(event: TouchEvent) {
+        event.preventDefault(); // Verhindert das Scrollen der Seite bei Touch-Events
+        const touch = event.touches[0];
+        this.onMouseDown(touch);
+    }
+
+    onTouchMove(event: TouchEvent) {
+        event.preventDefault();
+        const touch = event.touches[0];
+        this.onMouseMove(touch);
+    }
+
+    onTouchEnd(event: TouchEvent) {
+        event.preventDefault();
+        this.onMouseUp();
+    }
 }

@@ -1,54 +1,37 @@
 <!--Header Section-->
-<div style="background-color: lightblue;">
+<div style="background-color: lightblue">
     <mat-grid-list cols="3" rowHeight="6:1">
-      <mat-grid-tile>
-          <img src="./assets/UDE_logo.png" style="max-width: 150px;">
-      </mat-grid-tile>
-      <mat-grid-tile>
-          <h2 *ngIf="currentTask?.language === Language.GERMAN">Aufgabe {{currentTask?.taskNumber}} von 18: {{currentTask?.title}}</h2>
-          <h2 *ngIf="currentTask?.language === Language.ENGLISH">Task {{currentTask?.taskNumber}} of 18: {{currentTask?.title}}</h2>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
-          <mat-icon>exit_to_app</mat-icon>
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-raised-button color="primary" (click)="resetDrawing()">
-            {{ currentTask?.language === Language.GERMAN ? 'Zurücksetzen' : 'Reset' }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-          <button mat-raised-button color="primary">
-              {{ currentTask?.language === Language.GERMAN ? 'Vorherige Seite' : 'Previous Page' }}
-          </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-raised-button color="primary" (click)="saveDrawing()">
-            {{ currentTask?.language === Language.GERMAN ? 'Nächste Seite' : 'Next Page' }}
-        </button>
-      </mat-grid-tile>
-    </mat-grid-list>
-</div>
-
-<div style="background-color: aliceblue;">
-    <!--Task Description Section-->
-    <mat-grid-list cols="1" rowHeight="20:1">
         <mat-grid-tile>
-            <p>{{currentTask?.description}}</p>
+            <img src="./assets/UDE_logo.png" style="max-width: 150px" />
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <h2 *ngIf="currentTask?.language === Language.GERMAN && (currentTask?.id !== 1 || currentTask?.id !== 2)">
+                Aufgabe {{ currentTask!.taskNumber - 2 }} von 18: {{ currentTask?.title }}
+            </h2>
+            <h2 *ngIf="currentTask?.language === Language.ENGLISH && (currentTask?.id !== 1 || currentTask?.id !== 2)">
+                Task {{ currentTask?.taskNumber }} of 18: {{ currentTask?.title }}
+            </h2>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickResetPage()">
+                {{ currentTask?.language === Language.GERMAN ? "Zurücksetzen" : "Reset" }}
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickPreviousPage()">
+                {{ currentTask?.language === Language.GERMAN ? "Vorherige Seite" : "Previous Page" }}
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickNextPage()">
+                {{ currentTask?.language === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
+            </button>
         </mat-grid-tile>
     </mat-grid-list>
-    <!--Spreatching Section-->
-    <div style="position: relative;">
-      <img #backgroundImage [src]="backgroundImageUrl" style="max-width: 90%;" (load)="onImageLoad()">
-        <canvas #drawingCanvas
-                (touchstart)="onTouchStart($event)"
-                (touchmove)="onTouchMove($event)"
-                (touchend)="onTouchEnd($event)"
-                (mousedown)="onMouseDown($event)"
-                (mousemove)="onMouseMove($event)"
-                (mouseup)="onMouseUp()"
-                style="position: absolute; top: 0; left: 0;"></canvas>
-
-    </div>
 </div>
+<app-sketch />

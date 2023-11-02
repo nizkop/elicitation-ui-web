@@ -15,6 +15,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { TaskService } from "./shared/service/task.service";
 import { DemographicsComponent } from "./component/demographics/demographics.component";
 import { SketchComponent } from "./component/sketch/sketch.component";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -27,7 +29,16 @@ import { SketchComponent } from "./component/sketch/sketch.component";
         DemographicsComponent,
         SketchComponent,
     ],
-    imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule, MatButtonModule, MatIconModule, MatGridListModule],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NoopAnimationsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatGridListModule,
+        MatSnackBarModule,
+        FormsModule,
+    ],
     providers: [TaskService],
     bootstrap: [AppComponent],
 })

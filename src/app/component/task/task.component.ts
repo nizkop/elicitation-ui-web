@@ -4,6 +4,7 @@ import { Task } from "../../shared/model/task";
 import { Language } from "../../shared/model/language.enum";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SketchComponent } from "../sketch/sketch.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: "app-task",
@@ -22,10 +23,11 @@ export class TaskComponent implements OnInit {
         private taskService: TaskService,
         private route: ActivatedRoute,
         private router: Router,
+        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
-        //TODO: capturedLines is already defined in Task Mode -> update Model with the same id
+        //TODO: capturedLines is already defined in Task Model -> update Model with the same id
         this.tasks = this.taskService.initData(Language.GERMAN);
         const taskNumber = +this.route.snapshot.params["taskNumber"];
         this.currentTask = this.tasks?.find((task) => task.taskNumber === taskNumber);
@@ -50,6 +52,13 @@ export class TaskComponent implements OnInit {
         this.sketchComponent.resetDrawing();
     }
     clickNextPage() {
+        if (this.sketchComponent.capturedLines.length == 0) {
+            //TODO: English message
+            this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
+                duration: 3000,
+            });
+            return;
+        }
         this.sketchComponent.saveDrawing();
         if (this.currentTask!.taskNumber === this.tasks?.length) {
             this.router.navigate(["/demographics"]);

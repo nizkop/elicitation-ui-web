@@ -4,6 +4,7 @@ import { Task } from "../../shared/model/task";
 import { Language } from "../../shared/model/language.enum";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SketchComponent } from "../sketch/sketch.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: "app-playground",
@@ -23,6 +24,7 @@ export class PlaygroundComponent implements OnInit {
         private taskService: TaskService,
         private route: ActivatedRoute,
         private router: Router,
+        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
@@ -51,6 +53,13 @@ export class PlaygroundComponent implements OnInit {
         this.sketchComponent.resetDrawing();
     }
     clickNextPage() {
+        if (this.sketchComponent.capturedLines.length == 0) {
+            //TODO: English message
+            this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
+                duration: 3000,
+            });
+            return;
+        }
         this.sketchComponent.saveDrawing();
         if (this.currentTask!.taskNumber === 2) {
             this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);

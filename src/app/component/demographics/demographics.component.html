@@ -1,1 +1,149 @@
-<p>demographics works!</p>
+<!--Header Section-->
+<div style="background-color: lightblue">
+    <mat-grid-list cols="3" rowHeight="6:1">
+        <mat-grid-tile>
+            <img src="./assets/UDE_logo.png" style="max-width: 150px" />
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <h2 *ngIf="language === Language.GERMAN">Demographiefragebogen</h2>
+            <h2 *ngIf="language === Language.ENGLISH">Demographics Page</h2>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile> </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickPreviousPage()">
+                {{ language === Language.GERMAN ? "Vorherige Seite" : "Previous Page" }}
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickNextPage()">
+                {{ language === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<!--Demographics-->
+<div style="background-color: aliceblue">
+    <form>
+        <mat-grid-list cols="1" rowHeight="20:1">
+            <!-- Geschlecht -->
+            <mat-grid-tile>
+                <label>Geschlecht:</label>
+                <input type="radio" [(ngModel)]="gender" name="gender" value="weiblich" />
+                <p>weiblich</p>
+                <input type="radio" [(ngModel)]="gender" name="gender" value="männlich" />
+                <p>männlich</p>
+                <input type="radio" [(ngModel)]="gender" name="gender" value="non-binär" />
+                <p>non-binär</p>
+            </mat-grid-tile>
+
+            <!-- Alter -->
+            <mat-grid-tile>
+                <label>Alter:</label>
+                <input type="radio" [(ngModel)]="age" name="age" value="18-24" />
+                <p>18-24</p>
+                <input type="radio" [(ngModel)]="age" name="age" value="25-30" />
+                <p>25-30</p>
+                <input type="radio" [(ngModel)]="age" name="age" value="30-40" />
+                <p>30-40</p>
+                <input type="radio" [(ngModel)]="age" name="age" value="41-60" />
+                <p>41-60</p>
+                <input type="radio" [(ngModel)]="age" name="age" value="61-80" />
+                <p>61-80</p>
+            </mat-grid-tile>
+
+            <!-- Welche Hand benutzen Sie zum Schreiben? -->
+            <mat-grid-tile>
+                <label>Welche Hand benutzen Sie zum Schreiben?</label>
+                <input
+                    type="radio"
+                    [(ngModel)]="leftHandedOrRightHanded"
+                    name="leftHandedOrRightHanded"
+                    value="links"
+                />
+                <p>links</p>
+                <input
+                    type="radio"
+                    [(ngModel)]="leftHandedOrRightHanded"
+                    name="leftHandedOrRightHanded"
+                    value="rechts"
+                />
+                <p>rechts</p>
+            </mat-grid-tile>
+
+            <!-- Besitzen Sie ein Tablet? -->
+            <mat-grid-tile>
+                <label>Besitzen Sie ein Tablet?</label>
+                <input type="radio" [(ngModel)]="ownATablet" name="ownATablet" value="true" />
+                <p>Ja</p>
+                <input type="radio" [(ngModel)]="ownATablet" name="ownATablet" value="false" />
+                <p>Nein</p>
+            </mat-grid-tile>
+
+            <!-- Wofür benutzen Sie das Tablet vorwiegend? -->
+            <mat-grid-tile *ngIf="ownATablet">
+                <label>Wofür benutzen Sie das Tablet vorwiegend?</label>
+                <input type="radio" [(ngModel)]="useTablet" name="useTablet" value="Internet" />
+                <p>Internet</p>
+                <input type="radio" [(ngModel)]="useTablet" name="useTablet" value="Spiele" />
+                <p>Spiele</p>
+                <input type="radio" [(ngModel)]="useTablet" name="useTablet" value="Arbeit" />
+                <p>Arbeit</p>
+                <input type="radio" [(ngModel)]="useTablet" name="useTablet" value="Bücher" />
+                <p>Bücher</p>
+                <input type="radio" [(ngModel)]="useTablet" name="useTablet" value="Andere Media" />
+                <p>Andere Media</p>
+            </mat-grid-tile>
+
+            <!-- Verwenden Sie einen Stift zur Interaktion? -->
+            <mat-grid-tile *ngIf="ownATablet">
+                <label>Verwenden Sie einen Stift zur Interaktion?</label>
+                <input type="radio" [(ngModel)]="usePencil" name="usePencil" value="true" />
+                <p>Ja</p>
+                <input type="radio" [(ngModel)]="usePencil" name="usePencil" value="false" />
+                <p>Nein</p>
+            </mat-grid-tile>
+
+            <!-- Verwenden Sie Spreadsheets auf einem Tablet? -->
+            <mat-grid-tile *ngIf="ownATablet">
+                <label>Verwenden Sie Spreadsheets auf einem Tablet?</label>
+                <input type="radio" [(ngModel)]="useSpreadsheets" name="useSpreadsheets" value="true" />
+                <p>Ja</p>
+                <input type="radio" [(ngModel)]="useSpreadsheets" name="useSpreadsheets" value="false" />
+                <p>Nein</p>
+            </mat-grid-tile>
+
+            <!-- Haben Sie sonst Erfahrung mit stiftbasierter Interaktion? -->
+            <mat-grid-tile>
+                <label>Haben Sie sonst Erfahrung mit stiftbasierter Interaktion?</label>
+                <input type="radio" [(ngModel)]="anyExperience" name="anyExperience" value="true" />
+                <p>Ja</p>
+                <input type="radio" [(ngModel)]="anyExperience" name="anyExperience" value="false" />
+                <p>Nein</p>
+            </mat-grid-tile>
+
+            <!-- Verwenden Sie Spreadsheets auf einem anderen multi-touch-fähigem Gerät? -->
+            <mat-grid-tile>
+                <label>Verwenden Sie Spreadsheets auf einem anderen multi-touch-fähigem Gerät?</label>
+                <input
+                    type="radio"
+                    [(ngModel)]="useSpreadsheetsMultiTouch"
+                    name="useSpreadsheetsMultiTouch"
+                    value="true"
+                />
+                <p>Ja</p>
+                <input
+                    type="radio"
+                    [(ngModel)]="useSpreadsheetsMultiTouch"
+                    name="useSpreadsheetsMultiTouch"
+                    value="false"
+                />
+                <p>Nein</p>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>

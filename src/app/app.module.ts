@@ -6,7 +6,6 @@ import { AppComponent } from "./app.component";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { TaskComponent } from "./component/task/task.component";
 import { WelcomeComponent } from "./component/welcome/welcome.component";
-import { PlaygroundComponent } from "./component/playground/playground.component";
 import { QuestionnaireComponent } from "./component/questionnaire/questionnaire.component";
 import { AcknowledgementComponent } from "./component/acknowledgement/acknowledgement.component";
 import { MatButtonModule } from "@angular/material/button";
@@ -23,7 +22,6 @@ import { FormsModule } from "@angular/forms";
         AppComponent,
         TaskComponent,
         WelcomeComponent,
-        PlaygroundComponent,
         QuestionnaireComponent,
         AcknowledgementComponent,
         DemographicsComponent,

@@ -36,7 +36,7 @@ export class WelcomeComponent implements OnInit {
     }
 
     clickNextPage() {
-        this.router.navigate([`playground/1`]);
+        this.router.navigate([`task/1`]);
     }
 
     updateTasks() {

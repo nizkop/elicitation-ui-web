@@ -8,6 +8,7 @@ import { Language } from "../model/language.enum";
 })
 export class TaskService {
     loadedTasks: Task[] = [];
+    chosenLanguage: Language = Language.ENGLISH;
 
     germanTasks = [
         { title: "Wert ändern", description: "Tragen Sie den Wert 100 in die Zelle F9 ein.", group: Group.P },
@@ -178,20 +179,21 @@ export class TaskService {
     ];
 
     public initData(language: Language): Task[] {
-        console.log("Chosen Language: ", language);
+        this.chosenLanguage = language;
+        console.log("Chosen Language: ", this.chosenLanguage);
         const loadedTasks: Task[] = [];
         let id = 1;
         const resets = 0;
         let tasks = [];
 
-        if (language == Language.GERMAN) {
+        if (this.chosenLanguage == Language.GERMAN) {
             tasks = this.germanTasks;
         } else {
             tasks = this.englishTasks;
         }
 
         for (const task of tasks) {
-            loadedTasks.push(new Task(id, task.title, task.description, task.group, resets, language));
+            loadedTasks.push(new Task(id, task.title, task.description, task.group, resets, this.chosenLanguage));
             id++;
         }
 

@@ -3,6 +3,8 @@ import { TaskService } from "../../shared/service/task.service";
 import { Task } from "../../shared/model/task";
 import { Language } from "../../shared/model/language.enum";
 import { ActivatedRoute, Router } from "@angular/router";
+import { FileService } from "../../shared/service/file.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: "app-sketch",
@@ -30,6 +32,8 @@ export class SketchComponent implements OnInit {
     constructor(
         private taskService: TaskService,
         private route: ActivatedRoute,
+        private fileService: FileService,
+        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
@@ -40,7 +44,7 @@ export class SketchComponent implements OnInit {
         this.currentTask = this.tasks?.find((task) => task.taskNumber === taskNumber);
 
         if (this.currentTask) {
-            console.log("Current Task: ", this.currentTask);
+            console.log("Current Task: ", this.currentTask.id);
         } else {
             console.log("Aufgabe nicht gefunden");
         }
@@ -124,7 +128,7 @@ export class SketchComponent implements OnInit {
         }
     }
 
-    saveDrawing() {
+    saveDrawing(fileName: string) {
         if (this.canvas && this.context) {
             const saveCanvas = document.createElement("canvas");
             const saveContext = saveCanvas.getContext("2d");
@@ -145,27 +149,17 @@ export class SketchComponent implements OnInit {
                 const dataUrl = saveCanvas.toDataURL("image/png");
                 const a = document.createElement("a");
                 a.href = dataUrl;
-                a.download = "drawing.png";
+                a.download = `${fileName}.png`;
 
-                //JSON
-                const drawingData = {
-                    lines: this.capturedLines,
-                };
-                const jsonData = JSON.stringify(drawingData);
-                const blob = new Blob([jsonData], { type: "application/json" });
-                const b = document.createElement("a");
-                b.href = URL.createObjectURL(blob);
-                b.download = "drawing.json";
-
-                //PNG
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
 
                 //JSON
-                document.body.appendChild(b);
-                b.click();
-                document.body.removeChild(b);
+                const drawingData = {
+                    lines: this.capturedLines,
+                };
+                this.fileService.saveJsonFile(drawingData, `${fileName}.json`);
 
                 //Clean up
                 saveCanvas.remove();

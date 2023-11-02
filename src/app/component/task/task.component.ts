@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { TaskService } from "../../shared/service/task.service";
 import { Task } from "../../shared/model/task";
 import { Language } from "../../shared/model/language.enum";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SketchComponent } from "../sketch/sketch.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Group } from "../../shared/model/group.enum";
 
 @Component({
     selector: "app-task",
@@ -14,10 +15,12 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class TaskComponent implements OnInit {
     @ViewChild(SketchComponent) private sketchComponent!: SketchComponent;
 
-    tasks: Task[] | undefined;
     currentTask: Task | undefined;
 
+    startTime: Date | undefined;
+
     protected readonly Language = Language;
+    protected readonly Group = Group;
 
     constructor(
         private taskService: TaskService,
@@ -27,43 +30,52 @@ export class TaskComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        //TODO: Add start time
         //TODO: capturedLines is already defined in Task Model -> update Model with the same id
-        this.tasks = this.taskService.initData(Language.GERMAN);
         const taskNumber = +this.route.snapshot.params["taskNumber"];
-        this.currentTask = this.tasks?.find((task) => task.taskNumber === taskNumber);
+        this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 
         if (this.currentTask) {
-            console.log(this.currentTask);
+            console.log("Current Task: ", this.currentTask.id);
         } else {
             console.log("Aufgabe nicht gefunden");
         }
+
+        this.startTime = new Date();
     }
 
     clickPreviousPage() {
-        if (this.currentTask!.taskNumber === 3) {
-            //TODO: Add router for questionnaire
-            this.router.navigate(["/playground/" + (this.currentTask!.taskNumber - 1).toString()]);
-        } else {
-            this.router.navigate(["/task/" + (this.currentTask!.taskNumber - 1).toString()]);
+        if (this.currentTask!.taskNumber === 2) {
+            this.router.navigate(["/questionnaire/" + (this.currentTask!.taskNumber - 1).toString()]);
+        }
+        if (this.currentTask!.taskNumber === 1) {
+            this.router.navigate(["/welcome"]);
         }
     }
+
     clickResetPage() {
-        //TODO: save the current sketch and increment reset variable
-        this.sketchComponent.resetDrawing();
+        this.sketchComponent.saveDrawing(
+            `${this.currentTask?.taskNumber}_drawing_task${this.currentTask?.id}_resets${this.currentTask?.resets}`,
+        );
+        this.currentTask!.resets = this.currentTask!.resets + 1;
     }
+
     clickNextPage() {
         if (this.sketchComponent.capturedLines.length == 0) {
-            //TODO: English message
-            this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
-                duration: 3000,
-            });
+            if (this.currentTask?.language === Language.GERMAN) {
+                this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
+                    duration: 3000,
+                });
+            } else {
+                this.snackBar.open("This page has not been edited yet", "Okay", {
+                    duration: 3000,
+                });
+            }
             return;
         }
-        this.sketchComponent.saveDrawing();
-        if (this.currentTask!.taskNumber === this.tasks?.length) {
-            this.router.navigate(["/demographics"]);
-        } else {
-            this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);
-        }
+        this.sketchComponent.saveDrawing(
+            `${this.currentTask?.taskNumber}_drawing_task${this.currentTask?.id}_resets${this.currentTask?.resets}`,
+        );
+        this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
     }
 }

@@ -1,1 +1,88 @@
-<p>questionnaire works!</p>
+<!--Header Section-->
+<div style="background-color: lightblue">
+    <mat-grid-list cols="3" rowHeight="6:1">
+        <mat-grid-tile>
+            <img src="./assets/UDE_logo.png" style="max-width: 150px" />
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <h2 *ngIf="currentTask?.language === Language.GERMAN">Zwischenfragebogen: {{ currentTask?.title }}</h2>
+            <h2 *ngIf="currentTask?.language === Language.ENGLISH">Questionnaire: {{ currentTask?.title }}</h2>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile> </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickPreviousPage()">
+                {{ currentTask?.language === Language.GERMAN ? "Vorherige Seite" : "Previous Page" }}
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickNextPage()">
+                {{ currentTask?.language === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<!--Questionnaire-->
+<div style="background-color: aliceblue">
+    <form>
+        <mat-grid-list cols="1" rowHeight="20:1">
+            <mat-grid-tile *ngIf="currentTask?.language === Language.GERMAN">
+                <label>{{ question1_GERMAN }}</label>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Sehr einfach" />
+                <p>Sehr einfach</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Einfach" />
+                <p>Einfach</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Neutral" />
+                <p>Neutral</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Schwer" />
+                <p>Schwer</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Sehr Schwer" />
+                <p>Sehr Schwer</p>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="currentTask?.language === Language.ENGLISH">
+                <label>{{ question1_ENGLISH }}</label>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Very easy" />
+                <p>very easy</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="easy" />
+                <p>easy</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="neutral" />
+                <p>neutral</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="difficult" />
+                <p>difficult</p>
+                <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="very difficult" />
+                <p>very difficult</p>
+            </mat-grid-tile>
+
+            <mat-grid-tile *ngIf="currentTask?.language === Language.GERMAN">
+                <label>{{ question2_GERMAN }}</label>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="Sehr zufrieden" />
+                <p>Sehr zufrieden</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="Zufrieden" />
+                <p>Zufrieden</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="Neutral" />
+                <p>Neutral</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="Unzufrieden" />
+                <p>Unzufrieden</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="Sehr unzufrieden" />
+                <p>Sehr unzufrieden</p>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="currentTask?.language === Language.ENGLISH">
+                <label>{{ question2_ENGLISH }}</label>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="very satisfied" />
+                <p>very satisfied</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="satisfied" />
+                <p>satisfied</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="neutral" />
+                <p>neutral</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="dissatisfied" />
+                <p>dissatisfied</p>
+                <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="very dissatisfied" />
+                <p>very dissatisfied</p>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>

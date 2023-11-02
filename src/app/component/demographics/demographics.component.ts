@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { Language } from "../../shared/model/language.enum";
 import { Router } from "@angular/router";
+import { FileService } from "../../shared/service/file.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: "app-demographics",
@@ -22,7 +24,11 @@ export class DemographicsComponent {
     anyExperience: boolean = false;
     useSpreadsheetsMultiTouch: boolean = false;
 
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        private fileService: FileService,
+        private snackBar: MatSnackBar,
+    ) {}
 
     checkFormCompletion(): boolean {
         if (this.gender === "" || this.age === "" || this.leftHandedOrRightHanded === "") {
@@ -48,32 +54,20 @@ export class DemographicsComponent {
                 useSpreadsheetsMultiTouch: this.useSpreadsheetsMultiTouch,
             };
 
-            // JSON schön formatieren
-            const formattedJson = JSON.stringify(data, null, 2);
-
-            // JSON in einen Blob umwandeln
-            const jsonData = new Blob([formattedJson], { type: "application/json" });
-
-            // Erstellen Sie einen Blob und verknüpfen Sie ihn mit einem Download-Link
-            const blob = new Blob([jsonData], { type: "application/json" });
-            const downloadLink = document.createElement("a");
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = "demographics.json";
-
-            // JSON herunterladen
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+            this.fileService.saveJsonFile(data, `21_demographics.json`);
         } else {
-            // Zeigen Sie eine Fehlermeldung an oder tun Sie etwas anderes, wenn das Formular nicht vollständig ist.
+            this.snackBar.open("Bitte füllen Sie alle Felder aus", "Okay", {
+                duration: 3000,
+            });
         }
     }
 
     clickPreviousPage() {
-        this.router.navigate(["/task/18"]);
+        this.router.navigate(["/questionnaire/18"]);
     }
+
     clickNextPage() {
         this.saveData();
-        //this.router.navigate(["/acknowledgement"]);
+        this.router.navigate(["/acknowledgement"]);
     }
 }

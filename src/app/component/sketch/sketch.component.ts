@@ -35,12 +35,12 @@ export class SketchComponent implements OnInit {
     ngOnInit() {
         //TODO: capturedLines is already defined in Task Mode -> update Model with the same id
         this.capturedLines = [];
-        this.tasks = this.taskService.initData(Language.GERMAN);
+        this.tasks = this.taskService.loadedTasks;
         const taskNumber = +this.route.snapshot.params["taskNumber"];
         this.currentTask = this.tasks?.find((task) => task.taskNumber === taskNumber);
 
         if (this.currentTask) {
-            console.log(this.currentTask);
+            console.log("Current Task: ", this.currentTask);
         } else {
             console.log("Aufgabe nicht gefunden");
         }

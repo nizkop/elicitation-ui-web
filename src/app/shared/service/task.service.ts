@@ -7,6 +7,8 @@ import { Language } from "../model/language.enum";
     providedIn: "root",
 })
 export class TaskService {
+    loadedTasks: Task[] = [];
+
     germanTasks = [
         { title: "Wert ändern", description: "Tragen Sie den Wert 100 in die Zelle F9 ein.", group: Group.P },
         { title: "Wert löschen", description: "Löschen Sie den Inhalt der Zelle E8.", group: Group.P },
@@ -176,6 +178,7 @@ export class TaskService {
     ];
 
     public initData(language: Language): Task[] {
+        console.log("Chosen Language: ", language);
         const loadedTasks: Task[] = [];
         let id = 1;
         const resets = 0;
@@ -192,7 +195,6 @@ export class TaskService {
             id++;
         }
 
-        console.log("Loaded Tasks: ", loadedTasks);
         return this.randomiseByGroup(loadedTasks);
     }
 
@@ -219,7 +221,8 @@ export class TaskService {
         shuffledList.forEach((task, index) => {
             task.taskNumber = index + 1;
         });
-        console.log("Shuffled List: ", shuffledList);
+        console.log("Loaded Tasks: ", shuffledList);
+        this.loadedTasks = shuffledList;
 
         return shuffledList;
     }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { TaskService } from "../../shared/service/task.service";
 import { Task } from "../../shared/model/task";
 import { Language } from "../../shared/model/language.enum";
@@ -14,7 +14,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class PlaygroundComponent implements OnInit {
     @ViewChild(SketchComponent) private sketchComponent!: SketchComponent;
 
-    tasks: Task[] | undefined;
     //TODO: do we need this? We can use tasks[id] instead
     currentTask: Task | undefined;
 
@@ -28,13 +27,12 @@ export class PlaygroundComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        //TODO: Load tasks once, and save it globally
-        this.tasks = this.taskService.initData(Language.GERMAN);
+        //TODO: Duplicate Code fragment with sketch component
         const taskNumber = +this.route.snapshot.params["taskNumber"];
-        this.currentTask = this.tasks?.find((task) => task.taskNumber === taskNumber);
+        this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 
         if (this.currentTask) {
-            console.log(this.currentTask);
+            console.log("Current Task: ", this.currentTask);
         } else {
             console.log("Aufgabe nicht gefunden");
         }
@@ -49,15 +47,22 @@ export class PlaygroundComponent implements OnInit {
             this.router.navigate(["/welcome"]);
         }
     }
+
     clickResetPage() {
         this.sketchComponent.resetDrawing();
     }
+
     clickNextPage() {
         if (this.sketchComponent.capturedLines.length == 0) {
-            //TODO: English message
-            this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
-                duration: 3000,
-            });
+            if (this.currentTask?.language === Language.GERMAN) {
+                this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
+                    duration: 3000,
+                });
+            } else {
+                this.snackBar.open("This page was not edited", "Okay", {
+                    duration: 3000,
+                });
+            }
             return;
         }
         this.sketchComponent.saveDrawing();

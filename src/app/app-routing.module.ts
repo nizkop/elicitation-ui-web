@@ -9,7 +9,7 @@ import { QuestionnaireComponent } from "./component/questionnaire/questionnaire.
 
 const routes: Routes = [
     //TODO: Redirect to login only if user is loggedOut
-    { path: "", redirectTo: "demographics", pathMatch: "full" },
+    { path: "", redirectTo: "welcome", pathMatch: "full" },
     { path: "welcome", component: WelcomeComponent },
     { path: "playground/:taskNumber", component: PlaygroundComponent },
     { path: "task/:taskNumber", component: TaskComponent },

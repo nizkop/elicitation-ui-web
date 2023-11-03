@@ -52,6 +52,10 @@ export class QuestionnaireComponent implements OnInit {
         return !(this.formQuestion1 === "" || this.formQuestion2 === "");
     }
 
+    clickExitStudy() {
+        this.router.navigate(["/demographics"]);
+    }
+
     clickPreviousPage() {
         if (this.currentTask!.taskNumber === 3) {
             this.router.navigate(["/playground/" + (this.currentTask!.taskNumber - 1).toString()]);

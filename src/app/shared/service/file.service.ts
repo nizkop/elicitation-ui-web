@@ -8,6 +8,7 @@ import { Language } from "../model/language.enum";
 })
 export class FileService {
     public saveJsonFile(data: any, fileName: string) {
+        /*
         const formattedJson = JSON.stringify(data, null, 2);
         const jsonData = new Blob([formattedJson], { type: "application/json" });
 
@@ -21,6 +22,8 @@ export class FileService {
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
+
+         */
     }
 
     public saveImageFile() {}

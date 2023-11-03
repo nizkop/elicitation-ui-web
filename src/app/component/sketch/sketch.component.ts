@@ -159,6 +159,7 @@ export class SketchComponent implements OnInit {
                     saveContext.lineWidth = this.context.lineWidth;
                     saveContext.stroke();
                 }
+                /*
                 //PNG
                 const dataUrl = saveCanvas.toDataURL("image/png");
                 const a = document.createElement("a");
@@ -168,6 +169,8 @@ export class SketchComponent implements OnInit {
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
+
+                 */
 
                 //JSON
                 const drawingData = {

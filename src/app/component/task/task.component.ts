@@ -46,6 +46,10 @@ export class TaskComponent implements OnInit {
         }
     }
 
+    clickExitStudy() {
+        this.router.navigate(["/demographics"]);
+    }
+
     clickResetPage() {
         this.sketchComponent.saveTask(
             `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,

@@ -17,7 +17,7 @@
             <h2 *ngIf="currentTask?.language === Language.ENGLISH">Warm-up: {{ currentTask?.title }}</h2>
         </mat-grid-tile>
         <mat-grid-tile>
-            <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
+            <button mat-fab color="warn" aria-label="Example icon button with a delete icon" (click)="clickExitStudy()">
                 <mat-icon>exit_to_app</mat-icon>
             </button>
         </mat-grid-tile>

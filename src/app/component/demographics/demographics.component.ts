@@ -1,16 +1,17 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Language } from "../../shared/model/language.enum";
 import { Router } from "@angular/router";
 import { FileService } from "../../shared/service/file.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { TaskService } from "../../shared/service/task.service";
 
 @Component({
     selector: "app-demographics",
     templateUrl: "./demographics.component.html",
     styleUrls: ["./demographics.component.scss"],
 })
-export class DemographicsComponent {
-    language: Language = Language.GERMAN;
+export class DemographicsComponent implements OnInit {
+    language: Language = Language.ENGLISH;
 
     protected readonly Language = Language;
 
@@ -28,7 +29,12 @@ export class DemographicsComponent {
         private router: Router,
         private fileService: FileService,
         private snackBar: MatSnackBar,
+        private taskService: TaskService,
     ) {}
+
+    ngOnInit(): void {
+        this.language = this.taskService.chosenLanguage;
+    }
 
     checkFormCompletion(): boolean {
         if (this.gender === "" || this.age === "" || this.leftHandedOrRightHanded === "") {
@@ -55,10 +61,17 @@ export class DemographicsComponent {
             };
 
             this.fileService.saveJsonFile(data, `21_demographics.json`);
+            this.router.navigate(["/acknowledgement"]);
         } else {
-            this.snackBar.open("Bitte füllen Sie alle Felder aus", "Okay", {
-                duration: 3000,
-            });
+            if (this.language === Language.GERMAN) {
+                this.snackBar.open("Bitte füllen Sie alle Felder aus", "Okay", {
+                    duration: 3000,
+                });
+            } else {
+                this.snackBar.open("Please fill in all fields", "Okay", {
+                    duration: 3000,
+                });
+            }
         }
     }
 
@@ -68,6 +81,5 @@ export class DemographicsComponent {
 
     clickNextPage() {
         this.saveData();
-        this.router.navigate(["/acknowledgement"]);
     }
 }

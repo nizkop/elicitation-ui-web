@@ -1,6 +1,6 @@
-import {Time} from "@angular/common";
-import {Group} from "./group.enum";
-import {Language} from "./language.enum";
+import { Time } from "@angular/common";
+import { Group } from "./group.enum";
+import { Language } from "./language.enum";
 
 export class Task {
     taskNumber!: number;
@@ -13,19 +13,16 @@ export class Task {
 
     //Captured during runtime
     capturedLines: Array<Array<{ x: number; y: number }>> = [];
-    startTimeWatching!: Time;
-    endTimeWatching!: Time;
-    startTimeDrawing!: Time;
-    endTimeDrawing!: Time;
+    startTimeWatching!: Date;
+    endTimeWatching!: Date;
+    timeWatching!: number;
+    startTimeDrawing!: Date;
+    endTimeDrawing!: Date;
+    timeDrawing!: number;
 
     //TODO: save userId as the folder name
 
-    constructor(id: number,
-                title: string,
-                description: string,
-                group: Group,
-                resets: number,
-                language: Language) {
+    constructor(id: number, title: string, description: string, group: Group, resets: number, language: Language) {
         this.id = id;
         this.title = title;
         this.description = description;

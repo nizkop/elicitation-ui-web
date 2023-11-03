@@ -42,7 +42,7 @@ export class QuestionnaireComponent implements OnInit {
         if (this.currentTask) {
             console.log("Current Task: ", this.currentTask.id);
         } else {
-            console.log("Aufgabe nicht gefunden");
+            console.log("Task not found");
         }
 
         this.startTime = new Date();
@@ -85,11 +85,15 @@ export class QuestionnaireComponent implements OnInit {
                 this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);
             }
         } else {
-            this.snackBar.open("Bitte füllen Sie alle Felder aus", "Okay", {
-                duration: 3000,
-            });
+            if (this.currentTask?.language === Language.GERMAN) {
+                this.snackBar.open("Bitte füllen Sie alle Felder aus", "Okay", {
+                    duration: 3000,
+                });
+            } else {
+                this.snackBar.open("Please fill in all fields", "Okay", {
+                    duration: 3000,
+                });
+            }
         }
     }
-
-    protected readonly Group = Group;
 }

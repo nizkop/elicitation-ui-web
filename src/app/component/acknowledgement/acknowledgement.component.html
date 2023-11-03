@@ -6,7 +6,7 @@
         </mat-grid-tile>
         <mat-grid-tile>
             <h2 *ngIf="language === Language.GERMAN">Danksagung</h2>
-            <h2 *ngIf="language === Language.ENGLISH">Welcome</h2></mat-grid-tile
+            <h2 *ngIf="language === Language.ENGLISH">Acknowledgement</h2></mat-grid-tile
         >
         <mat-grid-tile> </mat-grid-tile>
         <mat-grid-tile> </mat-grid-tile>
@@ -18,35 +18,39 @@
         </mat-grid-tile>
     </mat-grid-list>
 </div>
-<div style="background-color: aliceblue">
-    <mat-grid-list cols="1" rowHeight="20:1">
-        <mat-grid-tile>
-            <h1>Vielen Dank für Ihre Teilnahme!</h1>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <p>
-                Wir möchten uns herzlich bei Ihnen bedanken, dass Sie an unserer Studie teilgenommen haben. Ihre
-                Teilnahme ist für uns äußerst wertvoll und hilft uns, wichtige Erkenntnisse zu gewinnen.
-            </p>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <p>
-                Ihre Daten wurden sorgfältig erfasst und werden vertraulich behandelt. Wir verwenden Ihre Informationen
-                ausschließlich für wissenschaftliche Zwecke und werden sie nicht an Dritte weitergeben.
-            </p></mat-grid-tile
-        >
-
-        <mat-grid-tile>
-            <p>
-                Falls Sie weitere Fragen haben oder mehr über die Studie erfahren möchten, können Sie uns gerne
-                kontaktieren. Ihre Meinung und Ihr Feedback sind uns wichtig.
-            </p></mat-grid-tile
-        >
-
-        <mat-grid-tile> <p>Vielen Dank nochmals für Ihre Teilnahme!</p></mat-grid-tile>
-
-        <mat-grid-tile><p>Das Forschungsteam</p> </mat-grid-tile>
-    </mat-grid-list>
+<!--ENGLISH-->
+<div style="background-color: aliceblue" class="textbox" *ngIf="language === Language.ENGLISH">
+    <h2>Thank you for your participation and commitment to this research!</h2>
+    <p>
+        We would like to thank you very much for taking part in our study. Your participation is extremely valuable to
+        us and helps us to gain important insights.
+    </p>
+    <p>
+        Your data has been carefully collected and will be treated confidentially. We will use your information
+        exclusively for scientific purposes and will not pass it on to third parties.
+    </p>
+    <p>
+        If you have any further questions or would like to find out more about the study, please feel free to contact
+        us. Your opinion and feedback are important to us.
+    </p>
+    <p>Thank you again for your participation!</p>
+    <p>The research team</p>
+</div>
+<!--GERMAN-->
+<div style="background-color: aliceblue" class="textbox" *ngIf="language === Language.GERMAN">
+    <h2>Vielen Dank für Ihre Teilnahme!</h2>
+    <p>
+        Wir möchten uns herzlich bei Ihnen bedanken, dass Sie an unserer Studie teilgenommen haben. Ihre Teilnahme ist
+        für uns äußerst wertvoll und hilft uns, wichtige Erkenntnisse zu gewinnen.
+    </p>
+    <p>
+        Ihre Daten wurden sorgfältig erfasst und werden vertraulich behandelt. Wir verwenden Ihre Informationen
+        ausschließlich für wissenschaftliche Zwecke und werden sie nicht an Dritte weitergeben.
+    </p>
+    <p>
+        Falls Sie weitere Fragen haben oder mehr über die Studie erfahren möchten, können Sie uns gerne kontaktieren.
+        Ihre Meinung und Ihr Feedback sind uns wichtig.
+    </p>
+    <p>Vielen Dank nochmals für Ihre Teilnahme!</p>
+    <p>Das Forschungsteam</p>
 </div>

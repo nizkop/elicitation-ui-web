@@ -17,8 +17,6 @@ export class TaskComponent implements OnInit {
 
     currentTask: Task | undefined;
 
-    startTime: Date | undefined;
-
     protected readonly Language = Language;
     protected readonly Group = Group;
 
@@ -30,30 +28,28 @@ export class TaskComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        //TODO: Add start time
-        //TODO: capturedLines is already defined in Task Model -> update Model with the same id
         const taskNumber = +this.route.snapshot.params["taskNumber"];
         this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 
         if (this.currentTask) {
             console.log("Current Task: ", this.currentTask.id);
         } else {
-            console.log("Aufgabe nicht gefunden");
+            console.log("Task not found");
         }
-
-        this.startTime = new Date();
     }
 
     clickPreviousPage() {
         if (this.currentTask!.taskNumber === 2) {
             this.router.navigate(["/questionnaire/" + (this.currentTask!.taskNumber - 1).toString()]);
-        }
-        if (this.currentTask!.taskNumber === 1) {
+        } else {
             this.router.navigate(["/welcome"]);
         }
     }
 
     clickResetPage() {
+        this.sketchComponent.saveTask(
+            `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
+        );
         this.sketchComponent.saveDrawing(
             `${this.currentTask?.taskNumber}_drawing_task${this.currentTask?.id}_resets${this.currentTask?.resets}`,
         );
@@ -73,6 +69,10 @@ export class TaskComponent implements OnInit {
             }
             return;
         }
+        //TODO: reset is not correctly saved in task_detail
+        this.sketchComponent.saveTask(
+            `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
+        );
         this.sketchComponent.saveDrawing(
             `${this.currentTask?.taskNumber}_drawing_task${this.currentTask?.id}_resets${this.currentTask?.resets}`,
         );

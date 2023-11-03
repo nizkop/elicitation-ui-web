@@ -33,7 +33,6 @@ export class SketchComponent implements OnInit {
         private taskService: TaskService,
         private route: ActivatedRoute,
         private fileService: FileService,
-        private snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
@@ -45,8 +44,9 @@ export class SketchComponent implements OnInit {
 
         if (this.currentTask) {
             console.log("Current Task: ", this.currentTask.id);
+            this.currentTask.startTimeWatching = new Date();
         } else {
-            console.log("Aufgabe nicht gefunden");
+            console.log("Task not found");
         }
     }
 
@@ -64,6 +64,11 @@ export class SketchComponent implements OnInit {
     }
 
     onMouseDown(event: MouseEvent | Touch) {
+        this.currentTask!.endTimeWatching = new Date();
+        this.currentTask!.timeWatching =
+            this.currentTask!.endTimeWatching.getTime() - this.currentTask!.startTimeWatching.getTime();
+        this.currentTask!.startTimeDrawing = new Date();
+
         if (this.context && this.canvas) {
             this.drawing = true;
             const x =
@@ -126,6 +131,15 @@ export class SketchComponent implements OnInit {
             this.capturedLines.push(this.currentLine);
             this.currentLine = [];
         }
+    }
+
+    saveTask(fileName: string) {
+        this.currentTask!.endTimeDrawing = new Date();
+        this.currentTask!.timeDrawing =
+            this.currentTask!.endTimeDrawing.getTime() - this.currentTask!.startTimeDrawing.getTime();
+        this.currentTask!.capturedLines = this.capturedLines;
+
+        this.fileService.saveJsonFile(this.currentTask, `${fileName}.json`);
     }
 
     saveDrawing(fileName: string) {

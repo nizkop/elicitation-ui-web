@@ -3,9 +3,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Task } from "../../shared/model/task";
 import { TaskService } from "../../shared/service/task.service";
 import { Language } from "../../shared/model/language.enum";
-import { FileService } from "../../shared/service/file.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Group } from "../../shared/model/group.enum";
+import { DataStorageService } from "../../shared/service/data.storage.service";
+import { MessageService } from "../../shared/service/message.service";
 
 @Component({
     selector: "app-questionnaire",
@@ -31,8 +30,8 @@ export class QuestionnaireComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private taskService: TaskService,
-        private fileService: FileService,
-        private snackBar: MatSnackBar,
+        private dataStorageService: DataStorageService,
+        private messageService: MessageService,
     ) {}
 
     ngOnInit(): void {
@@ -66,22 +65,7 @@ export class QuestionnaireComponent implements OnInit {
 
     clickNextPage(): void {
         if (this.checkFormCompletion()) {
-            const questionnaireData = {
-                id: this.currentTask?.id,
-                question1:
-                    this.currentTask?.language === Language.GERMAN ? this.question1_GERMAN : this.question1_ENGLISH,
-                question2:
-                    this.currentTask?.language === Language.GERMAN ? this.question2_GERMAN : this.question2_ENGLISH,
-                answer1: this.formQuestion1,
-                answer2: this.formQuestion2,
-                startTime: this.startTime,
-                endTime: new Date(),
-            };
-
-            this.fileService.saveJsonFile(
-                questionnaireData,
-                `${this.currentTask?.taskNumber}_questionnaire_task${this.currentTask?.id}.json`,
-            );
+            this.saveData();
 
             if (this.currentTask?.taskNumber === this.taskService.loadedTasks.length) {
                 this.router.navigate(["/demographics"]);
@@ -89,15 +73,24 @@ export class QuestionnaireComponent implements OnInit {
                 this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);
             }
         } else {
-            if (this.currentTask?.language === Language.GERMAN) {
-                this.snackBar.open("Bitte füllen Sie alle Felder aus", "Okay", {
-                    duration: 3000,
-                });
-            } else {
-                this.snackBar.open("Please fill in all fields", "Okay", {
-                    duration: 3000,
-                });
-            }
+            this.messageService.notCompletedForm(this.currentTask!.language);
         }
+    }
+
+    saveData(): void {
+        const questionnaireData = {
+            id: this.currentTask?.id,
+            question1: this.currentTask?.language === Language.GERMAN ? this.question1_GERMAN : this.question1_ENGLISH,
+            question2: this.currentTask?.language === Language.GERMAN ? this.question2_GERMAN : this.question2_ENGLISH,
+            answer1: this.formQuestion1,
+            answer2: this.formQuestion2,
+            startTime: this.startTime,
+            endTime: new Date(),
+        };
+
+        this.dataStorageService.saveData(
+            `${this.currentTask?.taskNumber}_questionnaire_task${this.currentTask?.id}.json`,
+            new Blob([JSON.stringify(questionnaireData, null, 2)], { type: "application/json" }),
+        );
     }
 }

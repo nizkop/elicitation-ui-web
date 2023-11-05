@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Language } from "../../shared/model/language.enum";
 import { Router } from "@angular/router";
-import { FileService } from "../../shared/service/file.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { TaskService } from "../../shared/service/task.service";
+import { DataStorageService } from "../../shared/service/data.storage.service";
+import { MessageService } from "../../shared/service/message.service";
 
 @Component({
     selector: "app-demographics",
@@ -27,15 +27,16 @@ export class DemographicsComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private fileService: FileService,
-        private snackBar: MatSnackBar,
         private taskService: TaskService,
+        private dataStorageService: DataStorageService,
+        private messageService: MessageService,
     ) {}
 
     ngOnInit(): void {
         this.language = this.taskService.chosenLanguage;
     }
 
+    //TODO: Refactor
     checkFormCompletion(): boolean {
         if (this.gender === "" || this.age === "" || this.leftHandedOrRightHanded === "") {
             return false;
@@ -47,32 +48,22 @@ export class DemographicsComponent implements OnInit {
     }
 
     saveData(): void {
-        if (this.checkFormCompletion()) {
-            const data = {
-                gender: this.gender,
-                age: this.age,
-                leftHandedOrRightHanded: this.leftHandedOrRightHanded,
-                ownATablet: this.ownATablet,
-                useTablet: this.useTablet,
-                usePencil: this.usePencil,
-                useSpreadsheets: this.useSpreadsheets,
-                anyExperience: this.anyExperience,
-                useSpreadsheetsMultiTouch: this.useSpreadsheetsMultiTouch,
-            };
+        const data = {
+            gender: this.gender,
+            age: this.age,
+            leftHandedOrRightHanded: this.leftHandedOrRightHanded,
+            ownATablet: this.ownATablet,
+            useTablet: this.useTablet,
+            usePencil: this.usePencil,
+            useSpreadsheets: this.useSpreadsheets,
+            anyExperience: this.anyExperience,
+            useSpreadsheetsMultiTouch: this.useSpreadsheetsMultiTouch,
+        };
 
-            this.fileService.saveJsonFile(data, `21_demographics.json`);
-            this.router.navigate(["/acknowledgement"]);
-        } else {
-            if (this.language === Language.GERMAN) {
-                this.snackBar.open("Bitte füllen Sie alle Felder aus", "Okay", {
-                    duration: 3000,
-                });
-            } else {
-                this.snackBar.open("Please fill in all fields", "Okay", {
-                    duration: 3000,
-                });
-            }
-        }
+        this.dataStorageService.saveData(
+            `21_demographics.json`,
+            new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }),
+        );
     }
 
     clickPreviousPage() {
@@ -80,6 +71,11 @@ export class DemographicsComponent implements OnInit {
     }
 
     clickNextPage() {
-        this.saveData();
+        if (this.checkFormCompletion()) {
+            this.saveData();
+            this.router.navigate(["/acknowledgement"]);
+        } else {
+            this.messageService.notCompletedForm(this.language);
+        }
     }
 }

@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Task } from "../../shared/model/task";
 import { TaskService } from "../../shared/service/task.service";
 import { Language } from "../../shared/model/language.enum";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { DataStorageService } from "../../shared/service/data.storage.service";
 
 @Component({
     selector: "app-welcome",
@@ -20,10 +20,12 @@ export class WelcomeComponent implements OnInit {
     constructor(
         private router: Router,
         private taskService: TaskService,
+        private dataStorageService: DataStorageService,
     ) {}
 
     ngOnInit(): void {
         this.updateTasks();
+        this.dataStorageService.clearData();
     }
 
     clickChangeLanguage() {

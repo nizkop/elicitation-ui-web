@@ -1,10 +1,10 @@
-import { Component, ElementRef, Injectable, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { TaskService } from "../../shared/service/task.service";
 import { Task } from "../../shared/model/task";
 import { Language } from "../../shared/model/language.enum";
-import { ActivatedRoute, Router } from "@angular/router";
-import { FileService } from "../../shared/service/file.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute } from "@angular/router";
+import { DataStorageService } from "../../shared/service/data.storage.service";
+import { MessageService } from "../../shared/service/message.service";
 
 @Component({
     selector: "app-sketch",
@@ -32,7 +32,8 @@ export class SketchComponent implements OnInit {
     constructor(
         private taskService: TaskService,
         private route: ActivatedRoute,
-        private fileService: FileService,
+        private dataStorageService: DataStorageService,
+        private messageService: MessageService,
     ) {}
 
     ngOnInit() {
@@ -46,7 +47,7 @@ export class SketchComponent implements OnInit {
             console.log("Current Task: ", this.currentTask.id);
             this.currentTask.startTimeWatching = new Date();
         } else {
-            console.log("Task not found");
+            this.messageService.taskNotFound();
         }
     }
 
@@ -137,9 +138,11 @@ export class SketchComponent implements OnInit {
         this.currentTask!.endTimeDrawing = new Date();
         this.currentTask!.timeDrawing =
             this.currentTask!.endTimeDrawing.getTime() - this.currentTask!.startTimeDrawing.getTime();
-        this.currentTask!.capturedLines = this.capturedLines;
 
-        this.fileService.saveJsonFile(this.currentTask, `${fileName}.json`);
+        this.dataStorageService.saveData(
+            `${fileName}.json`,
+            new Blob([JSON.stringify(this.currentTask, null, 2)], { type: "application/json" }),
+        );
     }
 
     saveDrawing(fileName: string) {
@@ -159,8 +162,13 @@ export class SketchComponent implements OnInit {
                     saveContext.lineWidth = this.context.lineWidth;
                     saveContext.stroke();
                 }
-                this.fileService.saveImageFile(saveCanvas, fileName);
-                this.fileService.saveJsonFile({ lines: this.capturedLines }, `${fileName}.json`);
+                saveCanvas.toBlob((blob) => {
+                    this.dataStorageService.saveData(`${fileName}.png`, blob);
+                });
+                this.dataStorageService.saveData(
+                    `${fileName}.json`,
+                    new Blob([JSON.stringify(this.currentTask, null, 2)], { type: "application/json" }),
+                );
 
                 //Clean up
                 saveCanvas.remove();

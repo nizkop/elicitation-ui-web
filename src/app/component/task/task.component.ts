@@ -4,8 +4,8 @@ import { Task } from "../../shared/model/task";
 import { Language } from "../../shared/model/language.enum";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SketchComponent } from "../sketch/sketch.component";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Group } from "../../shared/model/group.enum";
+import { MessageService } from "../../shared/service/message.service";
 
 @Component({
     selector: "app-task",
@@ -24,7 +24,7 @@ export class TaskComponent implements OnInit {
         private taskService: TaskService,
         private route: ActivatedRoute,
         private router: Router,
-        private snackBar: MatSnackBar,
+        private messageService: MessageService,
     ) {}
 
     ngOnInit() {
@@ -32,9 +32,8 @@ export class TaskComponent implements OnInit {
         this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 
         if (this.currentTask) {
-            console.log("Current Task: ", this.currentTask.id);
         } else {
-            console.log("Task not found");
+            this.messageService.taskNotFound();
         }
     }
 
@@ -51,28 +50,20 @@ export class TaskComponent implements OnInit {
     }
 
     clickResetPage() {
-        this.sketchComponent.saveTask(
-            `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
-        );
-        this.sketchComponent.saveDrawing(
-            `${this.currentTask?.taskNumber}_drawing_task${this.currentTask?.id}_resets${this.currentTask?.resets}`,
-        );
+        this.saveData();
         this.currentTask!.resets = this.currentTask!.resets + 1;
     }
 
     clickNextPage() {
         if (this.sketchComponent.capturedLines.length == 0) {
-            if (this.currentTask?.language === Language.GERMAN) {
-                this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
-                    duration: 3000,
-                });
-            } else {
-                this.snackBar.open("This page has not been edited yet", "Okay", {
-                    duration: 3000,
-                });
-            }
-            return;
+            this.messageService.notEditedPage(this.currentTask!.language);
+        } else {
+            this.saveData();
+            this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
         }
+    }
+
+    saveData() {
         //TODO: reset is not correctly saved in task_detail
         this.sketchComponent.saveTask(
             `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
@@ -80,6 +71,5 @@ export class TaskComponent implements OnInit {
         this.sketchComponent.saveDrawing(
             `${this.currentTask?.taskNumber}_drawing_task${this.currentTask?.id}_resets${this.currentTask?.resets}`,
         );
-        this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
     }
 }

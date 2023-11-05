@@ -37,7 +37,6 @@ export class SketchComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        //TODO: capturedLines is already defined in Task Mode -> update Model with the same id
         this.capturedLines = [];
         this.tasks = this.taskService.loadedTasks;
         const taskNumber = +this.route.snapshot.params["taskNumber"];
@@ -179,6 +178,7 @@ export class SketchComponent implements OnInit {
 
     resetDrawing() {
         console.log("Reset drawings...");
+        this.currentTask!.resets = this.currentTask!.resets + 1;
         this.capturedLines = [];
         this.drawOnCanvas();
     }

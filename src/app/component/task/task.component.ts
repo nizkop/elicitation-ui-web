@@ -28,6 +28,7 @@ export class TaskComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        //TODO: Can be removed?
         const taskNumber = +this.route.snapshot.params["taskNumber"];
         this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 
@@ -51,7 +52,6 @@ export class TaskComponent implements OnInit {
 
     clickResetPage() {
         this.saveData();
-        this.currentTask!.resets = this.currentTask!.resets + 1;
     }
 
     clickNextPage() {
@@ -64,7 +64,6 @@ export class TaskComponent implements OnInit {
     }
 
     saveData() {
-        //TODO: reset is not correctly saved in task_detail
         this.sketchComponent.saveTask(
             `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
         );

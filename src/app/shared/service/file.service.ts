@@ -8,7 +8,6 @@ import { Language } from "../model/language.enum";
 })
 export class FileService {
     public saveJsonFile(data: any, fileName: string) {
-        /*
         const formattedJson = JSON.stringify(data, null, 2);
         const jsonData = new Blob([formattedJson], { type: "application/json" });
 
@@ -22,9 +21,16 @@ export class FileService {
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
-
-         */
     }
 
-    public saveImageFile() {}
+    public saveImageFile(canvas: HTMLCanvasElement, fileName: string) {
+        const dataUrl = canvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = `${fileName}.png`;
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 }

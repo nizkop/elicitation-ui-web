@@ -159,24 +159,8 @@ export class SketchComponent implements OnInit {
                     saveContext.lineWidth = this.context.lineWidth;
                     saveContext.stroke();
                 }
-                /*
-                //PNG
-                const dataUrl = saveCanvas.toDataURL("image/png");
-                const a = document.createElement("a");
-                a.href = dataUrl;
-                a.download = `${fileName}.png`;
-
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-
-                 */
-
-                //JSON
-                const drawingData = {
-                    lines: this.capturedLines,
-                };
-                this.fileService.saveJsonFile(drawingData, `${fileName}.json`);
+                this.fileService.saveImageFile(saveCanvas, fileName);
+                this.fileService.saveJsonFile({ lines: this.capturedLines }, `${fileName}.json`);
 
                 //Clean up
                 saveCanvas.remove();

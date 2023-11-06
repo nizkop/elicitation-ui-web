@@ -4,6 +4,7 @@ import { Task } from "../../shared/model/task";
 import { TaskService } from "../../shared/service/task.service";
 import { Language } from "../../shared/model/language.enum";
 import { DataStorageService } from "../../shared/service/data.storage.service";
+import { RecordingService } from "../../shared/service/recording.service";
 
 @Component({
     selector: "app-welcome",
@@ -13,7 +14,6 @@ import { DataStorageService } from "../../shared/service/data.storage.service";
 export class WelcomeComponent implements OnInit {
     chosenLanguage: Language = Language.ENGLISH;
     tasks: Task[] | undefined;
-    //TODO: Audio und ScreenRecording
 
     protected readonly Language = Language;
 
@@ -21,11 +21,13 @@ export class WelcomeComponent implements OnInit {
         private router: Router,
         private taskService: TaskService,
         private dataStorageService: DataStorageService,
+        private recordingService: RecordingService,
     ) {}
 
     ngOnInit(): void {
         this.updateTasks();
         this.dataStorageService.clearData();
+        this.recordingService.startRecording();
     }
 
     clickChangeLanguage() {

@@ -3,6 +3,7 @@ import { Language } from "../../shared/model/language.enum";
 import { Router } from "@angular/router";
 import { TaskService } from "../../shared/service/task.service";
 import { DataStorageService } from "../../shared/service/data.storage.service";
+import { RecordingService } from "../../shared/service/recording.service";
 
 @Component({
     selector: "app-acknowledgement",
@@ -18,15 +19,19 @@ export class AcknowledgementComponent implements OnInit {
         private router: Router,
         private taskService: TaskService,
         private dataStorageService: DataStorageService,
+        private recordingService: RecordingService,
     ) {}
 
-    ngOnInit(): void {
-        this.language = this.taskService.chosenLanguage;
-        const randomId = Math.floor(Math.random() * 1000000).toString();
-        if (this.language === Language.GERMAN) {
-            this.dataStorageService.downloadAllData(`GERMAN_${randomId}`);
-        } else {
-            this.dataStorageService.downloadAllData(`ENGLISH_${randomId}`);
+    async ngOnInit() {
+        try {
+            await this.recordingService.stopRecording();
+
+            this.language = this.taskService.chosenLanguage;
+            const randomId = Math.floor(Math.random() * 1000000).toString();
+            const fileName = this.language === Language.GERMAN ? `GERMAN_${randomId}` : `ENGLISH_${randomId}`;
+            this.dataStorageService.downloadAllData(fileName);
+        } catch (error) {
+            console.error("Fehler beim Stoppen der Aufnahme", error);
         }
     }
 

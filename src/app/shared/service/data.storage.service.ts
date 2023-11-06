@@ -10,6 +10,7 @@ export class DataStorageService {
 
     public saveData(key: string, data: any): void {
         this.dataStore[key] = data;
+        console.log(`Saved data for key: ${key}, size: ${data.size}`);
     }
 
     public clearData(): void {
@@ -20,7 +21,7 @@ export class DataStorageService {
         const zip = new JSZip();
 
         Object.keys(this.dataStore).forEach((key) => {
-            zip.file(key, this.dataStore[key]);
+            zip.file(key, this.dataStore[key], { binary: true });
         });
 
         zip.generateAsync({ type: "blob" }).then((content) => {

@@ -28,7 +28,6 @@ export class TaskComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        //TODO: Can be removed?
         const taskNumber = +this.route.snapshot.params["taskNumber"];
         this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 

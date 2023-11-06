@@ -58,7 +58,7 @@ export class SketchComponent implements OnInit {
             this.canvas.width = this.backgroundImage.nativeElement.width;
             this.canvas.height = this.backgroundImage.nativeElement.height;
 
-            this.context.strokeStyle = "black";
+            this.context.strokeStyle = "blue";
             this.context.lineWidth = 2;
         }
     }
@@ -166,7 +166,7 @@ export class SketchComponent implements OnInit {
                 });
                 this.dataStorageService.saveData(
                     `${fileName}.json`,
-                    new Blob([JSON.stringify(this.currentTask, null, 2)], { type: "application/json" }),
+                    new Blob([JSON.stringify(this.capturedLines, null, 2)], { type: "application/json" }),
                 );
 
                 //Clean up
@@ -179,6 +179,7 @@ export class SketchComponent implements OnInit {
     resetDrawing() {
         console.log("Reset drawings...");
         this.currentTask!.resets = this.currentTask!.resets + 1;
+        this.currentTask!.startTimeWatching = new Date();
         this.capturedLines = [];
         this.drawOnCanvas();
     }

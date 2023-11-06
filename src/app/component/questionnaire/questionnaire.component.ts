@@ -15,9 +15,9 @@ export class QuestionnaireComponent implements OnInit {
     currentTask: Task | undefined;
 
     question1_GERMAN = "Wie einfach kann man dieses Szenario sketchen?";
-    question1_ENGLISH = "Wie einfach kann man dieses Szenario sketchen?";
+    question1_ENGLISH = "How easy it is to sketch this scenario?";
     question2_GERMAN = "Wie zufrieden sind Sie mit Ihrem Sketch?";
-    question2_ENGLISH = "Wie zufrieden sind Sie mit Ihrem Sketch?";
+    question2_ENGLISH = "How satisfied are you with your sketch?";
 
     formQuestion1 = "";
     formQuestion2 = "";

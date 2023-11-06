@@ -7,7 +7,6 @@ import { SketchComponent } from "../sketch/sketch.component";
 import { Group } from "../../shared/model/group.enum";
 import { MessageService } from "../../shared/service/message.service";
 import { RecordingService } from "../../shared/service/recording.service";
-import { delay } from "rxjs";
 
 @Component({
     selector: "app-task",
@@ -41,10 +40,10 @@ export class TaskComponent implements OnInit {
     }
 
     clickPreviousPage() {
-        if (this.currentTask!.taskNumber === 2) {
-            this.router.navigate(["/questionnaire/" + (this.currentTask!.taskNumber - 1).toString()]);
+        if (this.currentTask!.taskNumber === 1) {
+            this.messageService.alreadyFirstPage();
         } else {
-            this.router.navigate(["/welcome"]);
+            this.router.navigate(["/questionnaire/" + (this.currentTask!.taskNumber - 1).toString()]);
         }
     }
 
@@ -66,11 +65,13 @@ export class TaskComponent implements OnInit {
     }
 
     async saveData() {
-        await this.recordingService.takeScreenshot(
-            `${this.currentTask?.taskNumber}_screenshot${this.currentTask?.id}_resets${this.currentTask?.resets}.png`,
-            this.recordingService.getScreenStream()!,
-        );
-
+        if (!this.recordingService.recordingNotSupported()) {
+            await this.recordingService.takeScreenshot(
+                `${this.currentTask?.taskNumber}_screenshot${this.currentTask?.id}_resets${this.currentTask?.resets}.png`,
+                this.recordingService.getScreenStream()!,
+            );
+        } else {
+        }
         this.sketchComponent.saveTask(
             `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
         );

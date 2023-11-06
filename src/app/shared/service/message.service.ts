@@ -37,4 +37,16 @@ export class MessageService {
             duration: 3000,
         });
     }
+
+    public recordingNotSupported() {
+        this.snackBar.open("Screen and Audio Recording not supported", "Okay", {
+            duration: 3000,
+        });
+    }
+
+    public alreadyFirstPage() {
+        this.snackBar.open("You are already on the first page", "Okay", {
+            duration: 3000,
+        });
+    }
 }

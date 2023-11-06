@@ -1,68 +1,68 @@
-import { Injectable } from "@angular/core";
-import * as RecordRTC from "recordrtc";
+import { EventEmitter, Injectable } from "@angular/core";
 import { DataStorageService } from "./data.storage.service";
+import { MessageService } from "./message.service";
 
 @Injectable({
     providedIn: "root",
 })
 export class RecordingService {
-    private screenRecorder: RecordRTC | null = null;
-    private audioRecorder: RecordRTC | null = null;
+    private mediaRecorder: MediaRecorder | null = null;
     private screenStream: MediaStream | null = null;
     private audioStream: MediaStream | null = null;
+    private notSupported: boolean = false;
 
-    constructor(private dataStorageService: DataStorageService) {}
+    private recordingStopped = new EventEmitter<void>();
+
+    constructor(
+        private dataStorageService: DataStorageService,
+        private messageService: MessageService,
+    ) {}
 
     async startRecording() {
         try {
-            // Bildschirmaufnahme starten
             this.screenStream = await navigator.mediaDevices.getDisplayMedia({
                 video: true,
             });
-            this.screenRecorder = new RecordRTC(this.screenStream, {
-                type: "video",
-            });
-            this.screenRecorder.startRecording();
-
-            // Audioaufnahme starten
             this.audioStream = await navigator.mediaDevices.getUserMedia({
                 audio: true,
             });
-            this.audioRecorder = new RecordRTC(this.audioStream, {
-                type: "audio",
-            });
-            this.audioRecorder.startRecording();
+            // Combine the audio and screen streams
+            let tracks = [...this.screenStream.getVideoTracks(), ...this.audioStream.getAudioTracks()];
+            let combinedStream = new MediaStream(tracks);
+
+            this.mediaRecorder = new MediaRecorder(combinedStream);
+            let chunks: BlobPart[] = [];
+
+            this.mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    chunks.push(event.data);
+                }
+            };
+
+            this.mediaRecorder.onstop = async () => {
+                const blob = new Blob(chunks, { type: "video/webm" });
+                chunks = []; // Clear the chunks array
+                this.dataStorageService.saveData("22_recording.webm", blob);
+                this.stopMediaTracks(this.screenStream);
+                this.stopMediaTracks(this.audioStream);
+                this.recordingStopped.emit();
+            };
+
+            this.mediaRecorder.start();
         } catch (error) {
             console.error("Fehler beim Starten der Aufnahmen", error);
+            this.notSupported = true;
+            this.messageService.recordingNotSupported();
         }
     }
 
     async stopRecording(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            if (this.screenRecorder && this.audioRecorder) {
-                this.screenRecorder.stopRecording(() => {
-                    const videoBlob = this.screenRecorder!.getBlob();
-                    if (videoBlob.size > 0) {
-                        this.dataStorageService.saveData(`22_ScreenRecording.webm`, videoBlob);
-                        this.audioRecorder!.stopRecording(() => {
-                            const audioBlob = this.audioRecorder!.getBlob();
-                            if (audioBlob.size > 0) {
-                                this.dataStorageService.saveData(`23_AudioRecording.webm`, audioBlob);
-                                this.stopMediaTracks(this.screenStream);
-                                this.stopMediaTracks(this.audioStream);
-                                resolve();
-                            } else {
-                                console.error("Audio Blob is empty or not generated properly.");
-                                reject(new Error("Audio Blob is empty or not generated properly."));
-                            }
-                        });
-                    } else {
-                        console.error("Video Blob is empty or not generated properly.");
-                        reject(new Error("Video Blob is empty or not generated properly."));
-                    }
-                });
+            if (this.mediaRecorder && !this.notSupported) {
+                this.mediaRecorder.stop(); // This will trigger the onstop event
+                resolve();
             } else {
-                reject(new Error("Recorder nicht initialisiert"));
+                reject(new Error("Recorder nicht initialisiert oder nicht unterstützt"));
             }
         });
     }
@@ -108,5 +108,13 @@ export class RecordingService {
 
     public getScreenStream(): MediaStream | null {
         return this.screenStream;
+    }
+
+    public recordingNotSupported(): boolean {
+        return this.notSupported;
+    }
+
+    public getRecordingStoppedEvent(): EventEmitter<void> {
+        return this.recordingStopped;
     }
 }

@@ -11,7 +11,7 @@ import { RecordingService } from "../../shared/service/recording.service";
     styleUrls: ["./acknowledgement.component.scss"],
 })
 export class AcknowledgementComponent implements OnInit {
-    language: Language = Language.GERMAN;
+    language: Language = this.taskService.chosenLanguage;
 
     protected readonly Language = Language;
 
@@ -24,12 +24,19 @@ export class AcknowledgementComponent implements OnInit {
 
     async ngOnInit() {
         try {
-            await this.recordingService.stopRecording();
+            if (this.recordingService.recordingNotSupported()) {
+                const randomId = Math.floor(Math.random() * 1000000).toString();
+                const fileName = this.language === Language.GERMAN ? `GERMAN_${randomId}` : `ENGLISH_${randomId}`;
+                this.dataStorageService.downloadAllData(fileName);
+            } else {
+                await this.recordingService.stopRecording();
 
-            this.language = this.taskService.chosenLanguage;
-            const randomId = Math.floor(Math.random() * 1000000).toString();
-            const fileName = this.language === Language.GERMAN ? `GERMAN_${randomId}` : `ENGLISH_${randomId}`;
-            this.dataStorageService.downloadAllData(fileName);
+                this.recordingService.getRecordingStoppedEvent().subscribe(async () => {
+                    const randomId = Math.floor(Math.random() * 1000000).toString();
+                    const fileName = this.language === Language.GERMAN ? `GERMAN_${randomId}` : `ENGLISH_${randomId}`;
+                    this.dataStorageService.downloadAllData(fileName);
+                });
+            }
         } catch (error) {
             console.error("Fehler beim Stoppen der Aufnahme", error);
         }

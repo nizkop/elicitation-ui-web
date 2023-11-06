@@ -72,4 +72,41 @@ export class RecordingService {
             stream.getTracks().forEach((track) => track.stop());
         }
     }
+
+    takeScreenshot(fileName: string, stream: MediaStream): Promise<void> {
+        return new Promise((resolve, reject) => {
+            const videoTrack = stream.getVideoTracks()[0];
+            const captureCanvas = document.createElement("canvas");
+            const context = captureCanvas.getContext("2d");
+            const video = document.createElement("video");
+
+            video.srcObject = new MediaStream([videoTrack]);
+            video.onloadedmetadata = () => {
+                captureCanvas.width = video.videoWidth;
+                captureCanvas.height = video.videoHeight;
+                video
+                    .play()
+                    .then(() => {
+                        context?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                        captureCanvas.toBlob((blob) => {
+                            if (blob) {
+                                this.dataStorageService.saveData(fileName, blob);
+                                resolve();
+                            } else {
+                                reject(new Error("Screenshot Blob konnte nicht erstellt werden."));
+                            }
+                        }, "image/png");
+                        video.pause();
+                    })
+                    .catch((error) => {
+                        console.error("Error playing video for screenshot", error);
+                        reject(error);
+                    });
+            };
+        });
+    }
+
+    public getScreenStream(): MediaStream | null {
+        return this.screenStream;
+    }
 }

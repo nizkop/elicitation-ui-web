@@ -32,6 +32,8 @@
         <mat-grid-list cols="1" rowHeight="20:1">
             <mat-grid-tile *ngIf="currentTask?.language === Language.GERMAN">
                 <label>{{ question1_GERMAN }}</label>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="currentTask?.language === Language.GERMAN">
                 <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Sehr einfach" />
                 <p>Sehr einfach</p>
                 <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Einfach" />
@@ -45,6 +47,8 @@
             </mat-grid-tile>
             <mat-grid-tile *ngIf="currentTask?.language === Language.ENGLISH">
                 <label>{{ question1_ENGLISH }}</label>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="currentTask?.language === Language.ENGLISH">
                 <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="Very easy" />
                 <p>very easy</p>
                 <input type="radio" [(ngModel)]="formQuestion1" name="formQuestion1" value="easy" />
@@ -59,6 +63,8 @@
 
             <mat-grid-tile *ngIf="currentTask?.language === Language.GERMAN">
                 <label>{{ question2_GERMAN }}</label>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="currentTask?.language === Language.GERMAN">
                 <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="Sehr zufrieden" />
                 <p>Sehr zufrieden</p>
                 <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="Zufrieden" />
@@ -72,6 +78,8 @@
             </mat-grid-tile>
             <mat-grid-tile *ngIf="currentTask?.language === Language.ENGLISH">
                 <label>{{ question2_ENGLISH }}</label>
+            </mat-grid-tile>
+            <mat-grid-tile *ngIf="currentTask?.language === Language.ENGLISH">
                 <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="very satisfied" />
                 <p>very satisfied</p>
                 <input type="radio" [(ngModel)]="formQuestion2" name="formQuestion2" value="satisfied" />

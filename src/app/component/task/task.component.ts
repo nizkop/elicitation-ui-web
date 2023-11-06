@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { SketchComponent } from "../sketch/sketch.component";
 import { Group } from "../../shared/model/group.enum";
 import { MessageService } from "../../shared/service/message.service";
+import { RecordingService } from "../../shared/service/recording.service";
+import { delay } from "rxjs";
 
 @Component({
     selector: "app-task",
@@ -25,6 +27,7 @@ export class TaskComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private messageService: MessageService,
+        private recordingService: RecordingService,
     ) {}
 
     ngOnInit() {
@@ -53,16 +56,21 @@ export class TaskComponent implements OnInit {
         this.saveData();
     }
 
-    clickNextPage() {
+    async clickNextPage() {
         if (this.sketchComponent.capturedLines.length == 0) {
             this.messageService.notEditedPage(this.currentTask!.language);
         } else {
-            this.saveData();
+            await this.saveData();
             this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
         }
     }
 
-    saveData() {
+    async saveData() {
+        await this.recordingService.takeScreenshot(
+            `${this.currentTask?.taskNumber}_screenshot${this.currentTask?.id}_resets${this.currentTask?.resets}.png`,
+            this.recordingService.getScreenStream()!,
+        );
+
         this.sketchComponent.saveTask(
             `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
         );

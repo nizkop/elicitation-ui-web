@@ -133,6 +133,13 @@ export class SketchComponent implements OnInit {
         }
     }
 
+    saveSkip(fileName: string) {
+        this.dataStorageService.saveData(
+            `${fileName}.json`,
+            new Blob([JSON.stringify({ skipped: true }, null, 2)], { type: "application/json" }),
+        );
+    }
+
     saveTask(fileName: string) {
         this.currentTask!.endTimeDrawing = new Date();
         this.currentTask!.timeDrawing =

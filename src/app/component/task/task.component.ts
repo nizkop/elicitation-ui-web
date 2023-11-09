@@ -64,6 +64,13 @@ export class TaskComponent implements OnInit {
         }
     }
 
+    async clickSkipTask() {
+        this.sketchComponent.saveSkip(
+            `${this.currentTask?.taskNumber}_task_skip${this.currentTask?.id}_resets${this.currentTask?.resets}`,
+        );
+        this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
+    }
+
     async saveData() {
         if (!this.recordingService.recordingNotSupported()) {
             await this.recordingService.takeScreenshot(

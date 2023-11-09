@@ -39,6 +39,8 @@
                 <p>männlich</p>
                 <input type="radio" [(ngModel)]="gender" name="gender" value="non-binär" />
                 <p>non-binär</p>
+                <input type="radio" [(ngModel)]="gender" name="gender" value="Keine Angabe" />
+                <p>Keine Angabe</p>
             </mat-grid-tile>
             <!-- Gender -->
             <mat-grid-tile *ngIf="language === Language.ENGLISH">
@@ -49,6 +51,8 @@
                 <p>male</p>
                 <input type="radio" [(ngModel)]="gender" name="gender" value="non-binary" />
                 <p>non-binary</p>
+                <input type="radio" [(ngModel)]="gender" name="gender" value="prefer not to say" />
+                <p>prefer not to say</p>
             </mat-grid-tile>
 
             <!-- Alter -->
@@ -64,6 +68,8 @@
                 <p>41-60</p>
                 <input type="radio" [(ngModel)]="age" name="age" value="61-80" />
                 <p>61-80</p>
+                <input type="radio" [(ngModel)]="age" name="age" value="Keine Angabe" />
+                <p>Keine Angabe</p>
             </mat-grid-tile>
             <!-- Age -->
             <mat-grid-tile *ngIf="language === Language.ENGLISH">
@@ -78,6 +84,8 @@
                 <p>41-60</p>
                 <input type="radio" [(ngModel)]="age" name="age" value="61-80" />
                 <p>61-80</p>
+                <input type="radio" [(ngModel)]="age" name="age" value="prefer not to say" />
+                <p>prefer not to say</p>
             </mat-grid-tile>
 
             <!-- Welche Hand benutzen Sie zum Schreiben? -->

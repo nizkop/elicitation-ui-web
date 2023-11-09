@@ -63,17 +63,29 @@ export class QuestionnaireComponent implements OnInit {
         }
     }
 
+    clickSkip(): void {
+        this.dataStorageService.saveData(
+            `${this.currentTask?.taskNumber}_questionnaire_skip${this.currentTask?.id}.json`,
+            new Blob([JSON.stringify({ skipped: true }, null, 2)], { type: "application/json" }),
+        );
+        this.nextPage();
+    }
+
     clickNextPage(): void {
         if (this.checkFormCompletion()) {
             this.saveData();
 
-            if (this.currentTask?.taskNumber === this.taskService.loadedTasks.length) {
-                this.router.navigate(["/demographics"]);
-            } else {
-                this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);
-            }
+            this.nextPage();
         } else {
             this.messageService.notCompletedForm(this.currentTask!.language);
+        }
+    }
+
+    nextPage(): void {
+        if (this.currentTask?.taskNumber === this.taskService.loadedTasks.length) {
+            this.router.navigate(["/demographics"]);
+        } else {
+            this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);
         }
     }
 

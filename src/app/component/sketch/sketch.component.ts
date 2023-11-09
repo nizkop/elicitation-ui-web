@@ -151,16 +151,17 @@ export class SketchComponent implements OnInit {
             if (saveContext) {
                 saveCanvas.width = this.canvas.width;
                 saveCanvas.height = this.canvas.height;
-                for (const line of this.capturedLines) {
-                    saveContext.beginPath();
-                    saveContext.moveTo(line[0].x, line[0].y);
-                    for (let i = 1; i < line.length; i++) {
-                        saveContext.lineTo(line[i].x, line[i].y);
-                    }
-                    saveContext.strokeStyle = this.context.strokeStyle as string;
-                    saveContext.lineWidth = this.context.lineWidth;
-                    saveContext.stroke();
-                }
+
+                // Zeichnen Sie das backgroundImage auf den saveCanvas
+                const image = new Image();
+                image.src =
+                    this.currentTask?.language === Language.GERMAN
+                        ? this.backgroundImageUrlDE
+                        : this.backgroundImageUrlEN;
+                saveContext.drawImage(image, 0, 0, 1252, 575.625);
+
+                this.drawLinesOnCanvas(saveContext);
+
                 saveCanvas.toBlob((blob) => {
                     this.dataStorageService.saveData(`${fileName}.png`, blob);
                 });
@@ -174,6 +175,20 @@ export class SketchComponent implements OnInit {
             }
         }
         this.resetDrawing();
+    }
+
+    drawLinesOnCanvas(saveContext: CanvasRenderingContext2D) {
+        // Zeichnen Sie die Linien auf das Bild
+        for (const line of this.capturedLines) {
+            saveContext.beginPath();
+            saveContext.moveTo(line[0].x, line[0].y);
+            for (let i = 1; i < line.length; i++) {
+                saveContext.lineTo(line[i].x, line[i].y);
+            }
+            saveContext.strokeStyle = this.context!.strokeStyle as string;
+            saveContext.lineWidth = this.context!.lineWidth;
+            saveContext.stroke();
+        }
     }
 
     resetDrawing() {

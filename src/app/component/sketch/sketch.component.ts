@@ -165,7 +165,7 @@ export class SketchComponent implements OnInit {
                     this.currentTask?.language === Language.GERMAN
                         ? this.backgroundImageUrlDE
                         : this.backgroundImageUrlEN;
-                saveContext.drawImage(image, 0, 0, 1252, 575.625);
+                saveContext.drawImage(image, 0, 0, 1186, 576);
 
                 this.drawLinesOnCanvas(saveContext);
 

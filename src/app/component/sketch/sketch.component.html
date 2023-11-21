@@ -27,7 +27,6 @@
             *ngIf="currentTask?.language === Language.ENGLISH"
             #backgroundImage
             [src]="backgroundImageUrlEN"
-            style="max-width: 90%"
             (load)="onImageLoad()"
         />
         <canvas

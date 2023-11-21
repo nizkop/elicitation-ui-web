@@ -13,11 +13,7 @@
                 <mat-icon>exit_to_app</mat-icon>
             </button>
         </mat-grid-tile>
-        <mat-grid-tile>
-            <button mat-raised-button color="warn" (click)="clickSkip()">
-                {{ currentTask?.language === Language.GERMAN ? "Aufgabe überspringen" : "Skip Task" }}
-            </button>
-        </mat-grid-tile>
+        <mat-grid-tile> </mat-grid-tile>
         <mat-grid-tile>
             <button mat-raised-button color="primary" (click)="clickPreviousPage()">
                 {{ currentTask?.language === Language.GERMAN ? "Vorherige Seite" : "Previous Page" }}

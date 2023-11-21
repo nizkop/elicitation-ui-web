@@ -30,13 +30,17 @@ export class TaskComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        const taskNumber = +this.route.snapshot.params["taskNumber"];
-        this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
-        if (this.currentTask) {
-        } else {
-            this.messageService.taskNotFound();
-        }
+        this.route.params.subscribe((params) => {
+            const taskNumber = +params["taskNumber"];
+            this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
+
+            if (this.currentTask) {
+            } else {
+                this.messageService.taskNotFound();
+            }
+        });
     }
 
     clickPreviousPage() {
@@ -68,7 +72,11 @@ export class TaskComponent implements OnInit {
         this.sketchComponent.saveSkip(
             `${this.currentTask?.taskNumber}_task_skip${this.currentTask?.id}_resets${this.currentTask?.resets}`,
         );
-        this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
+        if (this.currentTask?.taskNumber === this.taskService.loadedTasks.length) {
+            this.router.navigate(["/demographics"]);
+        } else {
+            this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);
+        }
     }
 
     async saveData() {

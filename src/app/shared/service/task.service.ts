@@ -91,7 +91,7 @@ export class TaskService {
         {
             title: "Bedingte Formatierung",
             description:
-                "Definieren Sie eine bedingte Formatierungsregel für Zelle E13, sodass Werte über 400 in rot dargestellt werden, andere hingegen in grün.",
+                "Definieren Sie eine bedingte Formatierungsregel für die Zellen C7-11, so dass Werte über 200 in rot und andere in grün angezeigt werden.",
             group: Group.C,
         },
         {
@@ -168,7 +168,8 @@ export class TaskService {
         },
         {
             title: "Conditional formatting",
-            description: "Define a conditional formatting rule for cell E13.",
+            description:
+                "Define a conditional formatting rule for cells C7-11 so values greater than 200 are displayed in red but others in green.",
             group: Group.C,
         },
         {

@@ -56,11 +56,7 @@ export class QuestionnaireComponent implements OnInit {
     }
 
     clickPreviousPage() {
-        if (this.currentTask!.taskNumber === 3) {
-            this.router.navigate(["/playground/" + (this.currentTask!.taskNumber - 1).toString()]);
-        } else {
-            this.router.navigate(["/task/" + (this.currentTask!.taskNumber - 1).toString()]);
-        }
+        this.router.navigate(["/task/" + this.currentTask!.taskNumber.toString()]);
     }
 
     clickNextPage(): void {

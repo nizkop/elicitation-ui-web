@@ -73,9 +73,21 @@ export class DemographicsComponent implements OnInit {
     clickNextPage() {
         if (this.checkFormCompletion()) {
             this.saveData();
-            this.router.navigate(["/acknowledgement"]);
+            this.nextPage();
         } else {
             this.messageService.notCompletedForm(this.language);
         }
+    }
+
+    clickSkipTask() {
+        this.dataStorageService.saveData(
+            `21_demographics_skip.json`,
+            new Blob([JSON.stringify({ skipped: true }, null, 2)], { type: "application/json" }),
+        );
+        this.nextPage();
+    }
+
+    nextPage() {
+        this.router.navigate(["/acknowledgement"]);
     }
 }

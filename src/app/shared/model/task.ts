@@ -17,6 +17,8 @@ export class Task {
     startTimeDrawing!: Date;
     endTimeDrawing!: Date;
     timeDrawing!: number;
+    stepNumber: number = 0;  // Initialize stepNumber to 0
+    currentSheet: number = 1;
 
     constructor(id: number, title: string, description: string, group: Group, resets: number, language: Language) {
         this.id = id;

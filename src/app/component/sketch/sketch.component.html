@@ -1,16 +1,18 @@
 <div style="background-color: aliceblue">
-    <!--Task Description Section-->
+    <!-- Task Description Section -->
     <mat-grid-list cols="1" rowHeight="20:1">
         <mat-grid-tile>
             <p>{{ currentTask?.description }}</p>
         </mat-grid-tile>
     </mat-grid-list>
-    <!--Spreatching Section-->
+
+    <!-- Sketching Section -->
     <div style="position: relative">
+        <!-- Background Image for German Language -->
         <img
             *ngIf="currentTask?.language === Language.GERMAN"
             #backgroundImage
-            [src]="backgroundImageUrlDE"
+            [src]="currentBackgroundImage"
             (load)="onImageLoad()"
         />
         <canvas
@@ -23,12 +25,16 @@
             (mouseup)="onMouseUp()"
             style="position: absolute; top: 0; left: 0"
         ></canvas>
+
+        <!-- Background Image for English Language -->
+        <div>
         <img
             *ngIf="currentTask?.language === Language.ENGLISH"
             #backgroundImage
-            [src]="backgroundImageUrlEN"
+            [src]="currentBackgroundImage"
             (load)="onImageLoad()"
         />
+    </div>
         <canvas
             #drawingCanvas
             (touchstart)="onTouchStart($event)"
@@ -39,5 +45,21 @@
             (mouseup)="onMouseUp()"
             style="position: absolute; top: 0; left: 0"
         ></canvas>
+        
+        <!-- Buttons Section -->
+        <div style="position: fixed; 
+        bottom: 10px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        display: flex; 
+        gap: 5px; 
+        z-index: 1000; 
+        background: rgba(255, 255, 255, 0.8); 
+        padding: 5px 10px; 
+        border-radius: 10px;">
+            <button class="sheet-button" (click)="changeBackground('sheet1')">Sheet1</button>
+            <button class="sheet-button" (click)="changeBackground('sheet2')">Sheet2</button>
+           <!-- <button class="sheet-button" (click)="changeBackground('sheet3')">Sheet3</button> -->
+        </div>
     </div>
 </div>

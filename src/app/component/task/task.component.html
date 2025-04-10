@@ -1,12 +1,13 @@
 <!--Header Section-->
-<div style="background-color: lightblue">
+
+<!-- <div style="background-color: lightblue">
     <mat-grid-list cols="3" rowHeight="6:1">
         <mat-grid-tile>
             <button mat-raised-button color="warn" (click)="clickSkipTask()">
                 {{ currentTask?.language === Language.GERMAN ? "Aufgabe überspringen" : "Skip Task" }}
             </button>
         </mat-grid-tile>
-        <mat-grid-tile *ngIf="currentTask?.group !== Group.P">
+        <mat-grid-tile *ngIf="false">
             <h2 *ngIf="currentTask?.language === Language.GERMAN">
                 Aufgabe {{ currentTask!.taskNumber - 2 }} von 18: {{ currentTask?.title }}
             </h2>
@@ -14,7 +15,7 @@
                 Task {{ currentTask!.taskNumber - 2 }} of 18: {{ currentTask?.title }}
             </h2>
         </mat-grid-tile>
-        <mat-grid-tile *ngIf="currentTask?.group === Group.P">
+        <mat-grid-tile *ngIf="false">
             <h2 *ngIf="currentTask?.language === Language.GERMAN">Spielewiese: {{ currentTask?.title }}</h2>
             <h2 *ngIf="currentTask?.language === Language.ENGLISH">Warm-up: {{ currentTask?.title }}</h2>
         </mat-grid-tile>
@@ -25,7 +26,12 @@
         </mat-grid-tile>
         <mat-grid-tile>
             <button mat-raised-button color="primary" (click)="clickResetPage()">
-                {{ currentTask?.language === Language.GERMAN ? "Zurücksetzen" : "Reset" }}
+                {{ currentTask?.language === Language.GERMAN ? "Zurücksetzen" : "Reset Current Sheet" }}
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="clickResetAllSheets()">
+                {{ currentTask?.language === Language.GERMAN ? "Alle zurücksetzen" : "Reset All Sheets" }}
             </button>
         </mat-grid-tile>
         <mat-grid-tile>
@@ -40,4 +46,49 @@
         </mat-grid-tile>
     </mat-grid-list>
 </div>
+-->
+<div style="background-color: lightblue; 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            padding: 10px; 
+            justify-content: space-evenly; 
+            align-items: center; 
+            flex-wrap: wrap;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            ">
+    <button mat-raised-button color="primary" (click)="clickPreviousPage()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ currentTask?.language === Language.GERMAN ? "Vorherige Aufgabe" : "Previous Page" }}
+    </button>
+
+    <button mat-raised-button color="primary" (click)="clickResetPage()">
+        <mat-icon>refresh</mat-icon>
+        {{ currentTask?.language === Language.GERMAN ? "Zurücksetzen" : "Reset Current Sheet" }}
+    </button>
+
+    <button mat-raised-button color="primary" (click)="clickResetAllSheets()">
+        <mat-icon>clear_all</mat-icon>
+        {{ currentTask?.language === Language.GERMAN ? "Alle zurücksetzen" : "Reset All Sheets" }}
+    </button>
+
+    <button mat-raised-button color="primary" (click)="clickNextPage()">
+        <mat-icon>arrow_forward</mat-icon>
+        {{ currentTask?.language === Language.GERMAN ? "Vorherige Seite" : "Next Page" }}
+    </button>
+
+    <button mat-raised-button color="warn" (click)="clickSkipTask()">
+        <mat-icon>skip_next</mat-icon>
+        {{ currentTask?.language === Language.GERMAN ? "Aufgabe überspringen" : "Skip Task" }}
+    </button>
+
+    <button mat-fab color="warn" aria-label="Exit Study" (click)="clickExitStudy()">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+</div>
+<div style="margin-top: 70px;">
 <app-sketch />
+</div>

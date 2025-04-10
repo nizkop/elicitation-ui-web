@@ -7,6 +7,8 @@ import { SketchComponent } from "../sketch/sketch.component";
 import { Group } from "../../shared/model/group.enum";
 import { MessageService } from "../../shared/service/message.service";
 import { RecordingService } from "../../shared/service/recording.service";
+import { DataStorageService } from "../../shared/service/data.storage.service";
+
 
 @Component({
     selector: "app-task",
@@ -21,12 +23,15 @@ export class TaskComponent implements OnInit {
     protected readonly Language = Language;
     protected readonly Group = Group;
 
+    
     constructor(
         private taskService: TaskService,
         private route: ActivatedRoute,
         private router: Router,
         private messageService: MessageService,
         private recordingService: RecordingService,
+        private dataStorageService: DataStorageService
+        
     ) {}
 
     ngOnInit() {
@@ -37,13 +42,15 @@ export class TaskComponent implements OnInit {
             this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 
             if (this.currentTask) {
+                console.log(`Loaded task ${taskNumber}`, this.currentTask);
             } else {
                 this.messageService.taskNotFound();
             }
         });
     }
 
-    clickPreviousPage() {
+    async clickPreviousPage() {
+        await this.saveData();
         if (this.currentTask!.taskNumber === 1) {
             this.messageService.alreadyFirstPage();
         } else {
@@ -51,14 +58,70 @@ export class TaskComponent implements OnInit {
         }
     }
 
-    clickExitStudy() {
-        this.router.navigate(["/demographics"]);
+    async clickExitStudy() {
+        console.log("Exit Study button clicked");
+        
+        try {
+            // First, use the force save method to ensure drawings are saved
+            let forceSuccess = false;
+            if (this.sketchComponent) {
+                forceSuccess = this.sketchComponent.forceSaveAllDrawings();
+                console.log(`Force save ${forceSuccess ? 'succeeded' : 'failed'}`);
+            }
+            
+            // Then do the regular save
+            await this.saveData();
+            console.log("Regular save completed");
+            
+            // Give a small delay to ensure file operations complete
+            setTimeout(() => {
+                // Make one final attempt if the force save failed
+                if (!forceSuccess && this.sketchComponent) {
+                    console.log("Making final attempt to save drawings");
+                    this.sketchComponent.forceSaveAllDrawings();
+                }
+                
+                console.log("Navigating to demographics page");
+                this.router.navigate(["/demographics"]);
+            }, 300);
+        } catch (error) {
+            console.error("Error during exit process:", error);
+            
+            // Even if there's an error, make one final save attempt
+            if (this.sketchComponent) {
+                console.log("Making emergency save attempt after error");
+                this.sketchComponent.forceSaveAllDrawings();
+            }
+            
+            // Still navigate to demographics to avoid blocking the user
+            setTimeout(() => {
+                this.router.navigate(["/demographics"]);
+            }, 500);
+        }
     }
 
-    clickResetPage() {
-        this.saveData();
+    async clickResetPage() {
+        console.log("Reset current sheet button clicked");
+        
+        if (this.sketchComponent) {
+            await this.sketchComponent.resetDrawing();
+            console.log("Reset function completed in SketchComponent");
+        } else {
+            console.error("SketchComponent is not available!");
+        }
     }
 
+    async clickResetAllSheets() {
+        console.log("Reset All Sheets button clicked");
+        
+        if (this.sketchComponent) {
+            await this.sketchComponent.resetAllDrawings();
+            console.log("Reset function completed for all sheets");
+        } else {
+            console.error("SketchComponent is not available!");
+        }
+    }
+    
     async clickNextPage() {
         if (this.sketchComponent.capturedLines.length == 0) {
             this.messageService.notEditedPage(this.currentTask!.language);
@@ -69,29 +132,76 @@ export class TaskComponent implements OnInit {
     }
 
     async clickSkipTask() {
-        this.sketchComponent.saveSkip(
-            `${this.currentTask?.taskNumber}_task_skip${this.currentTask?.id}_resets${this.currentTask?.resets}`,
-        );
-        if (this.currentTask?.taskNumber === this.taskService.loadedTasks.length) {
-            this.router.navigate(["/demographics"]);
+        console.log("Skip task button clicked - Saving skip record");
+        
+        if (this.currentTask) {
+            try {
+                // First make sure drawings are saved
+                if (this.sketchComponent) {
+                    const saveResult = this.sketchComponent.forceSaveAllDrawings();
+                    console.log(`Forced save of drawings: ${saveResult ? 'successful' : 'failed'}`);
+                }
+                
+                // Create skip record data
+                const skipData = {
+                    taskId: this.currentTask.id,
+                    taskNumber: this.currentTask.taskNumber,
+                    action: "skipped",
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Generate filename for the skip record
+                const skipFileName = `Task_${this.currentTask.taskNumber}_Skipped.json`;
+                
+                // Create blob for the JSON file
+                const skipBlob = new Blob([JSON.stringify(skipData, null, 2)], { type: "application/json" });
+                
+                // Save using DataStorageService directly
+                this.dataStorageService.saveData(skipFileName, skipBlob);
+                
+                console.log(`Skip record created: ${skipFileName}`);
+            } catch (error) {
+                console.error("Error creating skip record:", error);
+            }
+            
+            // Short delay to ensure file operations complete
+            await new Promise(resolve => setTimeout(resolve, 200));
+            
+            // Navigate to the next task
+            const nextTaskNumber = this.currentTask.taskNumber + 1;
+            console.log(`Navigating to next task: ${nextTaskNumber}`);
+            this.router.navigate(["/task/" + nextTaskNumber.toString()]);
         } else {
-            this.router.navigate(["/task/" + (this.currentTask!.taskNumber + 1).toString()]);
+            console.error("Cannot skip task: No current task found");
         }
     }
 
     async saveData() {
-        if (!this.recordingService.recordingNotSupported()) {
-            await this.recordingService.takeScreenshot(
-                `${this.currentTask?.taskNumber}_screenshot${this.currentTask?.id}_resets${this.currentTask?.resets}.png`,
-                this.recordingService.getScreenStream()!,
-            );
+        console.log("Saving task data and screenshots");
+        
+        if (this.currentTask && this.sketchComponent) {
+            try {
+                // First handle recording service screenshot if available
+                if (this.recordingService && !this.recordingService.recordingNotSupported()) {
+                    const streamScreenshotName = `Task_${this.currentTask.taskNumber}_sheet${this.currentTask.currentSheet}.png`;
+                    await this.recordingService.takeScreenshot(
+                        streamScreenshotName,
+                        this.recordingService.getScreenStream()!
+                    );
+                    console.log(`Recording service screenshot saved: ${streamScreenshotName}`);
+                }
+                
+                
+                // This will update timestamps and take screenshots of all sheets
+                this.sketchComponent.saveTask();
+                
+                
+                console.log("Task data and screenshots saved successfully");
+            } catch (error) {
+                console.error("Error saving data:", error);
+            }
         } else {
+            console.warn("Cannot save data: no current task or sketch component");
         }
-        this.sketchComponent.saveTask(
-            `${this.currentTask?.taskNumber}_task_detail${this.currentTask?.id}_resets${this.currentTask?.resets}`,
-        );
-        this.sketchComponent.saveDrawing(
-            `${this.currentTask?.taskNumber}_drawing_task${this.currentTask?.id}_resets${this.currentTask?.resets}`,
-        );
     }
 }

@@ -1,4 +1,51 @@
-img {
-    width: 1186px;
-    height: 576px;
+/* Scrollable container for All_Scrolling_Sheets.png */
+img[src$="All_Scrolling_Sheets.png"] {
+    width: 1150px;
+    height: 1500px;
+}
+
+
+
+
+
+
+
+img[src$="Spreadsheet_EN.png"] {
+    width: 1150px;
+    height: 550px;
+}
+.sheet-button {
+    background-color: #f1f1f1;  /* Light gray background */
+    border: 1px solid #ccc;     /* Light gray border */
+    padding: 8px 16px;           /* Adjust padding for better shape */
+    font-size: 14px;             /* Slightly smaller text */
+    font-weight: bold;           /* Bold text */
+    color: #333;                 /* Dark text */
+    border-radius: 5px 5px 0 0;  /* Rounded corners on top */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow to make it stand out */
+    cursor: pointer;            /* Cursor pointer to indicate clickable */
+    transition: all 0.3s ease;   /* Smooth transition for hover effects */
+    margin: 0;                   /* Remove default margin */
+}
+
+.sheet-button:hover {
+    background-color: #e1e1e1;  /* Slightly darker gray on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* More pronounced shadow on hover */
+}
+
+.sheet-button:active {
+    background-color: #d1d1d1;  /* Darker gray on active click */
+}
+
+.sheet-button:focus {
+    outline: none;              /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0, 120, 255, 0.7); /* Add focus outline for accessibility */
+}
+
+.sheet-button:first-child {
+    border-radius: 5px 0 0 0; /* Rounded left corner for the first button */
+}
+
+.sheet-button:last-child {
+    border-radius: 0 5px 0 0; /* Rounded right corner for the last button */
 }

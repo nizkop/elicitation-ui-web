@@ -16,10 +16,8 @@ export class SketchComponent implements OnInit {
     @ViewChild("drawingCanvas", { static: false }) drawingCanvas!: ElementRef;
     
 
-    backgroundImageUrlDE = "./assets/Spreadsheet_DE.png";
-    backgroundImageUrlEN = "./assets/All_Scrolling_Sheets.png";
-
-    backgroundImageUrlSheet2 = "./assets/Spreadsheet_EN.png"; // New background for Sheet 2
+    backgroundImageUrl = '';
+    backgroundImageUrlSheet2 = ''; // New background for Sheet 2
     //backgroundImageUrlSheet3 = "./assets/background_3.png"; // New background for Sheet 3
 
     sheetDrawings: { [sheet: string]: Array<Array<{ x: number; y: number }>> } = {
@@ -38,7 +36,7 @@ export class SketchComponent implements OnInit {
     private screenshotInProgress: boolean = false;
     private screenshotQueue: Array<{sheetName: string, fileName: string, timestamp: number, resolve: Function, reject: Function}> = [];
     private isSkipTransitionScreenshot = false;
-    currentBackgroundImage = this.backgroundImageUrlEN; // Initially set to Sheet1 background
+    currentBackgroundImage = this.backgroundImageUrl; // Initially set to Sheet1 background
     // Add properties to component class
     private previousSheetDrawings: { [sheetName: string]: any[] } = {};
     private transitionCounter: { [sheetName: string]: number } = {}; // Track number of transitions
@@ -48,6 +46,7 @@ export class SketchComponent implements OnInit {
 
     capturedLines: Array<Array<{ x: number; y: number }>> = [];
     currentLine: { x: number; y: number }[] = [];
+    language: Language | undefined;
 
     tasks: Task[] | undefined;
     currentTask: Task | undefined;
@@ -59,7 +58,12 @@ export class SketchComponent implements OnInit {
         private route: ActivatedRoute,
         private dataStorageService: DataStorageService,
         private messageService: MessageService,
-    ) {}
+    ) {
+         this.language = this.taskService.chosenLanguage
+         this.backgroundImageUrl = `./assets/${this.language === Language.GERMAN ? 'DE' : 'EN'}/Spreadsheet.png`;
+         this.backgroundImageUrlSheet2 = `./assets/${this.language === Language.GERMAN ? 'EN' : 'EN'}/Spreadsheet.png`; // fallback for Sheet 2
+         this.currentBackgroundImage = this.backgroundImageUrl;// Update
+    }
 
 
     private sheetOriginalDimensions: { [key: string]: { width: number, height: number } } = {
@@ -67,11 +71,11 @@ export class SketchComponent implements OnInit {
         'sheet2': { width: 1150, height: 550 }
       };
       
-      
-      
-      
-      
-      
+
+
+
+
+
       async changeBackground(sheet: string) {
         // First save the current sheet's drawings if we're changing sheets
         if (this.currentSheet !== sheet) {
@@ -82,6 +86,7 @@ export class SketchComponent implements OnInit {
         // Skip if trying to change to the current sheet
         if (this.currentSheet === sheet) {
           console.log(`Already on ${sheet}, no change needed`);
+          // TODO muss die Meldung anders heißen?
           return;
         }
       
@@ -120,7 +125,7 @@ export class SketchComponent implements OnInit {
         
         // Now proceed with the sheet changing logic with explicit canvas dimension handling
         if (sheet === 'sheet1') {
-          this.currentBackgroundImage = this.backgroundImageUrlEN; // Sheet 1
+          this.currentBackgroundImage = this.backgroundImageUrl; // Sheet 1
           
           // Set canvas dimensions explicitly for sheet1
           if (this.canvas) {
@@ -242,6 +247,10 @@ private formatTimestamp(timestamp: number): string {
   
     if (this.currentTask) {
       console.log("Current Task: ", this.currentTask.id);
+      // Initialize background Image for sheet 2:
+      this.backgroundImageUrlSheet2 = `./assets/${this.language === Language.GERMAN ? 'DE' : 'EN'}/task_${this.currentTask?.id}.png`;
+        //  TODO so far no security, if picture not there
+
       this.currentTask.startTimeWatching = new Date();
       
       // Initialize the sheet drawings if not already done
@@ -250,7 +259,7 @@ private formatTimestamp(timestamp: number): string {
     } else {
       this.messageService.taskNotFound();
     }
-    
+
     
     // Initialize the sheetDrawings object if it doesn't exist
     if (!this.sheetDrawings) {
@@ -537,7 +546,7 @@ private formatTimestamp(timestamp: number): string {
     
             // Determine the correct background image based on sheet name
             const backgroundImageUrl: string = sheetName === "sheet1" 
-                ? this.backgroundImageUrlEN 
+                ? this.backgroundImageUrl
                 : this.backgroundImageUrlSheet2;
     
             const image: HTMLImageElement = new Image();

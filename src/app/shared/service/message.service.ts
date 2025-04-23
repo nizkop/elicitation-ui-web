@@ -20,17 +20,17 @@ export class MessageService {
         }
     }
 
-    public notEditedPage(language: Language): void {
-        if (language === Language.GERMAN) {
-            this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
-                duration: 3000,
-            });
-        } else {
-            this.snackBar.open("This page has not been edited yet", "Okay", {
-                duration: 3000,
-            });
-        }
-    }
+    // public notEditedPage(language: Language): void {
+    //     if (language === Language.GERMAN) {
+    //         this.snackBar.open("Die Seite wurde noch nicht bearbeitet", "Okay", {
+    //             duration: 3000,
+    //         });
+    //     } else {
+    //         this.snackBar.open("This page has not been edited yet", "Okay", {
+    //             duration: 3000,
+    //         });
+    //     }
+    // }
 
     public taskNotFound() {
         this.snackBar.open("Task not found", "Okay", {

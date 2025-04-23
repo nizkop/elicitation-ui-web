@@ -123,12 +123,8 @@ export class TaskComponent implements OnInit {
     }
     
     async clickNextPage() {
-        if (this.sketchComponent.capturedLines.length == 0) {
-            this.messageService.notEditedPage(this.currentTask!.language);
-        } else {
-            await this.saveData();
-            this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
-        }
+        await this.saveData();
+        this.router.navigate(["/questionnaire/" + this.currentTask!.taskNumber.toString()]);
     }
 
     async clickSkipTask() {

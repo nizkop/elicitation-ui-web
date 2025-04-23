@@ -1,6 +1,7 @@
 <!--Header Section-->
 <div style="background-color: lightblue">
     <mat-grid-list cols="3" rowHeight="6:1">
+<!--        <mat-grid-list cols="2" rowHeight="12:1">-->
         <mat-grid-tile>
             <img src="./assets/ui_logo.png" style="max-width: 75px; margin-top: 5px;" />
         </mat-grid-tile>
@@ -13,12 +14,12 @@
                 <mat-icon>exit_to_app</mat-icon>
             </button>
         </mat-grid-tile>
-        <mat-grid-tile> </mat-grid-tile>
         <mat-grid-tile>
             <button mat-raised-button color="primary" (click)="clickPreviousPage()">
                 {{ currentTask?.language === Language.GERMAN ? "Vorherige Seite" : "Previous Page" }}
             </button>
         </mat-grid-tile>
+        <mat-grid-tile> </mat-grid-tile>
         <mat-grid-tile>
             <button mat-raised-button color="primary" (click)="clickNextPage()">
                 {{ currentTask?.language === Language.GERMAN ? "Nächste Seite" : "Next Page" }}

@@ -57,8 +57,13 @@
         background: rgba(255, 255, 255, 0.8); 
         padding: 5px 10px; 
         border-radius: 10px;">
-            <button class="sheet-button" (click)="changeBackground('sheet1')">Sheet1</button>
-            <button class="sheet-button" (click)="changeBackground('sheet2')">Sheet2</button>
+            <button class="sheet-button" (click)="changeBackground('sheet1')">
+              {{ currentTask?.language === Language.GERMAN ? 'vorher' : 'before' }}
+            </button>
+
+            <button class="sheet-button" (click)="changeBackground('sheet2')">
+              {{ currentTask?.language === Language.GERMAN ? 'nachher' : 'after' }}
+            </button>
            <!-- <button class="sheet-button" (click)="changeBackground('sheet3')">Sheet3</button> -->
         </div>
     </div>

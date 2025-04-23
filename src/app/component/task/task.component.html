@@ -65,14 +65,9 @@
         {{ currentTask?.language === Language.GERMAN ? "Vorherige Aufgabe" : "Previous Page" }}
     </button>
 
-    <button mat-raised-button color="primary" (click)="clickResetPage()">
-        <mat-icon>refresh</mat-icon>
-        {{ currentTask?.language === Language.GERMAN ? "Zurücksetzen" : "Reset Current Sheet" }}
-    </button>
-
     <button mat-raised-button color="primary" (click)="clickResetAllSheets()">
-        <mat-icon>clear_all</mat-icon>
-        {{ currentTask?.language === Language.GERMAN ? "Alle zurücksetzen" : "Reset All Sheets" }}
+        <mat-icon>refresh</mat-icon>
+        {{ currentTask?.language === Language.GERMAN ? "Zurücksetzen" : "Reset" }}
     </button>
 
     <button mat-raised-button color="primary" (click)="clickNextPage()">

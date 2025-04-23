@@ -28,4 +28,11 @@ export class Task {
         this.resets = resets;
         this.language = language;
     }
+
+    public set_task_number(new_number: number){
+        this.taskNumber = new_number;
+        this.title = this.language === Language.GERMAN
+            ? `Aufgabe ${new_number}`
+            : `Task ${new_number}`; // TODO control? this.currentTask!.taskNumber.toString()
+    }
 }

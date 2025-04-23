@@ -55,7 +55,7 @@ export class TaskService {
         const shuffledList: Task[] = groupP.concat(groupA, groupB, groupC);
 
         shuffledList.forEach((task, index) => {
-            task.taskNumber = index + 1;
+            task.set_task_number(index+1);
         });
         console.log("Loaded Tasks: ", shuffledList);
         this.loadedTasks = shuffledList;

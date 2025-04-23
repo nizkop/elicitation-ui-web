@@ -235,13 +235,13 @@ export const tasks_definition = [
 
 export function splitTasks(combinedTasks: any[]): { germanTasks: any[], englishTasks: any[] } {
   const germanTasks = combinedTasks.map((task, index) => ({
-    title: `Aufgabe ${index + 1}`,
+    title: "",
     description: task.german_hint,
     group: task.group
   }));
 
   const englishTasks = combinedTasks.map((task, index) => ({
-    title: `Task ${index + 1}`,
+    title: "",
     description: task.english_hint,
     group: task.group
   }));

@@ -38,15 +38,24 @@ export const tasks_definition = [
     english_hint: "Calculation: K8=I8+J8\n What are the hours for Miller in May and Jun?",
     group: Group.A
   },
-  {
-    german_title: "Spalte einfügen",
-    english_title: "Insert column",
-    german_description: "Fügen Sie eine neue Spalte zwischen den Spalten B und C ein.",
-    english_description: "Insert a new column between columns B and C.",
-    german_hint: "",
-    english_hint: "Structure Change: something new included",
-    group: Group.A
-  },
+  // {
+  //   german_title: "Spalte einfügen",
+  //   english_title: "Insert column",
+  //   german_description: "Fügen Sie eine neue Spalte zwischen den Spalten B und C ein.",
+  //   english_description: "Insert a new column between columns B and C.",
+  //   german_hint: "",
+  //   english_hint: "Structure Change: something new included",
+  //   group: Group.A
+  // },
+    {//A instead of task 5
+        german_title: "Zentrieren von Zellen",
+        english_title: "",
+        german_description: "Zentrieren Sie die Werte A7:A11 sowie B7:B11.",
+        english_description: "",
+        german_hint: "Format",
+        english_hint: "Formatting",
+        group: Group.A
+    },
   {
     german_title: "Spalte entfernen",
     english_title: "Remove column",
@@ -92,25 +101,42 @@ export const tasks_definition = [
     english_hint: "Formatting",
     group: Group.B
   },
-  {
-    german_title: "Formatierung übertragen",
-    english_title: "Transfer formatting",
-    german_description: "Übertragen Sie die Formatierung der Zelle A13 auf die Zellen E13-J13.",
-    english_description: "Transfer the formatting of cell A13 to cells E13-J13.",
-    german_hint: "",
-    english_hint: "Formatting",
-    group: Group.P
-  },
-
-  {
-    german_title: "Tortendiagramm erstellen",
-    english_title: "Create pie chart",
-    german_description: "Erstellen Sie ein Tortendiagramm aus den Werten der Zellen E8-J8.",
-    english_description: "Create a pie chart from the values in cells E8-J8.",
-    german_hint: "",
-    english_hint: "Visualization",
-    group: Group.B
-  },
+  // {
+  //   german_title: "Formatierung übertragen",
+  //   english_title: "Transfer formatting",
+  //   german_description: "Übertragen Sie die Formatierung der Zelle A13 auf die Zellen E13-J13.",
+  //   english_description: "Transfer the formatting of cell A13 to cells E13-J13.",
+  //   german_hint: "",
+  //   english_hint: "Formatting",
+  //   group: Group.P
+  // },
+    {//C instead of 11
+        german_title: "Zeilenhöhe anpassen",
+        english_title: "Variate row height",
+        german_description: "Erhöhen Sie die Zeilenhöhe von Zeile 2.",
+        english_description: "",
+        german_hint: "Format",
+        english_hint: "Formatting",
+        group: Group.B
+    },
+  // {
+  //   german_title: "Tortendiagramm erstellen",
+  //   english_title: "Create pie chart",
+  //   german_description: "Erstellen Sie ein Tortendiagramm aus den Werten der Zellen E8-J8.",
+  //   english_description: "Create a pie chart from the values in cells E8-J8.",
+  //   german_hint: "",
+  //   english_hint: "Visualization",
+  //   group: Group.B
+  // },
+    {//E instead of task 12
+        german_title: "Zellen tauschen",
+        english_title: "Exchange cells",
+        german_description: "Vertauschen Sie die Einträge von B7 und B8.",
+        english_description: "Exchange the entries of B7 and B8.",
+        german_hint: "Strukturänderung: veränderter Ort",
+        english_hint: "Structure Change: Changed location",
+        group: Group.B
+    },
   {
     german_title: "Balkendiagramm erstellen",
     english_title: "Create bar chart",
@@ -198,37 +224,6 @@ export const tasks_definition = [
         "     =C7*SUM(E7:J7)",
     group: Group.C
   },
-//   Ersatz-Tasks: TODO endgültige Auswahl
-    {//A
-        german_hint: "",
-        english_hint: "Formatting",
-        group: Group.D
-    },
-    {//B
-        german_hint: "",
-        english_hint: "Formatting",
-        group: Group.D
-    },
-    {//C
-        german_hint: "",
-        english_hint: "Formatting",
-        group: Group.D
-    },
-    {//D
-        german_hint: "",
-        english_hint: "IF(J7>=100, \"Expensive\", \"Ok\")",
-        group: Group.D
-    },
-    {//E
-        german_hint: "",
-        english_hint: "Structure Change: Changed location",
-        group: Group.D
-    },
-    {//F
-        german_hint: "",
-        english_hint: "123+69",
-        group: Group.D
-    },
 ];
 
 

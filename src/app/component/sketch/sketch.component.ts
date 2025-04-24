@@ -86,7 +86,6 @@ export class SketchComponent implements OnInit {
         // Skip if trying to change to the current sheet
         if (this.currentSheet === sheet) {
           console.log(`Already on ${sheet}, no change needed`);
-          // TODO muss die Meldung anders heißen?
           return;
         }
       

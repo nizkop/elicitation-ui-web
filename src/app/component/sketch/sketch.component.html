@@ -8,32 +8,13 @@
 
     <!-- Sketching Section -->
     <div style="position: relative">
-        <!-- Background Image for German Language -->
-        <img
-            *ngIf="currentTask?.language === Language.GERMAN"
-            #backgroundImage
-            [src]="currentBackgroundImage"
-            (load)="onImageLoad()"
-        />
-        <canvas
-            #drawingCanvas
-            (touchstart)="onTouchStart($event)"
-            (touchmove)="onTouchMove($event)"
-            (touchend)="onTouchEnd($event)"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp()"
-            style="position: absolute; top: 0; left: 0"
-        ></canvas>
-
-        <!-- Background Image for English Language -->
         <div>
         <img
-            *ngIf="currentTask?.language === Language.ENGLISH"
             #backgroundImage
             [src]="currentBackgroundImage"
             (load)="onImageLoad()"
-        />
+            style="width: auto; max-width: 100%; height: auto; display: block; margin: 0 auto"
+        /> <!-- style added to resize picture to frame width of button row (enable scrolling without sketching)  -->
     </div>
         <canvas
             #drawingCanvas

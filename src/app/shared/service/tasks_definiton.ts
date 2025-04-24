@@ -99,7 +99,7 @@ export const tasks_definition = [
     english_description: "Transfer the formatting of cell A13 to cells E13-J13.",
     german_hint: "",
     english_hint: "Formatting",
-    group: Group.B
+    group: Group.P
   },
 
   {
@@ -198,36 +198,36 @@ export const tasks_definition = [
         "     =C7*SUM(E7:J7)",
     group: Group.C
   },
-//   Ersatz-Tasks:
+//   Ersatz-Tasks: TODO endgültige Auswahl
     {//A
         german_hint: "",
         english_hint: "Formatting",
-        group: Group.A // TODO
+        group: Group.D
     },
     {//B
         german_hint: "",
         english_hint: "Formatting",
-        group: Group.A // TODO
+        group: Group.D
     },
     {//C
         german_hint: "",
         english_hint: "Formatting",
-        group: Group.A // TODO
+        group: Group.D
     },
     {//D
         german_hint: "",
         english_hint: "IF(J7>=100, \"Expensive\", \"Ok\")",
-        group: Group.A // TODO
+        group: Group.D
     },
     {//E
         german_hint: "",
         english_hint: "Structure Change: Changed location",
-        group: Group.A // TODO
+        group: Group.D
     },
     {//F
         german_hint: "",
         english_hint: "123+69",
-        group: Group.A // TODO
+        group: Group.D
     },
 ];
 

@@ -2,22 +2,42 @@ import {Group} from "../model/group.enum";
 
 
 export const tasks_definition = [
+        {//C instead of 11
+        german_title: "Zeilenhöhe anpassen",
+        english_title: "Variate row height",
+        german_description: "Erhöhen Sie die Zeilenhöhe von Zeile 2.",
+        english_description: "Increase the row height of row 2.",
+        german_hint: "Format",
+        english_hint: "Formatting",
+        group: Group.P,
+        picture_file_name: "task_C.png",
+    },
+    {//G
+        german_title: "Durchschnitt",
+        english_title: "Average",
+        german_description:  "Berechnen Sie die durchschnittlichen Stunden pro Monat für jede Person",
+        english_description: "Calculate the average hours per month for each person.",
+        german_hint: "Berechnung, z.B. K8 =(E8+F8+G8+H8+I8+J8)/6 =SUMME(E8:J8)/6 =MITTELWERT(E8:J8)",
+        english_hint: "Calculation, e.g. K8 =(E8+F8+G8+H8+I8+J8)/6 =SUM(E8:J8)/6 =AVERAGE(E8:J8)",
+        group: Group.P,
+        picture_file_name: "task_G.png",
+    },
   {
     german_title: "Wert ändern",
     english_title: "Change value",
     german_description: "Tragen Sie den Wert 100 in die Zelle F9 ein.",
-    german_hint: "Dateneintrag",
+    german_hint: "Datenbearbeitung",
     english_hint: "Data Edit",
     english_description: "Enter the value 100 into cell F9.",
     group: Group.P,
-      picture_file_name: "task_1.png",
+    picture_file_name: "task_1.png",
   },
   {
     german_title: "Wert löschen",
     english_title: "Delete value",
     german_description: "Löschen Sie den Inhalt der Zelle E8.",
     english_description: "Delete the contents of cell E8.",
-    german_hint: "Dateneintrag",
+    german_hint: "Datenbearbeitung",
     english_hint: "Data Edit",
     group: Group.P,
     picture_file_name: "task_2.png",
@@ -27,7 +47,7 @@ export const tasks_definition = [
     english_title: "Delete values",
     german_description: "Löschen Sie die Inhalte der Zellen J7-J11.",
     english_description: "Delete the contents of cells J7-J11.",
-    german_hint: "Dateneintrag: etwas fehlt",
+    german_hint: "Datenbearbeitung: etwas fehlt",
     english_hint: "Data Edit: Something is missing",
     group: Group.A,
     picture_file_name: "task_3.png",
@@ -37,8 +57,8 @@ export const tasks_definition = [
     english_title: "Add two values",
     german_description: "Berechnen Sie die Summe der Zellen I8 und J8 in Zelle K8.",
     english_description: "Calculate the sum of cells I8 and J8 in cell K8.",
-    german_hint: "Dateneintrag",
-    english_hint: "Calculation: K8=I8+J8\n What are the hours for Miller in May and Jun?",
+    german_hint: "Datenbearbeitung: Was sind die Stunden für Miller im Mai und Juni? K8 =I8+J8",
+    english_hint: "Calculation: What are the hours for Miller in May and June? K8 =I8+J8 ",
     group: Group.A,
     picture_file_name: "task_4.png",
   },
@@ -53,9 +73,9 @@ export const tasks_definition = [
   // },
     {//A instead of task 5
         german_title: "Zentrieren von Zellen",
-        english_title: "",
+        english_title: "Centering cells",
         german_description: "Zentrieren Sie die Werte A7:A11 sowie B7:B11.",
-        english_description: "",
+        english_description: "Center the values in A7:A11 as well as B7:B11.",
         german_hint: "Format",
         english_hint: "Formatting",
         group: Group.A,
@@ -67,7 +87,7 @@ export const tasks_definition = [
     english_title: "Remove column",
     german_description: "Entfernen Sie die gesamte Spalte B aus der Tabelle.",
     english_description: "Remove the whole column B from the table.",
-    german_hint: "",
+    german_hint: "Strukturänderung: etwas fehlt",
     english_hint: "Structure Change: something is missing",
     group: Group.A,
     picture_file_name: "task_6.png",
@@ -77,8 +97,8 @@ export const tasks_definition = [
     english_title: "Move cells",
     german_description: "Verschieben Sie die Zellen A15-C15 nach H3.",
     english_description: "Move cells A15-C15 to H3.",
-    german_hint: "",
-    english_hint: "Structure Change: Changed location",
+    german_hint: "Strukturänderung",
+    english_hint: "Structure Change",
     group: Group.A,
     picture_file_name: "task_7.png",
   },
@@ -87,8 +107,8 @@ export const tasks_definition = [
     english_title: "Add multiple values",
     german_description: "Berechnen Sie die Summe der Zellen E7-E11 in Zelle E13.",
     english_description: "Calculate the sum of cells E7-E11 in cell E13.",
-    german_hint: "",
-    english_hint: "Calculation: E13 = SUM(E7:E11)",
+    german_hint: "Berechnung: E13 =E7+E8+E9+E10+E11 =SUMME(E7:E11)",
+    english_hint: "Calculation: E13 =E7+E8+E9+E10+E11 =SUM(E7:E11)",
     group: Group.B,
     picture_file_name: "task_8.png",
   },
@@ -97,7 +117,7 @@ export const tasks_definition = [
     english_title: "Format values",
     german_description: "Formatieren Sie die Werte in den Zellen C7-C11 als Euro-Beträge mit zwei Nachkommastellen.",
     english_description: "Format the values in cells C7-C11 as Dollar amounts with two decimal places.",
-    german_hint: "",
+    german_hint: "Format",
     english_hint: "Formatting",
     group: Group.B,
     picture_file_name: "task_9.png",
@@ -107,7 +127,7 @@ export const tasks_definition = [
     english_title: "Frame cell",
     german_description: "Fügen Sie einen einfachen Rahmen um die Zellen A15-C15 hinzu.",
     english_description: "Add a single frame around cells A15-C15.",
-    german_hint: "",
+    german_hint: "Format",
     english_hint: "Formatting",
     group: Group.B,
     picture_file_name: "task_10.png",
@@ -123,16 +143,6 @@ export const tasks_definition = [
   //   group: Group.P,
   //   picture_file_name: "task_11.png",
   // },
-    {//C instead of 11
-        german_title: "Zeilenhöhe anpassen",
-        english_title: "Variate row height",
-        german_description: "Erhöhen Sie die Zeilenhöhe von Zeile 2.",
-        english_description: "",
-        german_hint: "Format",
-        english_hint: "Formatting",
-        group: Group.P,
-        picture_file_name: "task_C.png",
-    },
   // {
   //   german_title: "Tortendiagramm erstellen",
   //   english_title: "Create pie chart",
@@ -158,7 +168,7 @@ export const tasks_definition = [
     english_title: "Create bar chart",
     german_description: "Erstellen Sie ein Balkendiagramm aus den Werten der Zellen C7-C11.",
     english_description: "Create a bar chart from the value in cells C7-C11.",
-    german_hint: "",
+    german_hint: "Veranschaulichung",
     english_hint: "Visualization",
     group: Group.B,
     picture_file_name: "task_13.png",
@@ -168,7 +178,7 @@ export const tasks_definition = [
     english_title: "Continue series",
     german_description: "Führen Sie die Serie von Werten in Zeile 6 (E6-J6) bis zur Zelle M6 fort.",
     english_description: "Continue the series of values in row 6 (E6-J6) up to cell M6.",
-    german_hint: "",
+    german_hint: "Strukturänderung",
     english_hint: "Structure Change",
     group: Group.B,
     picture_file_name: "task_14.png",
@@ -178,7 +188,7 @@ export const tasks_definition = [
     english_title: "Transpose values",
       german_description: "Transponieren Sie die Namen in Zellen A7-A11 nach Zeile 17 (d.h. übertragen Sie die in Spalte A untereinander stehenden Namen nebeneinander stehend in Zeile 17).",
     english_description: "Transpose the names in cells A7-A11 to row 17.",
-    german_hint: "",
+    german_hint: "Strukturänderung: Datenbearbeitung in A17:E17",
     english_hint: "Structure Change: Data Edit in A17:E17",
     group: Group.B,
     picture_file_name: "task_15.png",
@@ -189,7 +199,7 @@ export const tasks_definition = [
     english_title: "Sort data",
     german_description: "Sortieren Sie die Daten in den Zeilen 7-11 alphabetisch nach den Mitarbeiternamen in Spalte A.",
     english_description: "Sort the data in rows 7-11 alphabetically by the employee names in column A.",
-    german_hint: "",
+    german_hint: "Strukturänderung",
     english_hint: "Structure Change",
     group: Group.C,
     picture_file_name: "task_16.png",
@@ -199,13 +209,13 @@ export const tasks_definition = [
     english_title: "Calculate multiple sums",
     german_description: "Berechnen Sie für jeden Monat die Summe aller Mitarbeiterstunden in den Zellen E13-J13.",
     english_description: "For each month, calculate the sum of all employees' hours in cells E13-J13.",
-    german_hint: "",
-    english_hint: "Calculation: Total hours/month\n E13=SUM(E7:E11)\n" +
-        " F13=SUM(F7:F11)\n" +
-        " G13=SUM(G7:G11)\n" +
-        " H13=SUM(H7:H11)\n" +
-        " I13=SUM(I7:I11)\n" +
-        " J13=SUM(J7:J11)\n",
+    german_hint: "Berechnung: Summe Stunden/Monat, z.B. E13 =SUMME(E7:E11)",
+    english_hint: "Calculation: Total hours/month, e.g. E13 =SUM(E7:E11)",
+        // " F13=SUM(F7:F11)\n" +
+        // " G13=SUM(G7:G11)\n" +
+        // " H13=SUM(H7:H11)\n" +
+        // " I13=SUM(I7:I11)\n" +
+        // " J13=SUM(J7:J11)\n",
     group: Group.C,
     picture_file_name: "task_17.png",
   },
@@ -214,14 +224,14 @@ export const tasks_definition = [
     english_title: "Construct formula",
     german_description: "Berechnen Sie für jeden Mitarbeiter den Brutto-Stundensatz in Spalte D, indem Sie die Arbeitgeberkostenpauschale aus Zelle C15 auf den Netto-Stundensatz in Spalte C aufschlagen.",
     english_description: "For each employee, calculate the gross hourly rate in column D by factoring the overhead cost percentage from cell C15 into the net hourly rate in column C.",
-    german_hint: "",
-    english_hint: "Calculation: \n" +
-        " gross = net + overhead\n" +
-        " D7=C7+C$15*C7\n" +
-        " D8=C8+C$15*C8\n" +
-        " D9=C9+C$15*C9\n" +
-        " D10=C10+C$15*C10\n" +
-        " D11=C11+C$15*C11",
+    german_hint: "Berechnung: Brutto Stundensatz, z.B. D7 =C7+C$15*C7",
+    english_hint: "Calculation: gross hourly rate, e.g. D7 =C7+C$15*C7",
+        // " gross = net + overhead\n" +
+        // " D7=C7+C$15*C7\n" +
+        // " D8=C8+C$15*C8\n" +
+        // " D9=C9+C$15*C9\n" +
+        // " D10=C10+C$15*C10\n" +
+        // " D11=C11+C$15*C11",
     group: Group.C,
     picture_file_name: "task_18.png",
   },
@@ -230,8 +240,8 @@ export const tasks_definition = [
     english_title: "Conditional formatting",
     german_description: "Definieren Sie eine bedingte Formatierungsregel für die Zellen C7-11, so dass Werte über 200 in rot und andere in grün angezeigt werden.",
     english_description: "Define a conditional formatting rule for cells C7-11 so values greater than 200 are displayed in red but others in green.",
-    german_hint: "",
-    english_hint: "Formatting: Bis zu welcher Nummer sind die Zahlen grün? Ab welcher sind sie rot?",
+    german_hint: "Format: Bis zu welcher Zahl sind die Zellen grün? Ab welcher sind sie rot?",
+    english_hint: "Formatting: Up to which number are the cells green? From which number are they red?",
     group: Group.C,
     picture_file_name: "task_19.png",
   },
@@ -240,11 +250,8 @@ export const tasks_definition = [
     english_title: "Multiply values",
     german_description: "Berechnen Sie die Gesamtkosten für Mitarbeiter Smith in Zelle L7, indem Sie seine Gesamtstunden über alle Monate in Zeile 7 addieren und mit seinem Netto-Stundensatz in Zelle C7 multiplizieren.",
     english_description: "Calculate the total salary of employee Smith in cell L7.",
-    german_hint: "",
-    english_hint: "Calculation \n" +
-        " total salary of employee Smith \n" +
-        " L7=C7*(E7+F7+G7+H7+J7) \n" +
-        "     =C7*SUM(E7:J7)",
+    german_hint: "Berechnung: Gesamtgehalt des Mitarbeiters Smith, L7 =C7*(E7+F7+G7+H7+J7) =C7*SUMME(E7:J7)",
+    english_hint: "Calculation: total salary of employee Smith, L7 =C7*(E7+F7+G7+H7+J7) =C7*SUM(E7:J7)",
     group: Group.C,
     picture_file_name: "task_20.png",
   },

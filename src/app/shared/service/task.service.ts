@@ -39,7 +39,7 @@ export class TaskService {
         const groupA: Task[] = tasks.filter((task) => task.group === Group.A);
         const groupB: Task[] = tasks.filter((task) => task.group === Group.B);
         const groupC: Task[] = tasks.filter((task) => task.group === Group.C);
-        const groupD: Task[] = tasks.filter((task) => task.group === Group.D);
+        // const groupD: Task[] = tasks.filter((task) => task.group === Group.D);
 
         const shuffleArray = (array: Task[]) => {
             for (let i = array.length - 1; i > 0; i--) {
@@ -48,13 +48,12 @@ export class TaskService {
             }
         };
 
-        shuffleArray(groupP);
+        // shuffleArray(groupP);
         shuffleArray(groupA);
         shuffleArray(groupB);
         shuffleArray(groupC);
-        shuffleArray(groupD);
 
-        const shuffledList: Task[] = groupP.concat(groupA, groupB, groupC, groupD);
+        const shuffledList: Task[] = groupP.concat(groupA, groupB, groupC);
 
         shuffledList.forEach((task, index) => {
             task.set_task_number(index+1);

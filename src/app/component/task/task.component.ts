@@ -8,6 +8,7 @@ import { Group } from "../../shared/model/group.enum";
 import { MessageService } from "../../shared/service/message.service";
 import { RecordingService } from "../../shared/service/recording.service";
 import { DataStorageService } from "../../shared/service/data.storage.service";
+import {tasks_definition} from "../../shared/service/tasks_definiton";
 
 
 @Component({
@@ -165,8 +166,12 @@ export class TaskComponent implements OnInit {
             
             // Navigate to the next task
             const nextTaskNumber = this.currentTask.taskNumber + 1;
-            console.log(`Navigating to next task: ${nextTaskNumber}`);
-            this.router.navigate(["/task/" + nextTaskNumber.toString()]);
+            if(nextTaskNumber <= tasks_definition.length){
+                console.log(`Navigating to next task: ${nextTaskNumber}`);
+                this.router.navigate(["/task/" + nextTaskNumber.toString()]);
+            } else{
+                this.router.navigate(["/demographics"]); // no new task available
+            }
         } else {
             console.error("Cannot skip task: No current task found");
         }

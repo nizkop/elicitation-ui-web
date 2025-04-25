@@ -247,7 +247,7 @@ private formatTimestamp(timestamp: number): string {
     if (this.currentTask) {
       console.log("Current Task: ", this.currentTask.id);
       // Initialize background Image for sheet 2:
-      this.backgroundImageUrlSheet2 = `./assets/${this.language === Language.GERMAN ? 'DE' : 'EN'}/task_${this.currentTask?.id}.png`;
+      this.backgroundImageUrlSheet2 = `./assets/${this.language === Language.GERMAN ? 'DE' : 'EN'}/${this.currentTask?.picture_file_name}`;
         //  TODO so far no security, if picture not there
 
       this.currentTask.startTimeWatching = new Date();

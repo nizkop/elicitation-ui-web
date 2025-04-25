@@ -27,7 +27,7 @@ export class TaskService {
         }
 
         for (const task of tasks) {
-            loadedTasks.push(new Task(id, task.title, task.description, task.group, resets, this.chosenLanguage));
+            loadedTasks.push(new Task(id, task.title, task.description, task.group, resets, this.chosenLanguage, task.picture_file_name));
             id++;
         }
 

@@ -9,7 +9,8 @@ export const tasks_definition = [
     german_hint: "Dateneintrag",
     english_hint: "Data Edit",
     english_description: "Enter the value 100 into cell F9.",
-    group: Group.P
+    group: Group.P,
+      picture_file_name: "task_1.png",
   },
   {
     german_title: "Wert löschen",
@@ -18,7 +19,8 @@ export const tasks_definition = [
     english_description: "Delete the contents of cell E8.",
     german_hint: "Dateneintrag",
     english_hint: "Data Edit",
-    group: Group.P
+    group: Group.P,
+    picture_file_name: "task_2.png",
   },
   {
     german_title: "Werte löschen",
@@ -27,7 +29,8 @@ export const tasks_definition = [
     english_description: "Delete the contents of cells J7-J11.",
     german_hint: "Dateneintrag: etwas fehlt",
     english_hint: "Data Edit: Something is missing",
-    group: Group.A
+    group: Group.A,
+    picture_file_name: "task_3.png",
   },
   {
     german_title: "Zwei Werte addieren",
@@ -36,7 +39,8 @@ export const tasks_definition = [
     english_description: "Calculate the sum of cells I8 and J8 in cell K8.",
     german_hint: "Dateneintrag",
     english_hint: "Calculation: K8=I8+J8\n What are the hours for Miller in May and Jun?",
-    group: Group.A
+    group: Group.A,
+    picture_file_name: "task_4.png",
   },
   // {
   //   german_title: "Spalte einfügen",
@@ -54,8 +58,10 @@ export const tasks_definition = [
         english_description: "",
         german_hint: "Format",
         english_hint: "Formatting",
-        group: Group.A
+        group: Group.A,
+        picture_file_name: "task_5.png",
     },
+
   {
     german_title: "Spalte entfernen",
     english_title: "Remove column",
@@ -63,7 +69,8 @@ export const tasks_definition = [
     english_description: "Remove the whole column B from the table.",
     german_hint: "",
     english_hint: "Structure Change: something is missing",
-    group: Group.A
+    group: Group.A,
+    picture_file_name: "task_6.png",
   },
   {
     german_title: "Zellen verschieben",
@@ -72,7 +79,8 @@ export const tasks_definition = [
     english_description: "Move cells A15-C15 to H3.",
     german_hint: "",
     english_hint: "Structure Change: Changed location",
-    group: Group.A
+    group: Group.A,
+    picture_file_name: "task_7.png",
   },
   {
     german_title: "Mehrere Werte addieren",
@@ -81,7 +89,8 @@ export const tasks_definition = [
     english_description: "Calculate the sum of cells E7-E11 in cell E13.",
     german_hint: "",
     english_hint: "Calculation: E13 = SUM(E7:E11)",
-    group: Group.B
+    group: Group.B,
+    picture_file_name: "task_8.png",
   },
   {
     german_title: "Werte formatieren",
@@ -90,7 +99,8 @@ export const tasks_definition = [
     english_description: "Format the values in cells C7-C11 as Dollar amounts with two decimal places.",
     german_hint: "",
     english_hint: "Formatting",
-    group: Group.B
+    group: Group.B,
+    picture_file_name: "task_9.png",
   },
   {
     german_title: "Zellen umrahmen",
@@ -99,8 +109,10 @@ export const tasks_definition = [
     english_description: "Add a single frame around cells A15-C15.",
     german_hint: "",
     english_hint: "Formatting",
-    group: Group.B
+    group: Group.B,
+    picture_file_name: "task_10.png",
   },
+
   // {
   //   german_title: "Formatierung übertragen",
   //   english_title: "Transfer formatting",
@@ -108,7 +120,8 @@ export const tasks_definition = [
   //   english_description: "Transfer the formatting of cell A13 to cells E13-J13.",
   //   german_hint: "",
   //   english_hint: "Formatting",
-  //   group: Group.P
+  //   group: Group.P,
+  //   picture_file_name: "task_11.png",
   // },
     {//C instead of 11
         german_title: "Zeilenhöhe anpassen",
@@ -117,7 +130,8 @@ export const tasks_definition = [
         english_description: "",
         german_hint: "Format",
         english_hint: "Formatting",
-        group: Group.B
+        group: Group.P,
+        picture_file_name: "task_C.png",
     },
   // {
   //   german_title: "Tortendiagramm erstellen",
@@ -126,7 +140,8 @@ export const tasks_definition = [
   //   english_description: "Create a pie chart from the values in cells E8-J8.",
   //   german_hint: "",
   //   english_hint: "Visualization",
-  //   group: Group.B
+  //   group: Group.B,
+  //   picture_file_name: "task_12.png",
   // },
     {//E instead of task 12
         german_title: "Zellen tauschen",
@@ -135,7 +150,8 @@ export const tasks_definition = [
         english_description: "Exchange the entries of B7 and B8.",
         german_hint: "Strukturänderung: veränderter Ort",
         english_hint: "Structure Change: Changed location",
-        group: Group.B
+        group: Group.B,
+        picture_file_name: "task_E.png",
     },
   {
     german_title: "Balkendiagramm erstellen",
@@ -144,7 +160,8 @@ export const tasks_definition = [
     english_description: "Create a bar chart from the value in cells C7-C11.",
     german_hint: "",
     english_hint: "Visualization",
-    group: Group.B
+    group: Group.B,
+    picture_file_name: "task_13.png",
   },
   {
     german_title: "Serie fortführen",
@@ -153,7 +170,8 @@ export const tasks_definition = [
     english_description: "Continue the series of values in row 6 (E6-J6) up to cell M6.",
     german_hint: "",
     english_hint: "Structure Change",
-    group: Group.B
+    group: Group.B,
+    picture_file_name: "task_14.png",
   },
   {
     german_title: "Werte transponieren",
@@ -162,8 +180,10 @@ export const tasks_definition = [
     english_description: "Transpose the names in cells A7-A11 to row 17.",
     german_hint: "",
     english_hint: "Structure Change: Data Edit in A17:E17",
-    group: Group.B
+    group: Group.B,
+    picture_file_name: "task_15.png",
   },
+
   {
     german_title: "Daten sortieren",
     english_title: "Sort data",
@@ -171,9 +191,9 @@ export const tasks_definition = [
     english_description: "Sort the data in rows 7-11 alphabetically by the employee names in column A.",
     german_hint: "",
     english_hint: "Structure Change",
-    group: Group.C
+    group: Group.C,
+    picture_file_name: "task_16.png",
   },
-
   {
     german_title: "Mehrere Summen bilden",
     english_title: "Calculate multiple sums",
@@ -186,7 +206,8 @@ export const tasks_definition = [
         " H13=SUM(H7:H11)\n" +
         " I13=SUM(I7:I11)\n" +
         " J13=SUM(J7:J11)\n",
-    group: Group.C
+    group: Group.C,
+    picture_file_name: "task_17.png",
   },
   {
     german_title: "Formel konstruieren",
@@ -201,7 +222,8 @@ export const tasks_definition = [
         " D9=C9+C$15*C9\n" +
         " D10=C10+C$15*C10\n" +
         " D11=C11+C$15*C11",
-    group: Group.C
+    group: Group.C,
+    picture_file_name: "task_18.png",
   },
   {
     german_title: "Bedingte Formatierung",
@@ -210,7 +232,8 @@ export const tasks_definition = [
     english_description: "Define a conditional formatting rule for cells C7-11 so values greater than 200 are displayed in red but others in green.",
     german_hint: "",
     english_hint: "Formatting: Bis zu welcher Nummer sind die Zahlen grün? Ab welcher sind sie rot?",
-    group: Group.C
+    group: Group.C,
+    picture_file_name: "task_19.png",
   },
   {
     german_title: "Werte multiplizieren",
@@ -222,7 +245,8 @@ export const tasks_definition = [
         " total salary of employee Smith \n" +
         " L7=C7*(E7+F7+G7+H7+J7) \n" +
         "     =C7*SUM(E7:J7)",
-    group: Group.C
+    group: Group.C,
+    picture_file_name: "task_20.png",
   },
 ];
 
@@ -232,13 +256,15 @@ export function splitTasks(combinedTasks: any[]): { germanTasks: any[], englishT
   const germanTasks = combinedTasks.map((task, index) => ({
     title: "",
     description: task.german_hint,
-    group: task.group
+    group: task.group,
+    picture_file_name: task.picture_file_name
   }));
 
   const englishTasks = combinedTasks.map((task, index) => ({
     title: "",
     description: task.english_hint,
-    group: task.group
+    group: task.group,
+    picture_file_name: task.picture_file_name
   }));
 
   return { germanTasks, englishTasks };

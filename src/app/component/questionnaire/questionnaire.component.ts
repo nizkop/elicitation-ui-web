@@ -14,10 +14,10 @@ import { MessageService } from "../../shared/service/message.service";
 export class QuestionnaireComponent implements OnInit {
     currentTask: Task | undefined;
 
-    question1_GERMAN = "Wie einfach kann man dieses Szenario sketchen?";
-    question1_ENGLISH = "How easy it is to sketch this scenario?";
-    question2_GERMAN = "Wie zufrieden sind Sie mit Ihrem Sketch?";
-    question2_ENGLISH = "How satisfied are you with your sketch?";
+    question1_GERMAN = "Wie einfach ist dieses Szenario?";
+    question1_ENGLISH = "How easy is this scenario?";
+    question2_GERMAN = "Wie zufrieden sind Sie mit Ihrem Kommando (Skizze und/oder Spracheingabe)?";
+    question2_ENGLISH = "How satisfied are you with your command (sketch and/or voice input)?";
 
     formQuestion1 = "";
     formQuestion2 = "";

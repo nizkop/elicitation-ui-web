@@ -14,6 +14,7 @@ import { RecordingService } from "../../shared/service/recording.service";
 export class WelcomeComponent implements OnInit {
     chosenLanguage: Language = Language.ENGLISH;
     tasks: Task[] | undefined;
+    showIntroPage = true;
 
     protected readonly Language = Language;
 

@@ -22,7 +22,8 @@ export class DemographicsComponent implements OnInit {
     useTablet: string = "";
     usePencil: boolean = false;
     useSpreadsheets: boolean = false;
-    anyExperience: boolean = false;
+    anyExperienceVoice: boolean = false;
+    anyExperiencePen: boolean = false;
     useSpreadsheetsMultiTouch: boolean = false;
 
     constructor(
@@ -56,7 +57,8 @@ export class DemographicsComponent implements OnInit {
             useTablet: this.useTablet,
             usePencil: this.usePencil,
             useSpreadsheets: this.useSpreadsheets,
-            anyExperience: this.anyExperience,
+            anyExperienceVoice: this.anyExperienceVoice,
+            anyExperiencePen: this.anyExperiencePen,
             useSpreadsheetsMultiTouch: this.useSpreadsheetsMultiTouch,
         };
 

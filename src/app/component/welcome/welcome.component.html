@@ -1,183 +1,222 @@
-<!--Header Section-->
-<div style="background-color: lightblue">
-    <mat-grid-list cols="3" rowHeight="6:1">
-        <mat-grid-tile>
-            <img src="./assets/ui_logo.png" style="max-width: 70px; margin-top: 10px;"  />
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <h2 *ngIf="chosenLanguage === Language.GERMAN" class="pt">
-                Einwilligung zur Teilnahme an einer Elicitation-Studie
-            </h2>
-            <h2 *ngIf="chosenLanguage === Language.ENGLISH" class="pt">
-                Elicitation of Sketched Spreadsheet Formulas
-            </h2></mat-grid-tile
-        >
-        <mat-grid-tile> </mat-grid-tile>
-        <mat-grid-tile
-            ><button mat-raised-button color="primary" (click)="clickChangeLanguage()">
-                {{ chosenLanguage === Language.GERMAN ? "Switch to English" : "Switch to German" }}
-            </button>
-        </mat-grid-tile>
-        <mat-grid-tile> </mat-grid-tile>
-        <mat-grid-tile>
-            <button mat-raised-button color="primary" (click)="clickNextPage()">
-                {{ chosenLanguage === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
-            </button>
-        </mat-grid-tile>
-    </mat-grid-list>
-</div>
-<!--ENGLISH-->
-<div style="background-color: aliceblue" class="textbox" *ngIf="chosenLanguage === Language.ENGLISH">
-    <p class="pt">
-        Please read the following information carefully and sign this form if you would like to participate in this
-        experiment. You can request a copy of the form if you wish.
-    </p>
-    <h2>Purpose of the Research</h2>
-    <p>
-        This research project aims to investigate how users interact with spreadsheets
-        by sketching formulas as an alternative to traditional input methods, such 
-        as the mouse and keyboard. Specifically, this study focuses on understanding 
-        how users would express and execute common spreadsheet formulas using digital ink
-        on a touchscreen. The findings from this study may contribute to the design and
-        development of novel interaction techniques for spreadsheets, enabling more intuitive
-        and efficient ways for users to create and manipulate formulas.
-    </p>
-    <h2>Implementation of the Experiment</h2>
-    <p>
-        You will receive a tablet with a touchscreen and a digital pen. The researcher will show you several screenshots
-        of spreadsheets and ask you how you would perform a series of operations in that simulated application. Please
-        use the pen to draw your commands on the screen, and feel free to talk about your thoughts as you do so. After
-        each prompt, you will be able to give feedback on how difficult you found the task and how happy you are with
-        your answer. The experiment will take about 30 minutes. Afterwards, the researcher will ask some demographic
-        questions about yourself and your work experience.
-    </p>
-    <h2>Collected Data and Confidentiality</h2>
-    <p>
-        In this study, we will collect the following data:
-        <br />
-        • A screen recording and digital ink of your pen strokes on the screen
-        <br />
-        • An audio recording of your comments and conversations during the experiment
-        <br />
-        • Feedback and demographic data
-        <br />
-        <br />
-        The screen recording and digital ink of your pen strokes will be used as the primary source of information for
-        analyzing how different participants express spreadsheet commands using a pen and touchscreen. The audio
-        recording will be used as a supplementary source of information for understanding participants’ rationales for
-        their interaction choices. The feedback data will be used to provide context on the participants' user
-        experience. The demographic data will be used to analyze the characteristics of our participant pool, in order
-        to avoid sampling bias.
-        <br />
-        <br />
-        All data collected during the experiment will be anonymized (i.e. associated with a neutral identification
-        number instead of your name or affiliation), so it is not traceable to you or your organization. Parts of the
-        anonymized data (excluding audio) may be published in individual or aggregate form.
-    </p>
-    <h2>Refusal or Withdrawal</h2>
-    <p>
-        You have the right to refuse to participate in this study or to withdraw your participation at any time without
-        giving a reason, and without incurring any negative consequences. Data collected before your withdrawal may be
-        used with your consent. Once the research is complete, you may not forbid the use of data or demand that it be
-        destroyed.
-    </p>
-    <h2>Incentives</h2>
-    <p>There are no rewards, payments, prizes or other incentives for participation.</p>
-    <h2>Contact Information</h2>
-    <p>
-        The principal investigators for this research project are Dr. Matthias Book, professor at the Department of
-        Computer Science at the University of Iceland (book@hi.is), and Dr. Marc Hesenius, post-doctoral researcher at
-        the Software Engineering Chair of the University of Duisburg-Essen, Germany (marc.hesenius@uni-due.de). This
-        study is supported by the University of Iceland Research Fund (grant no. 92270).
-        <br />
-        <br />
-        If you have any questions about the experiment or your participation, please feel free to ask the researchers at
-        any time before, during or after the experiment.
-    </p>
-    <br />
-    <br />
-</div>
-<!--GERMAN-->
-<div style="background-color: aliceblue" class="textbox" *ngIf="chosenLanguage === Language.GERMAN">
-    <h2 class="pt">Einleitung und Zielsetzung</h2>
-    <p>
-        Künstliche Intelligenz (KI) verändert zunehmend den Arbeitsalltag in vielen Branchen. Vor allem große
-        Sprachmodelle ermöglichen nun eine Interaktion mit Computern in natürlicher Sprache. Aber Menschen interagieren
-        untereinander nicht nur mit Sprache, sondern auch mit anderen Modalitäten: z. B. verwenden wir Visualisierungen,
-        um Zusammenhänge deutlich zu machen. Wir möchten in dieser Studie betrachten, wie Visualisierungen in Form von
-        Skizzen zur Interaktion mit Anwendungen eingesetzt werden können.
+<!-- Intro-page -->
+<div *ngIf="showIntroPage" style="background-color: aliceblue; padding: 3rem 1rem; text-align: center;">
+    <!-- Logos -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <img src="./assets/ui_logo.png" alt="Logo 1" style="max-height: 100px;" />
+        <span></span>
+        <img src="./assets/UDE_logo.png" alt="Logo 2" style="max-height: 80px;" />
+    </div>
+
+
+    <!-- Welcome text -->
+    <h1 style="font-size: 2.8rem; color: #003366; margin-bottom: 1rem; margin-top: 5rem;">
+        {{ chosenLanguage === Language.GERMAN ? "Willkommen" : "Welcome" }}
+    </h1>
+
+    <p style="
+        font-size: 2rem;
+        line-height: 1.2;
+        max-width: 1500px;
+        margin: 4rem auto 4rem auto;
+        text-align: center;
+    "
+    [innerHTML]="chosenLanguage === Language.GERMAN
+        ? 'Vielen Dank für Ihr Interesse.<br><br>Diese Studie erforscht, wie gut man Tabellen-Programme mit Sprache oder über Skizzieren steuern könnte.<br>' +
+         'Klicken Sie unten auf den Button, um mehr zu erfahren.'
+        : 'Thank you for your interest.<br><br>This study explores how well spreadsheet programs can be controlled using speech or sketches.<br>' +
+         'Click the button below to learn more.'">
     </p>
 
-    <h2>Erfasste Daten und Ablauf der Studie</h2>
 
-    <p>
-        Sobald Sie die Studie mit dem dargestellten Button starten, erhalten Sie einzelne Aufgaben, bei denen ihre
-        Eingaben aufgezeichnet werden. Diese Aufzeichnung erfolgt anonym und wird nicht mit ihrem Namen oder
-        Kontaktdaten verknüpft. Sie können die App selbstständig bedienen, aber jederzeit Fragen stellen. Die Studie
-        wird in vier Schritten durchgeführt.
+    <!-- go to consent form -->
+    <button mat-raised-button color="primary" style="font-size: 1.1rem; padding: 0.6rem 2rem;" (click)="showIntroPage = false">
+        {{ chosenLanguage === Language.GERMAN ? "Weiter zur Einwilligungserklärung" : "Continue to Consent Form" }}
+    </button>
+</div>
+
+<!-- Einwilligungsseite (bisheriger Inhalt) -->
+<div *ngIf="!showIntroPage">
+    <!--Header Section-->
+    <div style="background-color: lightblue">
+        <mat-grid-list cols="3" rowHeight="6:1">
+            <mat-grid-tile>
+                <img src="./assets/ui_logo.png" style="max-width: 70px; margin-top: 10px;"  />
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <h2 *ngIf="chosenLanguage === Language.GERMAN" class="pt">
+                    Einwilligung zur Teilnahme an einer Elicitation-Studie
+                </h2>
+                <h2 *ngIf="chosenLanguage === Language.ENGLISH" class="pt">
+                   Consent to Participate in an Elicitation Study
+                </h2></mat-grid-tile
+            >
+            <mat-grid-tile> </mat-grid-tile>
+            <mat-grid-tile
+                ><button mat-raised-button color="primary" (click)="clickChangeLanguage()">
+                    {{ chosenLanguage === Language.GERMAN ? "Switch to English" : "Switch to German" }}
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile> </mat-grid-tile>
+            <mat-grid-tile>
+                <button mat-raised-button color="primary" (click)="clickNextPage()">
+                    {{ chosenLanguage === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
+                </button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <!--ENGLISH-->
+    <div style="background-color: aliceblue" class="textbox" *ngIf="chosenLanguage === Language.ENGLISH">
+        <p class="pt">
+            Please read the following information carefully and sign this form if you would like to participate in this
+            experiment. You can request a copy of the form if you wish.
+        </p>
+        <h2>Purpose of the Research</h2>
+        <p>
+            This research project aims to investigate how users interact with spreadsheets
+            by sketching formulas as an alternative to traditional input methods, such
+            as the mouse and keyboard. Specifically, this study focuses on understanding
+            how users would express and execute common spreadsheet formulas using digital ink
+            on a touchscreen or voice commands. The findings from this study may contribute to the design and
+            development of novel interaction techniques for spreadsheets, enabling more intuitive
+            and efficient ways for users to create and manipulate formulas.
+        </p>
+        <h2>Implementation of the Experiment</h2>
+        <p>
+            You will receive a tablet with a touchscreen and a digital pen. The researcher will show you several screenshots
+            of spreadsheets and ask you how you would perform a series of operations in that simulated application. Please
+            use the pen to draw your commands on the screen, and feel free to talk about your thoughts as you do so. After
+            each prompt, you will be able to give feedback on how difficult you found the task and how happy you are with
+            your answer. The experiment will take about 30 minutes. Afterwards, the researcher will ask some demographic
+            questions about yourself and your work experience.
+        </p>
+        <h2>Collected Data and Confidentiality</h2>
+        <p>
+            In this study, we will collect the following data:
+            <br />
+            • A screen recording and digital ink of your pen strokes on the screen
+            <br />
+            • An audio recording of your comments and conversations during the experiment
+            <br />
+            • Feedback and demographic data
+            <br />
+            <br />
+            The screen recording and digital ink of your pen strokes will be used as the primary source of information for
+            analyzing how different participants express spreadsheet commands using a pen and touchscreen. The audio
+            recording will be used as a supplementary source of information for understanding participants’ rationales for
+            their interaction choices. The feedback data will be used to provide context on the participants' user
+            experience. The demographic data will be used to analyze the characteristics of our participant pool, in order
+            to avoid sampling bias.
+            <br />
+            <br />
+            All data collected during the experiment will be anonymized (i.e. associated with a neutral identification
+            number instead of your name or affiliation), so it is not traceable to you or your organization. Parts of the
+            anonymized data (excluding audio) may be published in individual or aggregate form.
+        </p>
+        <h2>Refusal or Withdrawal</h2>
+        <p>
+            You have the right to refuse to participate in this study or to withdraw your participation at any time without
+            giving a reason, and without incurring any negative consequences. Data collected before your withdrawal may be
+            used with your consent. Once the research is complete, you may not forbid the use of data or demand that it be
+            destroyed.
+        </p>
+        <h2>Incentives</h2>
+        <p>There are no rewards, payments, prizes or other incentives for participation.</p>
+        <h2>Contact Information</h2>
+        <p>
+            The principal investigators for this research project are Dr. Matthias Book, professor at the Department of
+            Computer Science at the University of Iceland (book@hi.is), and Dr. Marc Hesenius, post-doctoral researcher at
+            the Software Engineering Chair of the University of Duisburg-Essen, Germany (marc.hesenius@uni-due.de). This
+            study is supported by the University of Iceland Research Fund (grant no. 92270).
+            <br />
+            <br />
+            If you have any questions about the experiment or your participation, please feel free to ask the researchers at
+            any time before, during or after the experiment.
+        </p>
         <br />
         <br />
-        1. Demonstration der App und Erläuterung
+    </div>
+    <!--GERMAN-->
+    <div style="background-color: aliceblue" class="textbox" *ngIf="chosenLanguage === Language.GERMAN">
+        <h2 class="pt">Einleitung und Zielsetzung</h2>
+        <p>
+            Künstliche Intelligenz (KI) verändert zunehmend den Arbeitsalltag in vielen Branchen. Vor allem große
+            Sprachmodelle ermöglichen nun eine Interaktion mit Computern in natürlicher Sprache. Aber Menschen interagieren
+            untereinander nicht nur mit Sprache, sondern auch mit anderen Modalitäten: z. B. verwenden wir Visualisierungen,
+            um Zusammenhänge deutlich zu machen. Wir möchten in dieser Studie betrachten, wie Visualisierungen in Form von
+            Skizzen zur Interaktion oder Spracheingaben mit Anwendungen eingesetzt werden können.
+        </p>
+
+        <h2>Erfasste Daten und Ablauf der Studie</h2>
+
+        <p>
+            Sobald Sie die Studie mit dem dargestellten Button starten, erhalten Sie einzelne Aufgaben, bei denen ihre
+            Eingaben aufgezeichnet werden. Diese Aufzeichnung erfolgt anonym und wird nicht mit ihrem Namen oder
+            Kontaktdaten verknüpft. Sie können die App selbstständig bedienen, aber jederzeit Fragen stellen. Die Studie
+            wird in vier Schritten durchgeführt.
+            <br />
+            <br />
+            1. Demonstration der App und Erläuterung
+            <br />
+            <br />
+            Wir demonstrieren Ihnen die App und erläutern die einzelnen Funktionalitäten, die zur Durchführung relevant
+            sind.
+            <br />
+            <br />
+            2. Übung anhand eines Beispiels
+            <br />
+            <br />
+            Sie erhalten Gelegenheit, an einem Beispiel die Bedienung der App zu üben. Außerdem haben sie die Möglichkeit,
+            sich anzuschauen, welche Informationen die App für die nachfolgende Analyse speichert.
+            <br />
+            <br />
+            3. Durchführung der eigentlichen Studie
+            <br />
+            <br />
+            Sie starten die Durchführung der Studie und die Bearbeitung der Aufgaben. Sie können selbstständig bestimmen,
+            wann Sie eine Aufgabe abgeschlossen haben und dann die nächste Aufgabe starten. Bitte „denken“ Sie laut! Das
+            hilft uns, bei der nachfolgenden Analyse ihre Gedankengänge nachzuvollziehen. Ihre Aufgabe ist, zu jedem
+            Beispiel eine potentielle Lösung mithilfe des Stiftes aufzumalen. Die App speichert während der Bearbeitung
+            folgende Daten:
+            <br />
+            <br />
+            • Die Trajektorien aller Stifteingaben mit Bezug zur Aufgabe
+            <br />
+            • Die Dauer der Bearbeitung einer Aufgabe
+            <br />
+            • Ihre Bewertung der der Lösungsfindung
+            <br />
+            • Eine Aufzeichnung der Audio-Daten („Think-Aloud-Protokoll“). Sprachdaten werden automatisch verfremdet, sodass
+            eine nachträgliche Erkennung der Proband:innen nicht möglich ist.
+            <br />
+            <br />
+            4. Demographie-Fragebogen
+            <br />
+            <br />
+            Es werden verschiedene demographische Daten (z. B. Altersgruppe, Geschlecht und Erfahrung in der Stiftbedienung)
+            erfasst. Sie haben bei jeder Frage die Wahl, ob Sie antworten möchten oder nicht.
+        </p>
+        <h2>Art und Dauer der Datenspeicherung</h2>
+        <p>Es werden keine personenidentifizierenden Daten (Name usw.) gespeichert.</p>
+        <p>
+            Ihre Studiendaten werden unter Verantwortung der Universität Duisburg-Essen ohne personenidentifizierende Daten
+            (Name usw.) digital gespeichert. Zu ihrer Session während der Studie wird eine anonyme Kennzeichnung generiert,
+            durch die nicht auf Datum und Uhrzeit der Session sowie Sie als Person geschlossen werden kann. Alle seitens der
+            zuvor genannten App gespeicherten Informationen werden auf den Systemen der Universität Duisburg-Essen
+            gespeichert und sind ausschließlich den involvierten Wissenschaftlern zugänglich.
+        </p>
+        <h2>Nutzung der Daten und Überlassung an andere Wissenschaftler:innen</h2>
+        <p>
+            Mit Ihrer Einwilligung stimmen Sie der Nutzung Ihrer Studiendaten zur weiteren Forschung im Bereich der
+            Mensch-Maschine-Interaktion zu, insbesondere mit Blick auf neuartige Interaktionsarten. Die Nutzung Ihrer
+            Studiendaten kann Wissenschaftler:innen aus andern Universitäten und forschenden Einrichtungen im In- und
+            Ausland im Interesse der Forschung gewährt werden. Ein Verkauf Ihrer Studiendaten ist ausgeschlossen. Die
+            Nutzung Ihrer Studiendaten darf auch in Kooperation mit Drittmittelgebern, sowohl von der öffentlichen Hand als
+            auch Industrieunternehmen, erfolgen. Die Forschungsergebnisse dürfen von Dritten nur dann publiziert werden,
+            wenn sie keinen Personenbezug enthalten. Die Forschungsergebnisse können auch für die Anmeldung von Patenten
+            verwendet werden. Auf der Grundlage der Forschungsergebnisse können neue Produkte und Dienstleistungen
+            entwickelt und kommerziell angeboten werden.
+        </p>
         <br />
         <br />
-        Wir demonstrieren Ihnen die App und erläutern die einzelnen Funktionalitäten, die zur Durchführung relevant
-        sind.
-        <br />
-        <br />
-        2. Übung anhand eines Beispiels
-        <br />
-        <br />
-        Sie erhalten Gelegenheit, an einem Beispiel die Bedienung der App zu üben. Außerdem haben sie die Möglichkeit,
-        sich anzuschauen, welche Informationen die App für die nachfolgende Analyse speichert.
-        <br />
-        <br />
-        3. Durchführung der eigentlichen Studie
-        <br />
-        <br />
-        Sie starten die Durchführung der Studie und die Bearbeitung der Aufgaben. Sie können selbstständig bestimmen,
-        wann Sie eine Aufgabe abgeschlossen haben und dann die nächste Aufgabe starten. Bitte „denken“ Sie laut! Das
-        hilft uns, bei der nachfolgenden Analyse ihre Gedankengänge nachzuvollziehen. Ihre Aufgabe ist, zu jedem
-        Beispiel eine potentielle Lösung mithilfe des Stiftes aufzumalen. Die App speichert während der Bearbeitung
-        folgende Daten:
-        <br />
-        <br />
-        • Die Trajektorien aller Stifteingaben mit Bezug zur Aufgabe
-        <br />
-        • Die Dauer der Bearbeitung einer Aufgabe
-        <br />
-        • Ihre Bewertung der der Lösungsfindung
-        <br />
-        • Eine Aufzeichnung der Audio-Daten („Think-Aloud-Protokoll“). Sprachdaten werden automatisch verfremdet, sodass
-        eine nachträgliche Erkennung der Proband:innen nicht möglich ist.
-        <br />
-        <br />
-        4. Demographie-Fragebogen
-        <br />
-        <br />
-        Es werden verschiedene demographische Daten (z. B. Altersgruppe, Geschlecht und Erfahrung in der Stiftbedienung)
-        erfasst. Sie haben bei jeder Frage die Wahl, ob Sie antworten möchten oder nicht.
-    </p>
-    <h2>Art und Dauer der Datenspeicherung</h2>
-    <p>Es werden keine personenidentifizierenden Daten (Name usw.) gespeichert.</p>
-    <p>
-        Ihre Studiendaten werden unter Verantwortung der Universität Duisburg-Essen ohne personenidentifizierende Daten
-        (Name usw.) digital gespeichert. Zu ihrer Session während der Studie wird eine anonyme Kennzeichnung generiert,
-        durch die nicht auf Datum und Uhrzeit der Session sowie Sie als Person geschlossen werden kann. Alle seitens der
-        zuvor genannten App gespeicherten Informationen werden auf den Systemen der Universität Duisburg-Essen
-        gespeichert und sind ausschließlich den involvierten Wissenschaftlern zugänglich.
-    </p>
-    <h2>Nutzung der Daten und Überlassung an andere Wissenschaftler:innen</h2>
-    <p>
-        Mit Ihrer Einwilligung stimmen Sie der Nutzung Ihrer Studiendaten zur weiteren Forschung im Bereich der
-        Mensch-Maschine-Interaktion zu, insbesondere mit Blick auf neuartige Interaktionsarten. Die Nutzung Ihrer
-        Studiendaten kann Wissenschaftler:innen aus andern Universitäten und forschenden Einrichtungen im In- und
-        Ausland im Interesse der Forschung gewährt werden. Ein Verkauf Ihrer Studiendaten ist ausgeschlossen. Die
-        Nutzung Ihrer Studiendaten darf auch in Kooperation mit Drittmittelgebern, sowohl von der öffentlichen Hand als
-        auch Industrieunternehmen, erfolgen. Die Forschungsergebnisse dürfen von Dritten nur dann publiziert werden,
-        wenn sie keinen Personenbezug enthalten. Die Forschungsergebnisse können auch für die Anmeldung von Patenten
-        verwendet werden. Auf der Grundlage der Forschungsergebnisse können neue Produkte und Dienstleistungen
-        entwickelt und kommerziell angeboten werden.
-    </p>
-    <br />
-    <br />
+    </div>
 </div>

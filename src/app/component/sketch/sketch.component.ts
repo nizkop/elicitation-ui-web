@@ -67,8 +67,8 @@ export class SketchComponent implements OnInit {
 
 
     private sheetOriginalDimensions: { [key: string]: { width: number, height: number } } = {
-        'sheet1': { width: 1150, height: 1500 },
-        'sheet2': { width: 1150, height: 550 }
+        'sheet1': { width: 1440 , height: 460 },
+        'sheet2': { width: 1440 , height: 460 }
       };
       
 
@@ -128,6 +128,7 @@ export class SketchComponent implements OnInit {
           
           // Set canvas dimensions explicitly for sheet1
           if (this.canvas) {
+            this.currentBackgroundImage = this.backgroundImageUrl; // reset for dimensions?
             this.canvas.width = this.sheetOriginalDimensions['sheet1'].width;
             this.canvas.height = this.sheetOriginalDimensions['sheet1'].height;
             console.log(`Set canvas dimensions for sheet1: ${this.canvas.width}x${this.canvas.height}`);
@@ -906,7 +907,7 @@ async saveAllSheetScreenshots(baseFileName: string) {
     try {
         // Use Promise.all to save screenshots concurrently
         await Promise.all([
-            this.saveSheetScreenshot('sheet1', baseFileName),
+            this.saveSheetScreenshot('sheet1', baseFileName),//TODO verzerrtes Bild
             this.saveSheetScreenshot('sheet2', baseFileName)
         ]);
         

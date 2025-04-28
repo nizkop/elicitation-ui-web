@@ -18,13 +18,13 @@ export class DemographicsComponent implements OnInit {
     age: string = "";
     gender: string = "";
     leftHandedOrRightHanded: string = "";
-    ownATablet: boolean = false;
-    useTablet: string = "";
-    usePencil: boolean = false;
-    useSpreadsheets: boolean = false;
-    anyExperienceVoice: boolean = false;
-    anyExperiencePen: boolean = false;
-    useSpreadsheetsMultiTouch: boolean = false;
+    nativeLanguage: string = "";
+
+    anyExperienceVoice: string = "";
+    anyExperiencePen: string = "";
+    anyExperienceTablet: string = "";
+    anyExperienceSpreadsheet: string = "";
+
 
     constructor(
         private router: Router,
@@ -39,10 +39,10 @@ export class DemographicsComponent implements OnInit {
 
     //TODO: Refactor
     checkFormCompletion(): boolean {
-        if (this.gender === "" || this.age === "" || this.leftHandedOrRightHanded === "") {
+        if (this.gender === "" || this.age === "" || this.leftHandedOrRightHanded === "" || this.nativeLanguage == "") {
             return false;
         }
-        if (this.ownATablet && this.useTablet === "") {
+        if (this.anyExperienceSpreadsheet == "" || this.anyExperienceTablet == "" || this.anyExperienceVoice == "" || this.anyExperiencePen == "") {
             return false;
         }
         return true;
@@ -53,13 +53,11 @@ export class DemographicsComponent implements OnInit {
             gender: this.gender,
             age: this.age,
             leftHandedOrRightHanded: this.leftHandedOrRightHanded,
-            ownATablet: this.ownATablet,
-            useTablet: this.useTablet,
-            usePencil: this.usePencil,
-            useSpreadsheets: this.useSpreadsheets,
+            nativeLanguage: this.nativeLanguage,
             anyExperienceVoice: this.anyExperienceVoice,
             anyExperiencePen: this.anyExperiencePen,
-            useSpreadsheetsMultiTouch: this.useSpreadsheetsMultiTouch,
+            anyExperienceTablet: this.anyExperienceTablet,
+            anyExperienceSpreadsheet: this.anyExperienceSpreadsheet
         };
 
         this.dataStorageService.saveData(

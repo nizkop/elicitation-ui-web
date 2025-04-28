@@ -34,7 +34,8 @@
     </button>
 </div>
 
-<!-- Einwilligungsseite (bisheriger Inhalt) -->
+<!-- Consent form -->
+<!--TODO update text -->
 <div *ngIf="!showIntroPage">
     <!--Header Section-->
     <div style="background-color: lightblue">
@@ -76,24 +77,20 @@
         </p>
         <h2>Purpose of the Research</h2>
         <p>
-            This research project aims to investigate how users interact with spreadsheets
-            by sketching formulas and voice commands as an alternative to traditional input methods, such
-            as the mouse and keyboard. Specifically, this study focuses on understanding
-            how users would express and execute common spreadsheet formulas using digital ink
-            on a touchscreen or how they would combine it with voice commands. The findings from this study may contribute to the design and
-            development of novel interaction techniques for spreadsheets, enabling more intuitive
-            and efficient ways for users to create and manipulate formulas.
+            This research project aims to investigate how users interact with spreadsheets by sketching and
+            speaking commands as an alternative to traditional input methods, such as the mouse and keyboard.
+            The findings from this study may contribute to the design and development of novel interaction
+            techniques for spreadsheets.
         </p>
         <h2>Implementation of the Experiment</h2>
         <p>
-            You will receive a tablet with a touchscreen and a digital pen. The researcher will show you several screenshots
-            of spreadsheets with a 'before-and-after' comparison and ask you how you would perform a series of operations in that simulated application.
-            Please use the pen to draw your commands on the screen and/or vocalize your commands aloud.
-            The researcher will show you two examples at first and explain how to execute the tasks.
-            Afterwards you will be asked to continue on your own.
-            After each prompt, you will be able to give feedback on how difficult you found the task.
-            The experiment will take about 30 minutes. Afterwards, the researcher will ask some demographic
-            questions about yourself and your experience with technical devices.
+            You will receive a tablet with a touchscreen and a digital pen. The researcher will show you several
+            pairs of screenshots showing a spreadsheet before and after a simulated operation. Once you have
+            recognized an operation, please use the pen to draw and/or speak your command. The researcher
+            will show you two examples at first and explain how to execute the tasks. Afterwards you will be
+            asked to continue on your own. After each prompt, you will be able to give feedback on how
+            difficult you found the task. The experiment will take about 30 minutes. Afterwards, the researcher
+            will ask some demographic questions about yourself and your experience.
         </p>
         <h2>Collected Data and Confidentiality</h2>
         <p>
@@ -106,18 +103,18 @@
             • Feedback and demographic data
             <br />
             <br />
-            The audio recording and digital ink of your pen strokes will be used as the primary source of information for
-            analyzing how different participants express spreadsheet commands using a pen and touchscreen as well as voice commands.
-            Audio recordings of conversations will be used as a supplementary source of information, and only as such,
-            to understand participants' rationales for their interaction choices.
-            The feedback data will be used to provide context on the participants' user experience.
-            The demographic data will be used to analyze the characteristics of our participant pool, in order
-            to avoid a sampling bias.
+            The recordings and digital ink of your pen strokes will be used as the primary source of information
+            for analyzing how different participants express spreadsheet commands using digital ink and voice
+            commands. Artificial intelligence tools may be used to support the transcription of the audio
+            recordings. The feedback data will be used to provide context on the participants' user experience.
+            The demographic data will be used to analyze the characteristics of our participant pool, in order to
+            avoid a sampling bias.
             <br />
             <br />
-            All data collected during the experiment will be anonymized (i.e. associated with a neutral identification
-            number instead of your name or affiliation), so it is not traceable to you or your organization. Parts of the
-            anonymized data (audio data only in transcribed form without your voice) may be published in individual or aggregate form.
+            All data collected during the experiment will be anonymized (i.e. associated with a neutral
+            identification number instead of your name and affiliation), so it is not traceable to you or your
+            organization. Parts of the anonymized data (audio data only in transcribed form without your voice)
+            may be published in individual or aggregate form.
         </p>
         <h2>Refusal or Withdrawal</h2>
         <p>
@@ -130,10 +127,18 @@
         <p>There are no rewards, payments, prizes or other incentives for participation.</p>
         <h2>Contact Information</h2>
         <p>
-            The principal investigators for this research project are Dr. Matthias Book, professor at the Department of
-            Computer Science at the University of Iceland (book@hi.is), and Dr. Marc Hesenius, post-doctoral researcher at
-            the Engineering Interactive Applications Chair of the University of Hildesheim, Germany (marc.hesenius@tamed.ai). This
-            study is supported by the Icelandic Research Fund (grant no. 2410725).
+            The principal investigators for this research project are
+            <br />
+            • Dr. Matthias Book, professor at the Department of
+            Computer Science at the University of Iceland (book@hi.is),
+            <br />
+            • Dr. Marc Hesenius, post-doctoral researcher at
+            the Engineering Interactive Applications Chair of the University of Hildesheim, Germany (hesenius@uni-hildesheim.de),
+            <br />
+            • and Prof. Dr. Volker Gruhn, professor at the Software Engineering Chair of the University
+            Duisburg-Essen, Germany (volker.gruhn@uni-due.de).
+            <br />
+            This study is supported by the Icelandic Research Fund (grant no. 2410725).
             <br />
             <br />
             If you have any questions about the experiment or your participation, please feel free to ask the researchers at
@@ -146,18 +151,17 @@
     <div style="background-color: aliceblue" class="textbox" *ngIf="chosenLanguage === Language.GERMAN">
         <h2 class="pt">Einleitung und Zielsetzung</h2>
         <p>
-            Künstliche Intelligenz (KI) verändert zunehmend den Arbeitsalltag in vielen Branchen. Vor allem große
-            Sprachmodelle ermöglichen nun eine Interaktion mit Computern in natürlicher Sprache. Aber Menschen interagieren
-            untereinander nicht nur mit Sprache, sondern auch mit anderen Modalitäten: z. B. verwenden wir Visualisierungen,
-            um Zusammenhänge deutlich zu machen. Wir möchten in dieser Studie betrachten, wie Visualisierungen in Form von
-            Skizzen zur Interaktion in Kombination mit Spracheingaben in technischen Anwendungen eingesetzt werden können.
+            Dieses Forschungsprojekt zielt darauf ab, zu untersuchen, wie Nutzer mit Tabellenkalkulationen interagieren,
+            indem sie Befehle skizzieren und aussprechen. Dies soll eine Alternative zu herkömmlichen Eingabemethoden wie Maus und
+            Tastatur darstellen. Die Ergebnisse dieser Studie könnten zur Gestaltung und Entwicklung neuartiger
+            Interaktionstechniken für Tabellenkalkulationen beitragen.
         </p>
 
         <h2>Durchführung des Experiments</h2>
         <p>
-            Der Versuchsleiter wird Ihnen mehrere Screenshots von Tabellenkalkulationen mit einem "Vorher-Nachher"-Vergleich
-            zeigen und Sie fragen, wie Sie eine Reihe von Operationen in dieser simulierten Anwendung durchführen würden.
-            Bitte verwenden Sie den Stift, um Ihre Befehle auf den Bildschirm zu zeichnen und/oder sprechen Sie ihre Kommandos laut aus.
+            Sie erhalten ein Tablet mit Touchscreen und einem digitalen Stift. Die Versuchsleitung wird Ihnen mehrere
+            Paare von Bildschirmfotos zeigen, die eine Tabellenkalkulation vor und nach einer simulierten Aktion darstellen.
+            Sobald Sie eine Aktion erkannt haben, verwenden Sie bitte den Stift, um Ihren Befehl zu zeichnen und/oder sprechen Sie.
             Der Versuchsleiter wird Ihnen zunächst zwei Beispiele zeigen und erklären, wie die Aufgaben zu bearbeiten sind.
             Anschließend werden Sie gebete, selbstständig fortzufahren.
             Nach jeder Aufgabe haben Sie die Möglichkeit, Feedback dazu zu geben, wie schwierig Sie die Aufgabe fanden.
@@ -178,8 +182,7 @@
             Als primäre Informationsquelle werden die Audioaufzeichnung der Eingabekommandos und die digitalen Striche
             Ihrer Stiftbewegungen genutzt, um zu analysieren, wie verschiedene Teilnehmer Befehle für
             Tabellenkalkulationsprogramme mit einem Stift und einem Touchscreen und per Sprachkommando ausdrücken.
-            Audioaufzeichnungen von Kommentaren oder Gesprächen werden als ergänzende Informationsquelle verwendet,
-            und nur als solche, um die Beweggründe der Teilnehmer für ihre Interaktionsentscheidungen zu verstehen.
+            Künstliche Intelligenz-Tools können zur Unterstützung der Transkription der Audioaufnahmen eingesetzt werden.
             Die Feedback-Daten werden verwendet, um den Kontext der Benutzererfahrung der Teilnehmer zu ermitteln.
             Die demografischen Daten werden verwendet, um die Charakteristika unserer Teilnehmer zu analysieren und
             somit Stichprobenverzerrungen zu vermeiden.
@@ -195,9 +198,15 @@
         <p>Es gibt keine Belohnungen, Bezahlungen, Preise oder sonstige Anreize für die Teilnahme.</p>
         <h2>Kontaktinformationen</h2>
             <p>
-                Die Hauptverantwortlichen für dieses Forschungsprojekt sind Dr. Matthias Book, Professor an der Fakultät für
-                Informatik der Universität von Island (book@hi.is), und Dr. Marc Hesenius, Post-Doc am Lehrstuhl für
-                dem Lehrstuhl für Interaktive Ingenieuranwendungen der Universität Hildesheim, Deutschland (marc.hesenius@tamed.ai).
+                Die Hauptverantwortlichen für dieses Forschungsprojekt sind
+                <br />
+                • Dr. Matthias Book, Professor an der Fakultät für Informatik der Universität von Island (book@hi.is),
+                <br />
+                • Dr. Marc Hesenius, Post-Doc am Lehrstuhl für
+                dem Lehrstuhl für Interaktive Ingenieuranwendungen der Universität Hildesheim, Deutschland (hesenius@uni-hildesheim.de),
+                <br />
+                • und Prof. Dr. Volker Gruhn, Professor am Lehrstuhl Software Engineering der Universität Duisburg-Essen, Deutschland (volker.gruhn@uni-due.de).
+                <br />
                 Diese Studie wird vom Isländischen Forschungsfond unterstützt (Zuschuss Nr. 2410725).
                 <br />
                 <br />
@@ -210,4 +219,4 @@
             <br />
     </div>
 </div>
-<!--TODO so steht die Uni DuE jetzt nirgendwo mehr!? -->
+

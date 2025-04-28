@@ -50,7 +50,10 @@
                    Consent to Participate in an Elicitation Study
                 </h2></mat-grid-tile
             >
-            <mat-grid-tile> </mat-grid-tile>
+            <mat-grid-tile>
+                <img src="./assets/UDE_logo.png" style="max-width: 90px; margin-top: 10px;"  />
+            </mat-grid-tile>
+
             <mat-grid-tile
                 ><button mat-raised-button color="primary" (click)="clickChangeLanguage()">
                     {{ chosenLanguage === Language.GERMAN ? "Switch to English" : "Switch to German" }}
@@ -62,6 +65,7 @@
                     {{ chosenLanguage === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
                 </button>
             </mat-grid-tile>
+
         </mat-grid-list>
     </div>
     <!--ENGLISH-->

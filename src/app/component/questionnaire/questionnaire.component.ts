@@ -16,8 +16,8 @@ export class QuestionnaireComponent implements OnInit {
 
     question1_GERMAN = "Wie einfach ist dieses Szenario?";
     question1_ENGLISH = "How easy is this scenario?";
-    question2_GERMAN = "Wie zufrieden sind Sie mit Ihrem Kommando (Skizze und/oder Spracheingabe)?";
-    question2_ENGLISH = "How satisfied are you with your command (sketch and/or voice input)?";
+    // question2_GERMAN = "Wie zufrieden sind Sie mit Ihrem Kommando (Skizze und/oder Spracheingabe)?";
+    // question2_ENGLISH = "How satisfied are you with your command (sketch and/or voice input)?";
 
     formQuestion1 = "";
     formQuestion2 = "";
@@ -48,7 +48,7 @@ export class QuestionnaireComponent implements OnInit {
     }
 
     checkFormCompletion(): boolean {
-        return !(this.formQuestion1 === "" || this.formQuestion2 === "");
+        return !(this.formQuestion1 === "");
     }
 
     clickExitStudy() {
@@ -81,9 +81,9 @@ export class QuestionnaireComponent implements OnInit {
         const questionnaireData = {
             id: this.currentTask?.id,
             question1: this.currentTask?.language === Language.GERMAN ? this.question1_GERMAN : this.question1_ENGLISH,
-            question2: this.currentTask?.language === Language.GERMAN ? this.question2_GERMAN : this.question2_ENGLISH,
+            // question2: this.currentTask?.language === Language.GERMAN ? this.question2_GERMAN : this.question2_ENGLISH,
             answer1: this.formQuestion1,
-            answer2: this.formQuestion2,
+            // answer2: this.formQuestion2,
             startTime: this.startTime,
             endTime: new Date(),
         };

@@ -39,9 +39,15 @@ export class MessageService {
     }
 
     public recordingNotSupported() {
-        this.snackBar.open("Screen and Audio Recording not supported", "Okay", {
-            duration: 3000,
-        });
+        // if (language === Language.GERMAN) {
+        //     this.snackBar.open("Bildschirm- und AUdioaufnahme nicht unterstützt", "Okay", {
+        //         duration: 3000,
+        //     });
+        // } else {
+            this.snackBar.open("Screen and Audio Recording not supported", "Okay", {
+                duration: 3000,
+            });
+        // }
     }
 
     public alreadyFirstPage() {

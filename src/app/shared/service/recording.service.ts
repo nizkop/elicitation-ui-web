@@ -23,12 +23,29 @@ export class RecordingService {
             this.screenStream = await navigator.mediaDevices.getDisplayMedia({
                 video: true,
             });
+        } catch (error) {
+            this.screenStream = null;
+            alert("screenrecording failed: "+ error);
+        }
+        try{
             this.audioStream = await navigator.mediaDevices.getUserMedia({
                 audio: true,
             });
+            let combinedStream: MediaStream;
             // Combine the audio and screen streams
-            let tracks = [...this.screenStream.getVideoTracks(), ...this.audioStream.getAudioTracks()];
-            let combinedStream = new MediaStream(tracks);
+            if (this.screenStream === null || this.screenStream === undefined) {
+                // Falls screenStream nicht vorhanden ist, nur AudioStream verwenden
+                let tracks = [...this.audioStream.getAudioTracks()];
+                combinedStream = new MediaStream(tracks);
+            } else {
+                // Falls screenStream vorhanden ist, kombiniere Video- und Audio-Streams
+                let tracks = [
+                    ...this.screenStream.getVideoTracks(),
+                    ...this.audioStream.getAudioTracks()
+                ];
+                combinedStream = new MediaStream(tracks);
+            }
+
 
             this.mediaRecorder = new MediaRecorder(combinedStream);
             let chunks: BlobPart[] = [];

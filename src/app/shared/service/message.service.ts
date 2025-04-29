@@ -38,13 +38,13 @@ export class MessageService {
         });
     }
 
-    public recordingNotSupported() {
+    public recordingNotSupported(errormsg:String) {
         // if (language === Language.GERMAN) {
         //     this.snackBar.open("Bildschirm- und AUdioaufnahme nicht unterstützt", "Okay", {
         //         duration: 3000,
         //     });
         // } else {
-            this.snackBar.open("Screen and Audio Recording not supported", "Okay", {
+            this.snackBar.open("Screen and Audio Recording not supported: "+errormsg, "Okay", {
                 duration: 3000,
             });
         // }

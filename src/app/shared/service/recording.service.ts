@@ -52,7 +52,8 @@ export class RecordingService {
         } catch (error) {
             console.error("Fehler beim Starten der Aufnahmen", error);
             this.notSupported = true;
-            this.messageService.recordingNotSupported();
+            // @ts-ignore
+            this.messageService.recordingNotSupported(error);
         }
     }
 

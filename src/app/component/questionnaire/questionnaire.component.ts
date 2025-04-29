@@ -80,10 +80,9 @@ export class QuestionnaireComponent implements OnInit {
     saveData(): void {
         const questionnaireData = {
             id: this.currentTask?.id,
+            picture_file_name: this.currentTask?.picture_file_name,
             question1: this.currentTask?.language === Language.GERMAN ? this.question1_GERMAN : this.question1_ENGLISH,
-            // question2: this.currentTask?.language === Language.GERMAN ? this.question2_GERMAN : this.question2_ENGLISH,
             answer1: this.formQuestion1,
-            // answer2: this.formQuestion2,
             startTime: this.startTime,
             endTime: new Date(),
         };

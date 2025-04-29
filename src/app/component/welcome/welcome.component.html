@@ -30,17 +30,16 @@
 
 
     <button mat-raised-button color="primary" (click)="clickChangeLanguage()">
-                    {{ chosenLanguage === Language.GERMAN ? "Switch to English" : "Switch to German" }}
+                    {{ chosenLanguage === Language.GERMAN ? "Nach Englisch wechseln" : "Switch to German" }}
                 </button>
-    <span style="display: inline-block; width: 3rem;"></span>
+    <span style="display: inline-block; width: 5rem;"></span>
     <!-- go to consent form -->
-    <button mat-raised-button color="primary" style="font-size: 1.1rem; padding: 0.6rem 2rem;" (click)="showIntroPage = false">
+    <button mat-raised-button color="primary" (click)="showIntroPage = false">
         {{ chosenLanguage === Language.GERMAN ? "Weiter zur Einwilligungserklärung" : "Continue to Consent Form" }}
     </button>
 </div>
 
 <!-- Consent form -->
-<!--TODO update text -->
 <div *ngIf="!showIntroPage">
     <!--Header Section-->
     <div style="background-color: lightblue">
@@ -62,7 +61,7 @@
 
             <mat-grid-tile
                 ><button mat-raised-button color="primary" (click)="clickChangeLanguage()">
-                    {{ chosenLanguage === Language.GERMAN ? "Switch to English" : "Switch to German" }}
+                    {{ chosenLanguage === Language.GERMAN ? "Nach Englisch wechseln" : "Switch to German" }}
                 </button>
             </mat-grid-tile>
             <mat-grid-tile> </mat-grid-tile>

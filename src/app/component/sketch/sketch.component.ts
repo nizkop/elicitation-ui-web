@@ -907,7 +907,7 @@ async saveAllSheetScreenshots(baseFileName: string) {
     try {
         // Use Promise.all to save screenshots concurrently
         await Promise.all([
-            this.saveSheetScreenshot('sheet1', baseFileName),//TODO verzerrtes Bild
+            this.saveSheetScreenshot('sheet1', baseFileName),
             this.saveSheetScreenshot('sheet2', baseFileName)
         ]);
         

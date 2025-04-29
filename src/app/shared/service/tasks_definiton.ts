@@ -29,7 +29,7 @@ export const tasks_definition = [
     german_hint: "Datenbearbeitung",
     english_hint: "Data Edit",
     english_description: "Enter the value 100 into cell F9.",
-    group: Group.P,
+    group: Group.A,
     picture_file_name: "task_1.png",
   },
   {
@@ -39,7 +39,7 @@ export const tasks_definition = [
     english_description: "Delete the contents of cell E8.",
     german_hint: "Datenbearbeitung",
     english_hint: "Data Edit",
-    group: Group.P,
+    group: Group.A,
     picture_file_name: "task_2.png",
   },
   {
@@ -71,16 +71,16 @@ export const tasks_definition = [
   //   english_hint: "Structure Change: something new included",
   //   group: Group.A
   // },
-    {//A instead of task 5
-        german_title: "Zentrieren von Zellen",
-        english_title: "Centering cells",
-        german_description: "Zentrieren Sie die Werte A7:A11 sowie B7:B11.",
-        english_description: "Center the values in A7:A11 as well as B7:B11.",
-        german_hint: "Format",
-        english_hint: "Formatting",
-        group: Group.A,
-        picture_file_name: "task_5.png",
-    },
+  //   {//A instead of task 5
+  //       german_title: "Zentrieren von Zellen",
+  //       english_title: "Centering cells",
+  //       german_description: "Zentrieren Sie die Werte A7:A11 sowie B7:B11.",
+  //       english_description: "Center the values in A7:A11 as well as B7:B11.",
+  //       german_hint: "Format",
+  //       english_hint: "Formatting",
+  //       group: Group.A,
+  //       picture_file_name: "task_A.png",
+  //   },
 
   {
     german_title: "Spalte entfernen",
@@ -170,7 +170,7 @@ export const tasks_definition = [
     english_description: "Create a bar chart from the value in cells C7-C11.",
     german_hint: "Veranschaulichung",
     english_hint: "Visualization",
-    group: Group.B,
+    group: Group.C,
     picture_file_name: "task_13.png",
   },
   {

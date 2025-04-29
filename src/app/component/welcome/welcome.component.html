@@ -75,10 +75,10 @@
     </div>
     <!--ENGLISH-->
     <div style="background-color: aliceblue" class="textbox" *ngIf="chosenLanguage === Language.ENGLISH">
-        <p class="pt" >
+        <p class="pt" ><em>
             Please read the following information carefully and sign this form if you would like to participate in this
             experiment. You can request a copy of the form if you wish.
-        </p>
+        </em></p>
         <h2>Purpose of the Research</h2>
         <p>
             This research project aims to investigate how users interact with spreadsheets by sketching and
@@ -153,7 +153,11 @@
     </div>
     <!--GERMAN-->
     <div style="background-color: aliceblue" class="textbox" *ngIf="chosenLanguage === Language.GERMAN">
-        <h2 class="pt">Einleitung und Zielsetzung</h2>
+        <p class="pt" ><em>
+            Bitte lesen Sie die folgenden Informationen sorgfältig und unterschreiben Sie das Formular, wenn sie an
+            diesem Experiment teilnehmen wollen. Bei Nachfrage erhalten Sie eine Kopie dieses Formulars.
+        </em></p>
+        <h2>Einleitung und Zielsetzung</h2>
         <p>
             Dieses Forschungsprojekt zielt darauf ab, zu untersuchen, wie Nutzer mit Tabellenkalkulationen interagieren,
             indem sie Befehle skizzieren und aussprechen. Dies soll eine Alternative zu herkömmlichen Eingabemethoden wie Maus und

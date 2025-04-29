@@ -31,22 +31,15 @@ export class RecordingService {
             this.audioStream = await navigator.mediaDevices.getUserMedia({
                 audio: true,
             });
-            let combinedStream: MediaStream;
+            let tracks: MediaStreamTrack[] = [];
             // Combine the audio and screen streams
-            if (this.screenStream === null || this.screenStream === undefined) {
-                // Falls screenStream nicht vorhanden ist, nur AudioStream verwenden
-                let tracks = [...this.audioStream.getAudioTracks()];
-                combinedStream = new MediaStream(tracks);
-            } else {
-                // Falls screenStream vorhanden ist, kombiniere Video- und Audio-Streams
-                let tracks = [
-                    ...this.screenStream.getVideoTracks(),
-                    ...this.audioStream.getAudioTracks()
-                ];
-                combinedStream = new MediaStream(tracks);
+            if (this.screenStream !== null && this.screenStream !== undefined) {
+                // if screen recording successful, use it:
+                tracks.push(...this.screenStream.getVideoTracks());
             }
+            tracks.push(...this.audioStream.getAudioTracks());
 
-
+            let combinedStream = new MediaStream(tracks);
             this.mediaRecorder = new MediaRecorder(combinedStream);
             let chunks: BlobPart[] = [];
 
@@ -69,8 +62,8 @@ export class RecordingService {
         } catch (error) {
             console.error("Fehler beim Starten der Aufnahmen", error);
             this.notSupported = true;
-            // @ts-ignore
-            this.messageService.recordingNotSupported(error);
+            const errorMessage = (error instanceof Error) ? error.message : "unknown error";
+            this.messageService.recordingNotSupported(errorMessage);
         }
     }
 

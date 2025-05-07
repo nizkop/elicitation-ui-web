@@ -932,7 +932,9 @@ async saveAllSheetScreenshots(baseFileName: string) {
         }
     }
 
-    
+    get hasDescription(): boolean {
+      return typeof this.currentTask?.description === 'string' && this.currentTask.description.length > 0;
+    }
     
     async resetDrawing() {
         console.log("Reset drawings for current sheet...");

@@ -1,10 +1,13 @@
 <div style="background-color: aliceblue">
     <!-- Task Description Section -->
     <mat-grid-list cols="1" rowHeight="20:1">
-        <mat-grid-tile>
-            <p>{{ currentTask?.description }}</p>
-        </mat-grid-tile>
-    </mat-grid-list>
+          <mat-grid-tile>
+            <p>
+                <b *ngIf="hasDescription" >{{ currentTask?.language === Language.GERMAN ? 'Hinweis:' : 'Hint:' }}</b>
+                {{ currentTask?.description }}
+            </p>
+          </mat-grid-tile>
+        </mat-grid-list>
 
     <!-- Sketching Section -->
     <div style="position: relative">

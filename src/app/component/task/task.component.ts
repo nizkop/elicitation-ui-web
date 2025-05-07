@@ -201,8 +201,18 @@ export class TaskComponent implements OnInit {
             } catch (error) {
                 console.error("Error saving data:", error);
             }
+            try {
+                // This will update timestamps and take screenshots of all sheets
+                this.sketchComponent.saveTask();
+
+
+                console.log("Task data and screenshots saved successfully");
+            } catch (error) {
+                console.error("Error saving data:", error);
+            }
         } else {
             console.warn("Cannot save data: no current task or sketch component");
         }
+
     }
 }

@@ -285,7 +285,7 @@ private formatTimestamp(timestamp: number): string {
   
   // New method to try loading saved drawings
   private tryLoadSavedDrawings(): void {
-    
+
     console.log("Would attempt to load saved drawings here if implemented");
   }
 

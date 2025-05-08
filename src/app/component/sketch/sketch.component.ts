@@ -945,7 +945,7 @@ async saveAllSheetScreenshots(baseFileName: string) {
         // Check if there are drawings to reset (avoid taking screenshots if nothing to reset)
         if (currentDrawings.length > 0 && this.currentTask) {
             // Generate a descriptive filename for the screenshot that includes the task number
-            const taskNumber = this.currentTask.taskNumber || "unknown";
+            const taskNumber = this.currentTask.get_information() || "unknown";
             const fileName = `Task_${taskNumber}_Reset_Current_Sheet_${this.currentSheet}`;
             
             // Take a screenshot of the current sheet before resetting
@@ -988,7 +988,7 @@ async saveAllSheetScreenshots(baseFileName: string) {
             const sheets = ['sheet1', 'sheet2'];
             
             // Get the task number for the filename
-            const taskNumber = this.currentTask ? this.currentTask.taskNumber || "unknown" : "unknown";
+            const taskNumber = this.currentTask ? this.currentTask.get_information() || "unknown" : "unknown";
             
             // First, take screenshots of all sheets that have drawings before resetting
             for (const sheet of sheets) {

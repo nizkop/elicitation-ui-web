@@ -142,13 +142,14 @@ export class TaskComponent implements OnInit {
                 // Create skip record data
                 const skipData = {
                     taskId: this.currentTask.id,
+                    picture: this.currentTask.picture_file_name,
                     taskNumber: this.currentTask.taskNumber,
                     action: "skipped",
                     timestamp: new Date().toISOString()
                 };
                 
                 // Generate filename for the skip record
-                const skipFileName = `Task_${this.currentTask.taskNumber}_Skipped.json`;
+                const skipFileName = `Task_${this.currentTask.get_information()}_Skipped.json`;
                 
                 // Create blob for the JSON file
                 const skipBlob = new Blob([JSON.stringify(skipData, null, 2)], { type: "application/json" });
@@ -184,7 +185,7 @@ export class TaskComponent implements OnInit {
             try {
                 // First handle recording service screenshot if available
                 if (this.recordingService && !this.recordingService.recordingNotSupported()) {
-                    const streamScreenshotName = `Task_${this.currentTask.taskNumber}_sheet${this.currentTask.currentSheet}.png`;
+                    const streamScreenshotName = `Task_${this.currentTask.get_information()}_sheet${this.currentTask.currentSheet}.png`;
                     await this.recordingService.takeScreenshot(
                         streamScreenshotName,
                         this.recordingService.getScreenStream()!

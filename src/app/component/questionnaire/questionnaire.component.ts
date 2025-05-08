@@ -80,17 +80,17 @@ export class QuestionnaireComponent implements OnInit {
     saveData(): void {
         const questionnaireData = {
             id: this.currentTask?.id,
+            picture: this.currentTask?.picture_file_name,
             question1: this.currentTask?.language === Language.GERMAN ? this.question1_GERMAN : this.question1_ENGLISH,
-            // question2: this.currentTask?.language === Language.GERMAN ? this.question2_GERMAN : this.question2_ENGLISH,
             answer1: this.formQuestion1,
-            // answer2: this.formQuestion2,
             startTime: this.startTime,
             endTime: new Date(),
         };
 
+
         this.dataStorageService.saveData(
-            `${this.currentTask?.taskNumber}_questionnaire_task${this.currentTask?.id}.json`,
+            `${this.currentTask?.taskNumber}_questionnaire_${this.currentTask?.get_information()}.json`,
             new Blob([JSON.stringify(questionnaireData, null, 2)], { type: "application/json" }),
-        );
+        )
     }
 }

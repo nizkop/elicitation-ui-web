@@ -586,8 +586,8 @@ private formatTimestamp(timestamp: number): string {
                             tempContext.beginPath();
                             
                             // Transform the first point
-                            const startX: number = line[0].x * scaleX;
-                            const startY: number = line[0].y * scaleY;// Faktoren 0.65, 0.8 zu weit links, 1 zu weit rechts
+                            const startX: number = line[0].x //* scaleX;
+                            const startY: number = line[0].y //* scaleY;// Faktoren 0.65, 0.8 zu weit links, 1 zu weit rechts
                             
                             tempContext.moveTo(startX, startY);
                             

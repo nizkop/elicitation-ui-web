@@ -39,11 +39,9 @@ export class Task {
     }
 
     public get_information(){
-        let baseName: string;
+        let baseName: string = "task" + this.id ;
         if (this.picture_file_name) {
-            baseName = "picture" + this.picture_file_name.split(".")[0];
-        } else {
-            baseName = "task" + (this.id ?? "unknown");
+            baseName += "picture" + this.picture_file_name.split(".")[0];
         }
         return baseName;
     }

@@ -303,6 +303,8 @@ private formatTimestamp(timestamp: number): string {
             // Set the canvas dimensions to match the displayed dimensions
             this.canvas.width = displayedWidth;
             this.canvas.height = displayedHeight;
+
+            this.sheetDrawDimensions[this.currentSheet] = { width: displayedWidth, height: displayedHeight };
             
             this.context.strokeStyle = "blue";
             this.context.lineWidth = 2;
@@ -347,7 +349,10 @@ private formatTimestamp(timestamp: number): string {
             this.drawOnCanvas();
         }
     }
-
+    private sheetDrawDimensions: { [key: string]: { width: number, height: number } } = {
+        sheet1: { width: 1440, height: 415 }, // als Initialwert, wird gleich überschrieben
+        sheet2: { width: 1440, height: 415 }
+    };
     drawOnCanvas() {
         if (this.context) {
             this.context.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
@@ -540,7 +545,7 @@ private formatTimestamp(timestamp: number): string {
             const originalDimensions = this.sheetOriginalDimensions[sheetName];
             const targetWidth = originalDimensions.width;
             const targetHeight = originalDimensions.height;
-            
+            console.log("vorher:", tempCanvas.width, tempCanvas.height);
             tempCanvas.width = targetWidth;
             tempCanvas.height = targetHeight;
     
@@ -559,15 +564,12 @@ private formatTimestamp(timestamp: number): string {
                     tempContext.drawImage(image, 0, 0, tempCanvas.width, tempCanvas.height);
                     
                     // Use the original dimensions for scaling calculations, not the current canvas dimensions
-                    const originalWidth = originalDimensions.width;
-                    const originalHeight = originalDimensions.height;
-                    
-                    // Calculate scaling based on original dimensions
-                    const scaleX = targetWidth / originalWidth;
-                    const scaleY = targetHeight / originalHeight;
+                    const drawDims = this.sheetDrawDimensions[sheetName] || { width: targetWidth, height: targetHeight };
+                    const scaleX = targetWidth / drawDims.width;
+                    const scaleY = targetHeight / drawDims.height;
                     
                     console.log(`Using fixed scaling for ${sheetName}: X=${scaleX.toFixed(3)}, Y=${scaleY.toFixed(3)}`);
-                    console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);
+                    // console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);
                     console.log(`Target dimensions: ${targetWidth}x${targetHeight}`);
                     
                     // Draw the lines with proper scaling
@@ -585,7 +587,7 @@ private formatTimestamp(timestamp: number): string {
                             
                             // Transform the first point
                             const startX: number = line[0].x * scaleX;
-                            const startY: number = line[0].y * scaleY;
+                            const startY: number = line[0].y * scaleY;// Faktoren 0.65, 0.8 zu weit links, 1 zu weit rechts
                             
                             tempContext.moveTo(startX, startY);
                             

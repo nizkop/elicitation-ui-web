@@ -37,4 +37,14 @@ export class Task {
             ? `Aufgabe ${new_number}`
             : `Task ${new_number}`; // TODO control? this.currentTask!.taskNumber.toString()
     }
+
+    public get_information(){
+        let baseName: string;
+        if (this.picture_file_name) {
+            baseName = "picture" + this.picture_file_name.split(".")[0];
+        } else {
+            baseName = "task" + (this.id ?? "unknown");
+        }
+        return baseName;
+    }
 }

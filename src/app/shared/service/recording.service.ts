@@ -23,13 +23,23 @@ export class RecordingService {
             this.screenStream = await navigator.mediaDevices.getDisplayMedia({
                 video: true,
             });
+        } catch (error) {
+            this.screenStream = null;
+            alert("screenrecording failed: "+ error);
+        }
+        try{
             this.audioStream = await navigator.mediaDevices.getUserMedia({
                 audio: true,
             });
+            let tracks: MediaStreamTrack[] = [];
             // Combine the audio and screen streams
-            let tracks = [...this.screenStream.getVideoTracks(), ...this.audioStream.getAudioTracks()];
-            let combinedStream = new MediaStream(tracks);
+            if (this.screenStream !== null && this.screenStream !== undefined) {
+                // if screen recording successful, use it:
+                tracks.push(...this.screenStream.getVideoTracks());
+            }
+            tracks.push(...this.audioStream.getAudioTracks());
 
+            let combinedStream = new MediaStream(tracks);
             this.mediaRecorder = new MediaRecorder(combinedStream);
             let chunks: BlobPart[] = [];
 
@@ -52,7 +62,8 @@ export class RecordingService {
         } catch (error) {
             console.error("Fehler beim Starten der Aufnahmen", error);
             this.notSupported = true;
-            this.messageService.recordingNotSupported();
+            const errorMessage = (error instanceof Error) ? error.message : "unknown error";
+            this.messageService.recordingNotSupported(errorMessage);
         }
     }
 

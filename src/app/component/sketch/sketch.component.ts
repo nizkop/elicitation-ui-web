@@ -595,8 +595,8 @@ private formatTimestamp(timestamp: number): string {
                             
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {
-                                const pointX: number = line[i].x * scaleX;
-                                const pointY: number = line[i].y * scaleY;
+                                const pointX: number = line[i].x //* scaleX;
+                                const pointY: number = line[i].y //* scaleY;
                                 tempContext.lineTo(pointX, pointY);
                             }
                             

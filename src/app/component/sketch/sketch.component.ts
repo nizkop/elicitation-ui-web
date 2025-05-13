@@ -350,11 +350,7 @@ private formatTimestamp(timestamp: number): string {
             this.drawOnCanvas();
         }
     }
-    // TODO entfernt:
-    private sheetDrawDimensions: { [key: string]: { width: number, height: number } } = {
-        sheet1: { width: 1440, height: 415 }, // als Initialwert, wird gleich überschrieben
-        sheet2: { width: 1440, height: 415 }
-    };
+
     drawOnCanvas() {
         if (this.context) {
             this.context.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
@@ -484,7 +480,11 @@ private formatTimestamp(timestamp: number): string {
         });
     }
     
-    
+    // TODO entfernt:
+    // private sheetDrawDimensions: { [key: string]: { width: number, height: number } } = {
+    //     sheet1: { width: 1440, height: 415 }, // als Initialwert, wird gleich überschrieben
+    //     sheet2: { width: 1440, height: 415 }
+    // };
     private async processScreenshotQueue(): Promise<void> {
         // If already processing or queue is empty, return
         if (this.screenshotInProgress || this.screenshotQueue.length === 0) {
@@ -582,7 +582,7 @@ private formatTimestamp(timestamp: number): string {
                     // const scaleY = targetHeight / drawDims.height;
                     
                     console.log(`Using fixed scaling for ${sheetName}: X=${scaleX.toFixed(3)}, Y=${scaleY.toFixed(3)}`);
-                    console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);// TODO added
+                    console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);
                     console.log(`Target dimensions: ${targetWidth}x${targetHeight}`);
                     
                     // Draw the lines with proper scaling
@@ -599,8 +599,9 @@ private formatTimestamp(timestamp: number): string {
                             tempContext.beginPath();
                             
                             // Transform the first point
-                            const startX: number = line[0].x * scaleX;// TODO : const startX: number = line[0].x //* scaleX;
-                            const startY: number = line[0].y * scaleY;// TODO : const startY: number = line[0].y //* scaleY;
+                            const startX: number = line[0].x *1;//* scaleX;// TODO : const startX: number = line[0].x //* scaleX;
+                            const startY: number = line[0].y *1;//* scaleY;// TODO : const startY: number = line[0].y //* scaleY;
+                            console.log(startX, startY);
                             
                             tempContext.moveTo(startX, startY);
                             

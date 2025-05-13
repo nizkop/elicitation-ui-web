@@ -597,13 +597,14 @@ private formatTimestamp(timestamp: number): string {
                     for (const line of sheetDrawings) {
                         if (line.length > 1) {
                             tempContext.beginPath();
-                            const offset_x_for_tablet = 1.07;
+                            const offset_x_for_tablet = 1.079;
                             // 1.15 zu weit rechts#
                             // 0.75 zu weit links
                             // 1 zu links
                             // 1.05 zu links
                             // 1.1 etwas zu weit rechts
                             // 1.08 zu weit rechts
+                            // 1.07 zu weit links!
                             const offset_y_for_tablet = 1.07;
                             // 0.75 zu schmal & zu hoch
                             // 0.5 zu hoch
@@ -613,7 +614,7 @@ private formatTimestamp(timestamp: number): string {
                             // Transform the first point
                             const startX: number = line[0].x * scaleX*offset_x_for_tablet;// TODO : const startX: number = line[0].x //* scaleX;
                             const startY: number = line[0].y * scaleY*offset_y_for_tablet;// TODO : const startY: number = line[0].y //* scaleY;
-                            alert(`*1.08 (x) -> startX: ${startX}, *1.08 (y) startY: ${startY}`);
+                            // alert(`*1.08 (x) -> startX: ${startX}, *1.08 (y) startY: ${startY}`);
                             // Tablet: 539.194..., 74.771... = nach o
                             // +10 = nach s
                             // + 100 (y) -> 170 = nach o

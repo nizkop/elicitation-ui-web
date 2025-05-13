@@ -93,8 +93,21 @@ export class RecordingService {
 
             video.srcObject = new MediaStream([videoTrack]);
             video.onloadedmetadata = () => {
-                captureCanvas.width = video.videoWidth;
-                captureCanvas.height = video.videoHeight;
+                const cssWidth = video.videoWidth;
+                const cssHeight = video.videoHeight;
+                const scale = window.devicePixelRatio || 1;
+
+                // Set canvas size in physical pixels
+                captureCanvas.width = cssWidth * scale;
+                captureCanvas.height = cssHeight * scale;
+
+                // Optional: Set CSS size for debugging (not required)
+                // captureCanvas.style.width = `${cssWidth}px`;
+                // captureCanvas.style.height = `${cssHeight}px`;
+
+                // Scale drawing context
+                context?.scale(scale, scale);
+
                 video
                     .play()
                     .then(() => {

@@ -304,9 +304,6 @@ private formatTimestamp(timestamp: number): string {
             this.canvas.width = displayedWidth;
             this.canvas.height = displayedHeight;
 
-            // TODO entfernt:
-            // this.sheetDrawDimensions[this.currentSheet] = { width: displayedWidth, height: displayedHeight };
-
             this.context.strokeStyle = "blue";
             this.context.lineWidth = 2;
             
@@ -479,12 +476,8 @@ private formatTimestamp(timestamp: number): string {
             }
         });
     }
-    
-    // TODO entfernt:
-    // private sheetDrawDimensions: { [key: string]: { width: number, height: number } } = {
-    //     sheet1: { width: 1440, height: 415 }, // als Initialwert, wird gleich überschrieben
-    //     sheet2: { width: 1440, height: 415 }
-    // };
+
+
     private async processScreenshotQueue(): Promise<void> {
         // If already processing or queue is empty, return
         if (this.screenshotInProgress || this.screenshotQueue.length === 0) {
@@ -568,7 +561,6 @@ private formatTimestamp(timestamp: number): string {
                     tempContext.drawImage(image, 0, 0, tempCanvas.width, tempCanvas.height);
 
                     // Use the original dimensions for scaling calculations, not the current canvas dimensions
-                    // TODO added:
                     const originalWidth = originalDimensions.width;
                     const originalHeight = originalDimensions.height;
                     
@@ -576,10 +568,6 @@ private formatTimestamp(timestamp: number): string {
                     const scaleX = targetWidth / originalWidth;
                     const scaleY = targetHeight / originalHeight;
 
-                    // TODO entfernt:
-                    // const drawDims = this.sheetDrawDimensions[sheetName] || { width: targetWidth, height: targetHeight };
-                    // const scaleX = targetWidth / drawDims.width;
-                    // const scaleY = targetHeight / drawDims.height;
                     
                     console.log(`Using fixed scaling for ${sheetName}: X=${scaleX.toFixed(3)}, Y=${scaleY.toFixed(3)}`);
                     console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);
@@ -607,6 +595,7 @@ private formatTimestamp(timestamp: number): string {
                             // 1.07 zu weit links!
                             // 1.079 zu weit links!
                             // 1.09 zu weit links
+                            // 1.095 tacken zu weit rechts
                             const offset_y_for_tablet = 1.094;
                             // 0.75 zu schmal & zu hoch
                             // 0.5 zu hoch
@@ -614,13 +603,9 @@ private formatTimestamp(timestamp: number): string {
                             // 1 etw. zu hoch?
 
                             // Transform the first point
-                            const startX: number = line[0].x * scaleX*offset_x_for_tablet;// TODO : const startX: number = line[0].x //* scaleX;
-                            const startY: number = line[0].y * scaleY*offset_y_for_tablet;// TODO : const startY: number = line[0].y //* scaleY;
-                            // alert(`*1.08 (x) -> startX: ${startX}, *1.08 (y) startY: ${startY}`);
-                            // Tablet: 539.194..., 74.771... = nach o
-                            // +10 = nach s
-                            // + 100 (y) -> 170 = nach o
-                            // + 50 x = 468, +5 y = 100 --> Faktor
+                            const startX: number = line[0].x * scaleX*offset_x_for_tablet;
+                            const startY: number = line[0].y * scaleY*offset_y_for_tablet;
+
                             tempContext.moveTo(startX, startY);
 
                             // Transform all subsequent points

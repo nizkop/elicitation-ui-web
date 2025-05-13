@@ -3,8 +3,8 @@ import { Language } from "./language.enum";
 
 export class Task {
     taskNumber!: number;
-    id: number;
-    title: string;
+    id: string;
+    // title: string;
     description: string;
     group: Group;
     resets: number;
@@ -22,8 +22,7 @@ export class Task {
     currentSheet: number = 1;
 
     constructor(id: number, title: string, description: string, group: Group, resets: number, language: Language, picture_file_name:string) {
-        this.id = id;
-        this.title = title;
+        this.id = picture_file_name.replace(/^task_/i, '').replace(/\.png$/i, '');
         this.description = description;
         this.group = group;
         this.resets = resets;
@@ -33,16 +32,16 @@ export class Task {
 
     public set_task_number(new_number: number){
         this.taskNumber = new_number;
-        this.title = this.language === Language.GERMAN
-            ? `Aufgabe ${new_number}`
-            : `Task ${new_number}`; // TODO control? this.currentTask!.taskNumber.toString()
+        // this.title = this.language === Language.GERMAN
+        //     ? `Aufgabe ${this.id}`
+        //     : `Task ${this.id}`; // TODO control? this.currentTask!.taskNumber.toString()
     }
 
-    public get_information(){
-        let baseName: string = "task" + this.id ;
-        if (this.picture_file_name) {
-            baseName += "picture" + this.picture_file_name.split(".")[0];
-        }
-        return baseName;
-    }
+    // public get_information(){
+    //     let baseName: string = "task_" + this.id ;
+    //     // if (this.picture_file_name) {
+    //     //     baseName += "picture" + this.picture_file_name.split(".")[0];
+    //     // }
+    //     return baseName;
+    // }
 }

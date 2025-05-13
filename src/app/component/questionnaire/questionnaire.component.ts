@@ -88,7 +88,7 @@ export class QuestionnaireComponent implements OnInit {
         };
 
         this.dataStorageService.saveData(
-            `${this.currentTask?.taskNumber}_questionnaire_task${this.currentTask?.id}.json`,
+            `questionnaire_task_${this.currentTask?.id}.json`,
             new Blob([JSON.stringify(questionnaireData, null, 2)], { type: "application/json" }),
         );
     }

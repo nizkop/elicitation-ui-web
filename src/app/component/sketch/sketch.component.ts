@@ -110,7 +110,7 @@ export class SketchComponent implements OnInit {
             const fromSheet = this.currentSheet;
             const toSheet = sheet;
             const transitionCount = this.transitionCounter[this.currentSheet];
-            const fileName = `Task_${this.currentTask.taskNumber}_${fromSheet}_to_${toSheet}_Change_${transitionCount}`;
+            const fileName = `Task_${this.currentTask.id}_${fromSheet}_to_${toSheet}_Change_${transitionCount}`;
             
             // Take and save the screenshot of current sheet before changing
             await this.saveSheetScreenshot(this.currentSheet, fileName);
@@ -404,10 +404,10 @@ private formatTimestamp(timestamp: number): string {
     private createStandardFileName(prefix: string = 'Task'): string {
         if (!this.currentTask) return `${prefix}_unknown`;
         
-        const taskNumber = this.currentTask.taskNumber ?? 'unknown';
+        const info = this.currentTask.id ?? 'unknown';
         // const stepNumber = this.currentTask.stepNumber ?? 0;
         
-        return `${prefix}_${taskNumber}`;
+        return `${prefix}_${info}`;
     }
 
 
@@ -432,6 +432,8 @@ private formatTimestamp(timestamp: number): string {
         // Prepare task details WITHOUT including the fileName in the JSON content
         const taskDetails = {
           taskId: this.currentTask.id,
+          // picture: this.currentTask.picture_file_name,
+          // taskNumber: this.currentTask.taskNumber,
           userId: new Date().toISOString(),
           screenId: `${this.currentTask.taskNumber}_screen_${this.currentTask.id}`,
           currentSheet: this.currentSheet,
@@ -947,11 +949,11 @@ async saveAllSheetScreenshots(baseFileName: string) {
         // Check if there are drawings to reset (avoid taking screenshots if nothing to reset)
         if (currentDrawings.length > 0 && this.currentTask) {
             // Generate a descriptive filename for the screenshot that includes the task number
-            const taskNumber = this.currentTask.get_information() || "unknown";
-            const fileName = `Task_${taskNumber}_Reset_Current_Sheet_${this.currentSheet}`;
+            const info = this.currentTask.id || "unknown";
+            const fileName = `Task_${info}_Reset_Current_Sheet_${this.currentSheet}`;
             
             // Take a screenshot of the current sheet before resetting
-            console.log(`Taking screenshot before resetting ${this.currentSheet} for task ${taskNumber}`);
+            console.log(`Taking screenshot before resetting ${this.currentSheet} for task ${info}`);
             await this.saveSheetScreenshot(this.currentSheet, fileName);
             
             // Update previous drawings state to empty since we're about to clear them
@@ -988,10 +990,7 @@ async saveAllSheetScreenshots(baseFileName: string) {
             
             // Define the sheets we need to reset
             const sheets = ['sheet1', 'sheet2'];
-            
-            // Get the task number for the filename
-            const taskNumber = this.currentTask ? this.currentTask.get_information() || "unknown" : "unknown";
-            
+
             // First, take screenshots of all sheets that have drawings before resetting
             for (const sheet of sheets) {
                 // Check if the sheet has any drawings
@@ -1002,10 +1001,10 @@ async saveAllSheetScreenshots(baseFileName: string) {
                     await this.changeBackground(sheet);
                     
                     // Generate filename for the screenshot with task number
-                    const fileName = `Task_${taskNumber}_Reset_All_Sheets_${sheet}`;
+                    const fileName = `Task_${this.currentTask?.id}_Reset_All_Sheets_${sheet}`;
                     
                     // Take screenshot of this sheet
-                    console.log(`Taking screenshot before resetting ${sheet} for task ${taskNumber}`);
+                    console.log(`Taking screenshot before resetting ${sheet} for task ${this.currentTask?.id}`);
                     await this.saveSheetScreenshot(sheet, fileName);
                     
                     // Save current drawings as previous state
@@ -1031,7 +1030,7 @@ async saveAllSheetScreenshots(baseFileName: string) {
             // Redraw the canvas (which will now be clear for the current sheet)
             this.drawOnCanvas();
             
-            console.log(`All sheets have been reset successfully for task ${taskNumber}.`);
+            console.log(`All sheets have been reset successfully for task ${this.currentTask?.id}.`);
         } finally {
             // Reset the flag when done, even if there was an error
             this.isSkipTransitionScreenshot = false;

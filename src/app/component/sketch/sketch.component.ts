@@ -604,6 +604,7 @@ private formatTimestamp(timestamp: number): string {
                             alert(`+100 -> startX: ${startX}, startY: ${startY}`);
                             // Tablet: 539.194..., 74.771... = nach o
                             // +10 = nach s
+                            tempContext.moveTo(startX, startY);
 
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {

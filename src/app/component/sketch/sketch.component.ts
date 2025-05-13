@@ -599,9 +599,9 @@ private formatTimestamp(timestamp: number): string {
                             tempContext.beginPath();
                             
                             // Transform the first point
-                            const startX: number = line[0].x *1;//* scaleX;// TODO : const startX: number = line[0].x //* scaleX;
-                            const startY: number = line[0].y *1;//* scaleY;// TODO : const startY: number = line[0].y //* scaleY;
-                            console.log(startX, startY);
+                            const startX: number = line[0].x * scaleX;// TODO : const startX: number = line[0].x //* scaleX;
+                            const startY: number = line[0].y * scaleY;// TODO : const startY: number = line[0].y //* scaleY;
+                            alert(`startX: ${startX}, startY: ${startY}`);
                             
                             tempContext.moveTo(startX, startY);
                             

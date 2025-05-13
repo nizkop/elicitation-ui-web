@@ -597,8 +597,10 @@ private formatTimestamp(timestamp: number): string {
                     for (const line of sheetDrawings) {
                         if (line.length > 1) {
                             tempContext.beginPath();
-                            const offset_x_for_tablet = 1.15;
-                            const offset_y_for_tablet = 0.75;
+                            const offset_x_for_tablet = 0.75;
+                            // 1.15 zu weit rechts
+                            const offset_y_for_tablet = 0.5;
+                            // 0.75 zu schmal & zu hoch
 
                             // Transform the first point
                             const startX: number = line[0].x * scaleX*offset_x_for_tablet;// TODO : const startX: number = line[0].x //* scaleX;

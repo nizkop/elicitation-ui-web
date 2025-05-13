@@ -597,25 +597,25 @@ private formatTimestamp(timestamp: number): string {
                     for (const line of sheetDrawings) {
                         if (line.length > 1) {
                             tempContext.beginPath();
-                            
+
                             // Transform the first point
                             const startX: number = line[0].x * scaleX;// TODO : const startX: number = line[0].x //* scaleX;
-                            const startY: number = line[0].y * scaleY;// TODO : const startY: number = line[0].y //* scaleY;
+                            const startY: number = line[0].y * scaleY+10;// TODO : const startY: number = line[0].y //* scaleY;
                             alert(`startX: ${startX}, startY: ${startY}`);
-                            
-                            tempContext.moveTo(startX, startY);
-                            
+
+
+                            // 539.194..., 74.771...
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {
                                 const pointX: number = line[i].x * scaleX;
                                 const pointY: number = line[i].y * scaleY;
                                 tempContext.lineTo(pointX, pointY);
                             }
-                            
+
                             tempContext.stroke();
                         }
                     }
-    
+
                     // Convert to Blob and save as PNG
                     tempCanvas.toBlob((blob) => {
                         if (blob) {

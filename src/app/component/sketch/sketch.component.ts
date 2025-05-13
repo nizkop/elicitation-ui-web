@@ -600,11 +600,11 @@ private formatTimestamp(timestamp: number): string {
 
                             // Transform the first point
                             const startX: number = line[0].x * scaleX;// TODO : const startX: number = line[0].x //* scaleX;
-                            const startY: number = line[0].y * scaleY+10;// TODO : const startY: number = line[0].y //* scaleY;
-                            alert(`startX: ${startX}, startY: ${startY}`);
+                            const startY: number = line[0].y * scaleY+100;// TODO : const startY: number = line[0].y //* scaleY;
+                            alert(`+100 -> startX: ${startX}, startY: ${startY}`);
+                            // Tablet: 539.194..., 74.771... = nach o
+                            // +10 = nach s
 
-
-                            // 539.194..., 74.771...
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {
                                 const pointX: number = line[i].x * scaleX;

@@ -597,7 +597,7 @@ private formatTimestamp(timestamp: number): string {
                     for (const line of sheetDrawings) {
                         if (line.length > 1) {
                             tempContext.beginPath();
-                            const offset_x_for_tablet = 1.095;
+                            const offset_x_for_tablet = 1.094;
                             // 1.15 zu weit rechts#
                             // 0.75 zu weit links
                             // 1 zu links
@@ -607,7 +607,7 @@ private formatTimestamp(timestamp: number): string {
                             // 1.07 zu weit links!
                             // 1.079 zu weit links!
                             // 1.09 zu weit links
-                            const offset_y_for_tablet = 1.095;
+                            const offset_y_for_tablet = 1.094;
                             // 0.75 zu schmal & zu hoch
                             // 0.5 zu hoch
                             // 1.5 zu tief

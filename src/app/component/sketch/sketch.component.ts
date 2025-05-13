@@ -304,8 +304,6 @@ private formatTimestamp(timestamp: number): string {
             this.canvas.width = displayedWidth;
             this.canvas.height = displayedHeight;
 
-            this.sheetDrawDimensions[this.currentSheet] = { width: displayedWidth, height: displayedHeight };
-            
             this.context.strokeStyle = "blue";
             this.context.lineWidth = 2;
             
@@ -349,10 +347,7 @@ private formatTimestamp(timestamp: number): string {
             this.drawOnCanvas();
         }
     }
-    private sheetDrawDimensions: { [key: string]: { width: number, height: number } } = {
-        sheet1: { width: 1440, height: 415 }, // als Initialwert, wird gleich überschrieben
-        sheet2: { width: 1440, height: 415 }
-    };
+
     drawOnCanvas() {
         if (this.context) {
             this.context.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
@@ -564,14 +559,18 @@ private formatTimestamp(timestamp: number): string {
                 try {
                     // Draw the background image to fill the canvas exactly
                     tempContext.drawImage(image, 0, 0, tempCanvas.width, tempCanvas.height);
-                    
+
                     // Use the original dimensions for scaling calculations, not the current canvas dimensions
-                    const drawDims = this.sheetDrawDimensions[sheetName] || { width: targetWidth, height: targetHeight };
-                    const scaleX = targetWidth / drawDims.width;
-                    const scaleY = targetHeight / drawDims.height;
+                    const originalWidth = originalDimensions.width;
+                    const originalHeight = originalDimensions.height;
+
+                    // Calculate scaling based on original dimensions
+                    const scaleX = targetWidth / originalWidth;
+                    const scaleY = targetHeight / originalHeight;
+
                     
                     console.log(`Using fixed scaling for ${sheetName}: X=${scaleX.toFixed(3)}, Y=${scaleY.toFixed(3)}`);
-                    // console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);
+                    console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);
                     console.log(`Target dimensions: ${targetWidth}x${targetHeight}`);
                     
                     // Draw the lines with proper scaling
@@ -586,24 +585,40 @@ private formatTimestamp(timestamp: number): string {
                     for (const line of sheetDrawings) {
                         if (line.length > 1) {
                             tempContext.beginPath();
-                            
+                            const offset_x_for_tablet = 1.094;
+                            // 1.15 zu weit rechts#
+                            // 0.75 zu weit links
+                            // 1 zu links
+                            // 1.05 zu links
+                            // 1.1 etwas zu weit rechts
+                            // 1.08 zu weit rechts
+                            // 1.07 zu weit links!
+                            // 1.079 zu weit links!
+                            // 1.09 zu weit links
+                            // 1.095 tacken zu weit rechts
+                            const offset_y_for_tablet = 1.094;
+                            // 0.75 zu schmal & zu hoch
+                            // 0.5 zu hoch
+                            // 1.5 zu tief
+                            // 1 etw. zu hoch?
+
                             // Transform the first point
-                            const startX: number = line[0].x * scaleX;
-                            const startY: number = line[0].y * scaleY;// Faktoren 0.65, 0.8 zu weit links, 1 zu weit rechts
-                            
+                            const startX: number = line[0].x * scaleX*offset_x_for_tablet;
+                            const startY: number = line[0].y * scaleY*offset_y_for_tablet;
+
                             tempContext.moveTo(startX, startY);
-                            
+
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {
-                                const pointX: number = line[i].x //* scaleX;
-                                const pointY: number = line[i].y //* scaleY;
+                                const pointX: number = line[i].x * scaleX*offset_x_for_tablet;
+                                const pointY: number = line[i].y * scaleY*offset_y_for_tablet;
                                 tempContext.lineTo(pointX, pointY);
                             }
-                            
+
                             tempContext.stroke();
                         }
                     }
-    
+
                     // Convert to Blob and save as PNG
                     tempCanvas.toBlob((blob) => {
                         if (blob) {

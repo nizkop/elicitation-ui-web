@@ -1,0 +1,205 @@
+    onImageLoad() {
+        this.canvas = this.drawingCanvas.nativeElement;
+        this.context = this.canvas!.getContext("2d");
+
+        if (this.context && this.canvas && this.backgroundImage) {
+            // Get the displayed dimensions from the DOM element
+            const displayedWidth = this.backgroundImage.nativeElement.clientWidth;
+            const displayedHeight = this.backgroundImage.nativeElement.clientHeight;
+
+            // Set the canvas dimensions to match the displayed dimensions
+            this.canvas.width = displayedWidth;
+            this.canvas.height = displayedHeight;
+
+            this.context.strokeStyle = "blue";
+            this.context.lineWidth = 2;
+
+            this.drawOnCanvas(); // Redraw the saved sketch for the current sheet
+        }
+
+
+
+    private async processScreenshotQueue(): Promise<void> {
+        // If already processing or queue is empty, return
+        if (this.screenshotInProgress || this.screenshotQueue.length === 0) {
+            return;
+        }
+
+        // Set flag to indicate processing
+        this.screenshotInProgress = true;
+
+        // Get the next item from the queue
+        const nextItem = this.screenshotQueue.shift();
+
+        if (!nextItem) {
+            this.screenshotInProgress = false;
+            return;
+        }
+
+        // Destructure the item properties
+        const sheetName = nextItem.sheetName;
+        const fileName = nextItem.fileName;
+        const timestamp = nextItem.timestamp;
+        const resolve = nextItem.resolve;
+        const reject = nextItem.reject;
+
+        try {
+            if (!this.canvas || !this.context) {
+                console.error('Canvas or context not available');
+                reject(new Error('Canvas not initialized'));
+                this.screenshotInProgress = false;
+                this.processScreenshotQueue(); // Process next item
+                return;
+            }
+
+            // Format the timestamp in a readable way
+            const formattedTimestamp = this.formatTimestamp(timestamp);
+
+            // Log the request we're about to process
+            console.log(`Processing screenshot request for ${sheetName} with filename ${fileName} (Time: ${formattedTimestamp})`);
+
+            // Clean the filename
+            const baseFileName: string = fileName.replace(/_sheet\d+$/, '');
+            const sheetNumber: string = sheetName.replace('sheet', '');
+
+            // Use the formatted timestamp in the filename
+            // Format: T20240325_142530_123_Task_1_sheet1.png
+            const cleanFileName: string = `T${formattedTimestamp}_${baseFileName}_sheet${sheetNumber}.png`;
+
+            console.log(`Generating screenshot with timestamp ${formattedTimestamp} for ${sheetName}, saving as: ${cleanFileName}`);
+
+            // Create a temporary canvas for capturing the screenshot
+            const tempCanvas: HTMLCanvasElement = document.createElement("canvas");
+            const tempContext: CanvasRenderingContext2D | null = tempCanvas.getContext("2d");
+            if (!tempContext) {
+                console.error('Could not create temporary canvas context');
+                reject(new Error('Temporary canvas context creation failed'));
+                this.screenshotInProgress = false;
+                this.processScreenshotQueue(); // Process next item
+                return;
+            }
+
+            // Set fixed dimensions for the output screenshot based on the original dimensions for this sheet
+            const originalDimensions = this.sheetOriginalDimensions[sheetName];
+            const targetWidth = originalDimensions.width;
+            const targetHeight = originalDimensions.height;
+            console.log("vorher:", tempCanvas.width, tempCanvas.height);
+            tempCanvas.width = targetWidth;
+            tempCanvas.height = targetHeight;
+
+            // Determine the correct background image based on sheet name
+            const backgroundImageUrl: string = sheetName === "sheet1"
+                ? this.backgroundImageUrl
+                : this.backgroundImageUrlSheet2;
+
+            const image: HTMLImageElement = new Image();
+            image.crossOrigin = "anonymous";
+            image.src = backgroundImageUrl;
+
+            image.onload = () => {
+                try {
+                    // Draw the background image to fill the canvas exactly
+                    tempContext.drawImage(image, 0, 0, tempCanvas.width, tempCanvas.height);
+
+                    // Use the original dimensions for scaling calculations, not the current canvas dimensions
+                    const originalWidth = originalDimensions.width;
+                    const originalHeight = originalDimensions.height;
+
+                    // Calculate scaling based on original dimensions
+                    const scaleX = targetWidth / originalWidth;
+                    const scaleY = targetHeight / originalHeight;
+
+                    console.log(`Using fixed scaling for ${sheetName}: X=${scaleX.toFixed(3)}, Y=${scaleY.toFixed(3)}`);
+                    console.log(`Original dimensions: ${originalWidth}x${originalHeight}`);
+                    console.log(`Target dimensions: ${targetWidth}x${targetHeight}`);
+
+                    // Draw the lines with proper scaling
+                    tempContext.strokeStyle = "blue";
+                    tempContext.lineWidth = 2;
+
+                    // Get the drawings for the current sheet
+                    const sheetDrawings = this.sheetDrawings[sheetName] || [];
+                    console.log(`Drawing ${sheetDrawings.length} lines for ${sheetName}`);
+
+                    // Apply our transformation to each drawing point
+                    for (const line of sheetDrawings) {
+                        if (line.length > 1) {
+                            tempContext.beginPath();
+
+                            // Transform the first point
+                            const startX: number = line[0].x * scaleX;
+                            const startY: number = line[0].y * scaleY;
+
+                            tempContext.moveTo(startX, startY);
+
+                            // Transform all subsequent points
+                            for (let i = 1; i < line.length; i++) {
+                                const pointX: number = line[i].x * scaleX;
+                                const pointY: number = line[i].y * scaleY;
+                                tempContext.lineTo(pointX, pointY);
+                            }
+
+                            tempContext.stroke();
+                        }
+                    }
+
+                    // Convert to Blob and save as PNG
+                    tempCanvas.toBlob((blob) => {
+                        if (blob) {
+                            this.dataStorageService.saveData(cleanFileName, blob);
+                            console.log(`Screenshot with timestamp ${formattedTimestamp} saved successfully: ${cleanFileName}`);
+
+                            // Resolve the promise for this screenshot
+                            resolve();
+
+                            // Clean up
+                            tempCanvas.remove();
+
+                            // Clear the flag and process the next item
+                            this.screenshotInProgress = false;
+                            this.processScreenshotQueue();
+                        } else {
+                            console.error('Failed to create blob for screenshot');
+                            reject(new Error('Blob creation failed'));
+
+                            // Clean up
+                            tempCanvas.remove();
+
+                            // Clear the flag and process the next item
+                            this.screenshotInProgress = false;
+                            this.processScreenshotQueue();
+                        }
+                    }, 'image/png');
+                } catch (error) {
+                    console.error('Error in screenshot generation:', error);
+                    reject(error);
+
+                    // Clean up
+                    tempCanvas.remove();
+
+                    // Clear the flag and process the next item
+                    this.screenshotInProgress = false;
+                    this.processScreenshotQueue();
+                }
+            };
+
+            image.onerror = () => {
+                console.error(`Failed to load background image for ${sheetName}:`, backgroundImageUrl);
+                reject(new Error('Image loading failed'));
+
+                // Clean up
+                tempCanvas.remove();
+
+                // Clear the flag and process the next item
+                this.screenshotInProgress = false;
+                this.processScreenshotQueue();
+            };
+        } catch (error) {
+            console.error('Unexpected error in processScreenshotQueue:', error);
+            reject(error);
+
+            // Clear the flag and process the next item
+            this.screenshotInProgress = false;
+            this.processScreenshotQueue();
+        }
+    }

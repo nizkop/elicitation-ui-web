@@ -603,7 +603,7 @@ private formatTimestamp(timestamp: number): string {
                             // Transform the first point
                             const startX: number = line[0].x * scaleX*offset_x_for_tablet;// TODO : const startX: number = line[0].x //* scaleX;
                             const startY: number = line[0].y * scaleY*offset_y_for_tablet;// TODO : const startY: number = line[0].y //* scaleY;
-                            alert(`+100 (x) -> startX: ${startX}, startY: ${startY}`);
+                            alert(`*1.15 (x) -> startX: ${startX}, *0.75 (y) startY: ${startY}`);
                             // Tablet: 539.194..., 74.771... = nach o
                             // +10 = nach s
                             // + 100 (y) -> 170 = nach o

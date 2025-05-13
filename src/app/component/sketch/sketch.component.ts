@@ -597,22 +597,23 @@ private formatTimestamp(timestamp: number): string {
                     for (const line of sheetDrawings) {
                         if (line.length > 1) {
                             tempContext.beginPath();
-                            const offset_x_for_tablet = 50;
-                            const offset_y_for_tablet = 5;
+                            const offset_x_for_tablet = 1.15;
+                            const offset_y_for_tablet = 0.75;
 
                             // Transform the first point
-                            const startX: number = line[0].x * scaleX+offset_x_for_tablet;// TODO : const startX: number = line[0].x //* scaleX;
-                            const startY: number = line[0].y * scaleY+offset_y_for_tablet;// TODO : const startY: number = line[0].y //* scaleY;
+                            const startX: number = line[0].x * scaleX*offset_x_for_tablet;// TODO : const startX: number = line[0].x //* scaleX;
+                            const startY: number = line[0].y * scaleY*offset_y_for_tablet;// TODO : const startY: number = line[0].y //* scaleY;
                             alert(`+100 (x) -> startX: ${startX}, startY: ${startY}`);
                             // Tablet: 539.194..., 74.771... = nach o
                             // +10 = nach s
                             // + 100 (y) -> 170 = nach o
+                            // + 50 x = 468, +5 y = 100 --> Faktor
                             tempContext.moveTo(startX, startY);
 
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {
-                                const pointX: number = line[i].x * scaleX+offset_x_for_tablet;
-                                const pointY: number = line[i].y * scaleY+offset_y_for_tablet;
+                                const pointX: number = line[i].x * scaleX*offset_x_for_tablet;
+                                const pointY: number = line[i].y * scaleY*offset_y_for_tablet;
                                 tempContext.lineTo(pointX, pointY);
                             }
 

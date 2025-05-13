@@ -25,7 +25,7 @@ export class RecordingService {
             });
         } catch (error) {
             this.screenStream = null;
-            alert("screenrecording failed: "+ error);
+            alert("Set-Up without ScreenRecording: "+ error);
         }
         try{
             this.audioStream = await navigator.mediaDevices.getUserMedia({

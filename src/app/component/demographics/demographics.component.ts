@@ -39,7 +39,6 @@ export class DemographicsComponent implements OnInit {
 
     //TODO: Refactor
     checkFormCompletion(): boolean {
-        return true; // TODO remove line before merge into v2!!!
         if (this.gender === "" || this.age === "" || this.leftHandedOrRightHanded === "" || this.nativeLanguage == "") {
             return false;
         }

@@ -597,11 +597,13 @@ private formatTimestamp(timestamp: number): string {
                     for (const line of sheetDrawings) {
                         if (line.length > 1) {
                             tempContext.beginPath();
+                            const offset_x_for_tablet = 50;
+                            const offset_y_for_tablet = 0;
 
                             // Transform the first point
-                            const startX: number = line[0].x * scaleX;// TODO : const startX: number = line[0].x //* scaleX;
-                            const startY: number = line[0].y * scaleY+100;// TODO : const startY: number = line[0].y //* scaleY;
-                            alert(`+100 -> startX: ${startX}, startY: ${startY}`);
+                            const startX: number = line[0].x * scaleX+offset_x_for_tablet;// TODO : const startX: number = line[0].x //* scaleX;
+                            const startY: number = line[0].y * scaleY+offset_y_for_tablet;// TODO : const startY: number = line[0].y //* scaleY;
+                            alert(`+100 (x) -> startX: ${startX}, startY: ${startY}`);
                             // Tablet: 539.194..., 74.771... = nach o
                             // +10 = nach s
                             // + 100 (y) -> 170 = nach o
@@ -609,8 +611,8 @@ private formatTimestamp(timestamp: number): string {
 
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {
-                                const pointX: number = line[i].x * scaleX;
-                                const pointY: number = line[i].y * scaleY+100;
+                                const pointX: number = line[i].x * scaleX+offset_x_for_tablet;
+                                const pointY: number = line[i].y * scaleY+offset_y_for_tablet;
                                 tempContext.lineTo(pointX, pointY);
                             }
 

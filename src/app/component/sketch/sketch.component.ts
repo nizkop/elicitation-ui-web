@@ -604,12 +604,13 @@ private formatTimestamp(timestamp: number): string {
                             alert(`+100 -> startX: ${startX}, startY: ${startY}`);
                             // Tablet: 539.194..., 74.771... = nach o
                             // +10 = nach s
+                            // + 100 (y) -> 170 = nach o
                             tempContext.moveTo(startX, startY);
 
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {
                                 const pointX: number = line[i].x * scaleX;
-                                const pointY: number = line[i].y * scaleY;
+                                const pointY: number = line[i].y * scaleY+100;
                                 tempContext.lineTo(pointX, pointY);
                             }
 

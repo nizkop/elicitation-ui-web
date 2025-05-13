@@ -67,8 +67,8 @@ export class SketchComponent implements OnInit {
 
 
     private sheetOriginalDimensions: { [key: string]: { width: number, height: number } } = {
-        'sheet1': { width: 1440 , height: 460 },
-        'sheet2': { width: 1440 , height: 460 }
+        'sheet1': { width: 1440 , height: 415 },
+        'sheet2': { width: 1440 , height: 415 }
       };
       
 

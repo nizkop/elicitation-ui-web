@@ -182,29 +182,31 @@ export class TaskComponent implements OnInit {
         console.log("Saving task data and screenshots");
         
         if (this.currentTask && this.sketchComponent) {
-            try {
-                // First handle recording service screenshot if available
-                if (this.recordingService && !this.recordingService.recordingNotSupported()) {
-                    const streamScreenshotName = `Task_${this.currentTask.id}_sheet${this.currentTask.currentSheet}.png`;
-                    await this.recordingService.takeScreenshot(
-                        streamScreenshotName,
-                        this.recordingService.getScreenStream()!
-                    );
-                    console.log(`Recording service screenshot saved: ${streamScreenshotName}`);
+                try {
+                    // First handle recording service screenshot if available
+                    try {
+                        if (this.recordingService && !this.recordingService.recordingNotSupported()) {
+                            const streamScreenshotName = `Task_${this.currentTask.id}_sheet${this.currentTask.currentSheet}.png`;
+                            await this.recordingService.takeScreenshot(
+                                streamScreenshotName,
+                                this.recordingService.getScreenStream()!
+                            );
+                            console.log(`Recording service screenshot saved: ${streamScreenshotName}`);
+                        }
+                    } catch (error) {
+                        console.log("Recording service error while saving task")
+                    }
+
+                    // This will update timestamps and take screenshots of all sheets
+                    this.sketchComponent.saveTask();
+
+                    console.log("Task data and screenshots saved successfully");
+                } catch (error) {
+                    console.error("Error saving data:", error);
                 }
-                
-                
-                // This will update timestamps and take screenshots of all sheets
-                this.sketchComponent.saveTask();
-                
-                
-                console.log("Task data and screenshots saved successfully");
-            } catch (error) {
-                console.error("Error saving data:", error);
-            }
-            try {
-                // This will update timestamps and take screenshots of all sheets
-                this.sketchComponent.saveTask();
+                try {
+                    // This will update timestamps and take screenshots of all sheets
+                    this.sketchComponent.saveTask();
 
 
                 console.log("Task data and screenshots saved successfully");

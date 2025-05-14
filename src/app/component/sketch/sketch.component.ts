@@ -414,8 +414,13 @@ private formatTimestamp(timestamp: number): string {
         if (!this.currentTask) return;
         
         // Update timestamps and duration
-        this.currentTask.endTimeDrawing = new Date();
-        this.currentTask.timeDrawing = this.currentTask.endTimeDrawing.getTime() - this.currentTask.startTimeDrawing.getTime();
+        if(this.currentTask.startTimeDrawing){
+            this.currentTask.endTimeDrawing = new Date();
+            this.currentTask.timeDrawing = this.currentTask.endTimeDrawing.getTime() - this.currentTask.startTimeDrawing.getTime();
+        }
+        this.currentTask.endTimeWatching = new Date();
+        this.currentTask.timeWatching = this.currentTask!.endTimeWatching.getTime() - this.currentTask!.startTimeWatching.getTime();
+
         
         // Keep track of which sheet is active
         const sheetNumber = parseInt(this.currentSheet.replace('sheet', ''), 10);

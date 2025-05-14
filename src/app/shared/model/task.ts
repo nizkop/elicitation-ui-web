@@ -37,11 +37,4 @@ export class Task {
         //     : `Task ${this.id}`; // TODO control? this.currentTask!.taskNumber.toString()
     }
 
-    // public get_information(){
-    //     let baseName: string = "task_" + this.id ;
-    //     // if (this.picture_file_name) {
-    //     //     baseName += "picture" + this.picture_file_name.split(".")[0];
-    //     // }
-    //     return baseName;
-    // }
 }

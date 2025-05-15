@@ -606,7 +606,9 @@ private formatTimestamp(timestamp: number): string {
                             const startX: number = line[0].x * scaleX*offset_x_for_tablet;
                             const startY: number = line[0].y * scaleY*offset_y_for_tablet;
 
+                            alert("tempContext from " + tempContext.canvas.width + " x " + tempContext.canvas.height);
                             tempContext.moveTo(startX, startY);
+                            alert("moved to: " + tempContext.canvas.width + " x " + tempContext.canvas.height);
 
                             // Transform all subsequent points
                             for (let i = 1; i < line.length; i++) {

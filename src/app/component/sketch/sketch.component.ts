@@ -596,7 +596,7 @@ private formatTimestamp(timestamp: number): string {
                             // 1.079 zu weit links!
                             // 1.09 zu weit links
                             // 1.095 tacken zu weit rechts
-                            const offset_y_for_tablet = 1.094;
+                            const offset_y_for_tablet = 1//;.094;
                             // 0.75 zu schmal & zu hoch
                             // 0.5 zu hoch
                             // 1.5 zu tief

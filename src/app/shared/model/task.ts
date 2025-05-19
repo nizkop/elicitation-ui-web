@@ -18,6 +18,9 @@ export class Task {
     startTimeDrawing!: Date;
     endTimeDrawing!: Date;
     timeDrawing!: number;
+    voice: string = "";
+    startTimeVoice: string = "";
+    endTimeVoice: string = "";
     stepNumber: number = 0;  // Initialize stepNumber to 0
     currentSheet: number = 1;
 

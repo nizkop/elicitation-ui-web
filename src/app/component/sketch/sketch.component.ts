@@ -438,6 +438,16 @@ private formatTimestamp(timestamp: number): string {
           screenId: `${this.currentTask.taskNumber}_screen_${this.currentTask.id}`,
           currentSheet: this.currentSheet,
           taskData: this.currentTask,
+          // empty coding part:
+          codes: {
+            OPERATION: { SIMPLE: null, KNOWLEDGE: null, DETAILS: null },
+            EMPHASIS: null,
+            EXAMPLE: { VERBAL: null, SAMPLE: null },
+            LOCATION: { SELECTION: null, EXL: null, ENTRY: null, POSITION: null, CONNECTEDANNOTATION: null },
+            CONNECTION: null,
+            IMPLICATION: null,
+            GUI: null,
+          },
           ...(additionalData || {}) // Merge any additional data if provided
         };
         

@@ -87,6 +87,12 @@ export class SketchComponent implements OnInit {
         if (this.currentSheet === sheet) {
           console.log(`Already on ${sheet}, no change needed`);
           return;
+        } else {
+            if(sheet == "sheet2"){
+                // Increment the count of switches to the 'after' sheet:
+                alert("switch count"+ sheet)
+                this.currentTask!.switchNumber = (this.currentTask?.switchNumber ?? 0) + 1;
+            }
         }
       
         // First check if we need to take a screenshot of the current sheet before changing
@@ -1056,7 +1062,7 @@ async saveAllSheetScreenshots(baseFileName: string) {
             
             // Restore the original sheet view
             await this.changeBackground(currentSheetBeforeReset);
-            
+
             // Redraw the canvas (which will now be clear for the current sheet)
             this.drawOnCanvas();
             

@@ -21,7 +21,7 @@ export class Task {
     voice: string = "";
     startTimeVoice: string = "";
     endTimeVoice: string = "";
-    stepNumber: number = 0;  // Initialize stepNumber to 0
+    switchNumber: number = 0;
     currentSheet: number = 1;
 
     constructor(id: number, title: string, description: string, group: Group, resets: number, language: Language, picture_file_name:string) {

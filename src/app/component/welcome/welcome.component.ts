@@ -26,6 +26,7 @@ export class WelcomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        alert("Start");
         this.updateTasks();
         this.dataStorageService.clearData();
         this.recordingService.startRecording();

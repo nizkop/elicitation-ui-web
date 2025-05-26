@@ -90,7 +90,7 @@ export class SketchComponent implements OnInit {
         } else {
             if(sheet == "sheet2"){
                 // Increment the count of switches to the 'after' sheet:
-                alert("switch count"+ sheet)
+                // alert("switch count"+ sheet)
                 this.currentTask!.switchNumber = (this.currentTask?.switchNumber ?? 0) + 1;
             }
         }

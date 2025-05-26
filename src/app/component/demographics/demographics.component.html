@@ -139,7 +139,7 @@
 
          <!-- Muttersprache / Native Language -->
         <mat-grid-tile *ngIf="language === Language.GERMAN">
-            <label>Was ist Ihre Muttersprache?</label>
+            <label>Was ist/sind Ihre Muttersprache/Muttersprachen?</label>
             <input
                 type="text"
                 [(ngModel)]="nativeLanguage"
@@ -149,7 +149,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile *ngIf="language === Language.ENGLISH">
-            <label>What is your native language?</label>
+            <label>What is/are your native language/languages?</label>
             <input
                 type="text"
                 [(ngModel)]="nativeLanguage"

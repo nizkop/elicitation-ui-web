@@ -64,6 +64,13 @@ export const english_texts: Record<string, string> = {
     task_previous: "Previous Page",
     task_skip: "Skip Task",
     task_exit: "",
+    task_questionnaire: "Questionnaire",
+    task_questionnaire_question1: "How easy is this scenario?",
+    task_questionnaire_veryEasy: "very easy",
+    task_questionnaire_easy: "easy",
+    task_questionnaire_neutral: "neutral",
+    task_questionnaire_difficult: "difficult",
+    task_questionnaire_veryDifficult: "very difficult",
 
 };
 
@@ -134,6 +141,13 @@ export const german_texts: Record<string, string> = {
     task_previous: "Vorherige Aufgabe",
     task_skip: "Aufgabe überspringen",
     task_exit: "",
+    task_questionnaire: "Zwischenfragebogen",
+    task_questionnaire_question1: "Wie einfach ist dieses Szenario?",
+    task_questionnaire_veryEasy: "sehr einfach",
+    task_questionnaire_easy: "einfach",
+    task_questionnaire_neutral: "neutral",
+    task_questionnaire_difficult: "schwer",
+    task_questionnaire_veryDifficult: "sehr schwer",
 };
 
 export const icelandic_texts: Record<string, string> = {
@@ -175,4 +189,11 @@ export const icelandic_texts: Record<string, string> = {
     task_previous: "",
     task_skip: "",
     task_exit: "",
+    task_questionnaire: "",
+    task_questionnaire_question1: "",
+    task_questionnaire_veryEasy: "",
+    task_questionnaire_easy: "",
+    task_questionnaire_neutral: "",
+    task_questionnaire_difficult: "",
+    task_questionnaire_veryDifficult: "",
 };

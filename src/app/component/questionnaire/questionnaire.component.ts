@@ -5,6 +5,7 @@ import { TaskService } from "../../shared/service/task.service";
 import { Language } from "../../shared/model/language.enum";
 import { DataStorageService } from "../../shared/service/data.storage.service";
 import { MessageService } from "../../shared/service/message.service";
+import {TranslationService} from "../../shared/service/translation.service";
 
 @Component({
     selector: "app-questionnaire",
@@ -14,14 +15,8 @@ import { MessageService } from "../../shared/service/message.service";
 export class QuestionnaireComponent implements OnInit {
     currentTask: Task | undefined;
 
-    question1_GERMAN = "Wie einfach ist dieses Szenario?";
-    question1_ENGLISH = "How easy is this scenario?";
-    // question2_GERMAN = "Wie zufrieden sind Sie mit Ihrem Kommando (Skizze und/oder Spracheingabe)?";
-    // question2_ENGLISH = "How satisfied are you with your command (sketch and/or voice input)?";
 
     formQuestion1 = "";
-    formQuestion2 = "";
-
     startTime: Date | undefined;
 
     protected readonly Language = Language;
@@ -32,6 +27,7 @@ export class QuestionnaireComponent implements OnInit {
         private taskService: TaskService,
         private dataStorageService: DataStorageService,
         private messageService: MessageService,
+        public TranslationService: TranslationService
     ) {}
 
     ngOnInit(): void {
@@ -39,8 +35,10 @@ export class QuestionnaireComponent implements OnInit {
         this.currentTask = this.taskService.loadedTasks?.find((task) => task.taskNumber === taskNumber);
 
         if (this.currentTask) {
+            this.TranslationService.set_language(this.currentTask.language);
             console.log("Current Task: ", this.currentTask.id);
         } else {
+            this.TranslationService.set_language(Language.ENGLISH);
             console.log("Task not found");
         }
 
@@ -77,11 +75,15 @@ export class QuestionnaireComponent implements OnInit {
         }
     }
 
+    translator(key: string): string {
+        return this.TranslationService.translate("task_"+key);
+    }
+
     saveData(): void {
         const questionnaireData = {
             id: this.currentTask?.id,
             picture_file_name: this.currentTask?.picture_file_name,
-            question1: this.currentTask?.language === Language.GERMAN ? this.question1_GERMAN : this.question1_ENGLISH,
+            question1: this.translator("questionnaire_question1"),
             answer1: this.formQuestion1,
             startTime: this.startTime,
             endTime: new Date(),

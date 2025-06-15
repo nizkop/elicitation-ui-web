@@ -11,7 +11,7 @@
 
     <!-- Welcome text -->
     <h1 style="font-size: 2.8rem; color: #003366; margin-bottom: 1rem; margin-top: 5rem;">
-        {{ chosenLanguage === Language.GERMAN ? "Willkommen" : "Welcome" }}
+        {{ translator("WELCOME") }}
     </h1>
 
     <p style="
@@ -21,22 +21,32 @@
         margin: 4rem auto 4rem auto;
         text-align: center;
     "
-    [innerHTML]="chosenLanguage === Language.GERMAN
-        ? 'Vielen Dank für Ihr Interesse.<br><br>Diese Studie erforscht, wie gut man Tabellen-Programme mit Sprache oder über Skizzieren steuern könnte.<br>' +
-         'Klicken Sie unten auf den Button, um mehr zu erfahren.'
-        : 'Thank you for your interest.<br><br>This study explores how well spreadsheet programs can be controlled using speech or sketches.<br>' +
-         'Click the button below to learn more.'">
+    >
+        {{ translator('thankInterest') }}<br><br>
+        {{ translator('studyBasics') }}<br>
+        {{ translator('furtherInformationButton') }}
     </p>
 
 
-    <button mat-raised-button color="primary" (click)="clickChangeLanguage()">
-                    {{ chosenLanguage === Language.GERMAN ? "Nach Englisch wechseln" : "Switch to German" }}
-                </button>
-    <span style="display: inline-block; width: 5rem;"></span>
-    <!-- go to consent form -->
-    <button mat-raised-button color="primary" (click)="showIntroPage = false">
-        {{ chosenLanguage === Language.GERMAN ? "Weiter zur Einwilligungserklärung" : "Continue to Consent Form" }}
-    </button>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+    <!--    <button mat-raised-button color="primary" (click)="clickChangeLanguage()">-->
+    <!--                    {{ chosenLanguage === Language.GERMAN ? "Nach Englisch wechseln" : "Switch to German" }}-->
+    <!--                </button>-->
+      <button
+        *ngFor="let language of TranslationService.getOtherLanguages"
+        mat-raised-button
+        color="primary"
+        (click)="clickChangeLanguageNew(language)"
+      >
+        {{ translator(language) }}
+      </button>
+        <span style="display: inline-block; width: 5rem;"></span>
+        <!-- go to consent form -->
+        <button mat-raised-button color="primary" (click)="showIntroPage = false">
+            {{ translator("goOn") }}
+        </button>
+    </div>
 </div>
 
 <!-- Consent form -->

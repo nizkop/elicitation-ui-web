@@ -39,7 +39,7 @@ export class WelcomeComponent implements OnInit {
 
     translator(key: string): string {
         console.log("translator functio accessed")
-        return this.TranslationService.translate(key);
+        return this.TranslationService.translate("welcome_"+key);
     }
 
     clickChangeLanguageNew(new_language:string){

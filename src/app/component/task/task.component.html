@@ -62,22 +62,22 @@
             ">
     <button mat-raised-button color="primary" (click)="clickPreviousPage()">
         <mat-icon>arrow_back</mat-icon>
-        {{ currentTask?.language === Language.GERMAN ? "Vorherige Aufgabe" : "Previous Page" }}
+        {{ translator("previous") }}
     </button>
 
     <button mat-raised-button color="primary" (click)="clickResetAllSheets()">
         <mat-icon>refresh</mat-icon>
-        {{ currentTask?.language === Language.GERMAN ? "Zurücksetzen" : "Reset" }}
+        {{ translator("reset") }}
     </button>
 
     <button mat-raised-button color="primary" (click)="clickNextPage()">
         <mat-icon>arrow_forward</mat-icon>
-        {{ currentTask?.language === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
+        {{ translator("next") }}
     </button>
 
     <button mat-raised-button color="warn" (click)="clickSkipTask()">
         <mat-icon>skip_next</mat-icon>
-        {{ currentTask?.language === Language.GERMAN ? "Aufgabe überspringen" : "Skip Task" }}
+        {{ translator("skip") }}
     </button>
 
     <button mat-fab color="warn" aria-label="Exit Study" (click)="clickExitStudy()">

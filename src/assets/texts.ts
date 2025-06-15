@@ -59,6 +59,12 @@ export const english_texts: Record<string, string> = {
     welcome_contactQuestions: "If you have any questions about the experiment or your participation, please feel free to ask the researchers at\n" +
         "            any time before, during or after the experiment.",
 
+    task_next: "Next Page",
+    task_reset: "Reset",
+    task_previous: "Previous Page",
+    task_skip: "Skip Task",
+    task_exit: "",
+
 };
 
 export const german_texts: Record<string, string> = {
@@ -122,6 +128,12 @@ export const german_texts: Record<string, string> = {
     welcome_contactFunding: "Diese Studie wird vom Isländischen Forschungsfond unterstützt (Zuschuss Nr. 2410725).",
     welcome_contactQuestions: "Wenn Sie Fragen zum Experiment oder zu Ihrer Teilnahme haben, können Sie sich jederzeit vor,\n" +
         "                während und nach dem Experiment an die Forscher wenden.",
+
+    task_next: "Nächste Seite",
+    task_reset: "Zurücksetzen",
+    task_previous: "Vorherige Aufgabe",
+    task_skip: "Aufgabe überspringen",
+    task_exit: "",
 };
 
 export const icelandic_texts: Record<string, string> = {
@@ -157,4 +169,10 @@ export const icelandic_texts: Record<string, string> = {
     welcome_contact3: "og Marvin Bachert, doktorsnemi hjá University Duisburg-Essen, Þýskalandi (marvin.bachert@uni-due.de).",
     welcome_contactFunding: "Þessi rannsókn er studd af Rannsóknarmiðstöð Íslands (styrkur nr. 2410725).",
     welcome_contactQuestions: "Ef þú hefur einhverjar spurningar um rannsóknina eða þátttöku þína, vinsamlegast ekki hika við að spyrja rannsakandann hvenær sem er.",
+
+    task_next: "",
+    task_reset: "",
+    task_previous: "",
+    task_skip: "",
+    task_exit: "",
 };

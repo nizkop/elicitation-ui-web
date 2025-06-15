@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { TaskService } from "../../shared/service/task.service";
-import { Task } from "../../shared/model/task";
-import { Language } from "../../shared/model/language.enum";
-import { ActivatedRoute, Router } from "@angular/router";
-import { SketchComponent } from "../sketch/sketch.component";
-import { Group } from "../../shared/model/group.enum";
-import { MessageService } from "../../shared/service/message.service";
-import { RecordingService } from "../../shared/service/recording.service";
-import { DataStorageService } from "../../shared/service/data.storage.service";
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {TaskService} from "../../shared/service/task.service";
+import {Task} from "../../shared/model/task";
+import {Language} from "../../shared/model/language.enum";
+import {ActivatedRoute, Router} from "@angular/router";
+import {SketchComponent} from "../sketch/sketch.component";
+import {Group} from "../../shared/model/group.enum";
+import {MessageService} from "../../shared/service/message.service";
+import {RecordingService} from "../../shared/service/recording.service";
+import {DataStorageService} from "../../shared/service/data.storage.service";
 import {tasks_definition} from "../../shared/service/tasks_definiton";
-
+import {TranslationService} from "../../shared/service/translation.service";
 
 @Component({
     selector: "app-task",
@@ -31,7 +31,8 @@ export class TaskComponent implements OnInit {
         private router: Router,
         private messageService: MessageService,
         private recordingService: RecordingService,
-        private dataStorageService: DataStorageService
+        private dataStorageService: DataStorageService,
+        public TranslationService: TranslationService
         
     ) {}
 
@@ -44,10 +45,16 @@ export class TaskComponent implements OnInit {
 
             if (this.currentTask) {
                 console.log(`Loaded task ${taskNumber}`, this.currentTask);
+                this.TranslationService.set_language(this.currentTask.language);
             } else {
+                this.TranslationService.set_language(Language.ENGLISH);
                 this.messageService.taskNotFound();
             }
         });
+    }
+
+    translator(key: string): string {
+        return this.TranslationService.translate("task_"+key);
     }
 
     async clickPreviousPage() {

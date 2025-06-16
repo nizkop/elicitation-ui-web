@@ -12,7 +12,6 @@ export class TranslationService {
 
     constructor(
     ) {
-        console.log("construct TranslationService")
          this.translations = english_texts;
     }
 
@@ -31,7 +30,6 @@ export class TranslationService {
             this.translations = english_texts
             }
         }
-        console.log('Translations set:', this.translations);
     }
 
     get availableLanguages(): string[] {
@@ -50,8 +48,6 @@ export class TranslationService {
     }
 
     translate(key: string): string {
-        console.log("TRANSLATE", this.translations);
-
         const value = this.translations[key];
         if (value === undefined) {
             console.log(`[Translation misssing] Key: "${key}" in language: ${this.chosenLanguage}`);

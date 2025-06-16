@@ -5,8 +5,7 @@
             <img src="./assets/ui_logo.png" style="max-width: 75px; margin-top: 5px;" />
         </mat-grid-tile>
         <mat-grid-tile>
-            <h2 *ngIf="language === Language.GERMAN">Demographiefragebogen</h2>
-            <h2 *ngIf="language === Language.ENGLISH">Demographic questionnaire</h2>
+            <h2>{{translator("header")}}</h2>
         </mat-grid-tile>
         <mat-grid-tile>
             <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
@@ -14,18 +13,16 @@
             </button>
         </mat-grid-tile>
         <mat-grid-tile>
-            <button mat-raised-button color="warn" (click)="clickSkipTask()">
-                {{ language === Language.GERMAN ? "Aufgabe überspringen" : "Skip Task" }}
-            </button></mat-grid-tile
+            </mat-grid-tile
         >
         <mat-grid-tile>
             <button mat-raised-button color="primary" (click)="clickPreviousPage()">
-                {{ language === Language.GERMAN ? "Vorherige Seite" : "Previous Page" }}
+                {{ translator("previous") }}
             </button>
         </mat-grid-tile>
         <mat-grid-tile>
             <button mat-raised-button color="primary" (click)="clickNextPage()">
-                {{ language === Language.GERMAN ? "Nächste Seite" : "Next Page" }}
+                {{ translator("next") }}
             </button>
         </mat-grid-tile>
     </mat-grid-list>
@@ -34,91 +31,41 @@
 <div style="background-color: aliceblue">
     <form>
         <mat-grid-list cols="1" rowHeight="20:1">
-            <!-- Geschlecht -->
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <label>Geschlecht:</label>
-                <input type="radio" [(ngModel)]="gender" name="gender" value="weiblich" id="weiblich" />
-                <label for="weiblich">weiblich</label>
-                <input type="radio" [(ngModel)]="gender" name="gender" value="männlich" id="männlich" />
-                <label for="männlich">männlich</label>
-                <input type="radio" [(ngModel)]="gender" name="gender" value="non-binär" id="non-binär" />
-                <label for="non-binär">non-binär</label>
-                <input type="radio" [(ngModel)]="gender" name="gender" value="Keine Angabe" id="Keine Angabe" />
-                <label for="Keine Angabe">Keine Angabe</label>
-            </mat-grid-tile>
             <!-- Gender -->
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
-                <label>Gender:</label>
+            <mat-grid-tile>
+                <label>{{translator("gender")}}:</label>
                 <input type="radio" [(ngModel)]="gender" name="gender" value="female" id="female" />
-                <label for="female">female</label>
+                <label for="female">{{ translator("female") }}</label>
                 <input type="radio" [(ngModel)]="gender" name="gender" value="male" id="male" />
-                <label for="male">male</label>
+                <label for="male">{{ translator("male") }}</label>
                 <input type="radio" [(ngModel)]="gender" name="gender" value="non-binary" id="non-binary" />
-                <label for="non-binary">non-binary</label>
+                <label for="non-binary">{{ translator("nonbinary") }}</label>
                 <input type="radio" [(ngModel)]="gender" name="gender" value="prefer not to say" id="prefer not to say" />
-                <label for="prefer not to say">prefer not to say</label>
+                <label for="prefer not to say">{{ translator("noanswer") }}</label>
             </mat-grid-tile>
 
-            <!-- Alter -->
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <label>Alter:</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="18-29" id="dt 18-29" />
-                <label for="18-29">18-29</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="30-39" id="dt 30-39" />
-                <label for="30-39">30-39</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="40-49" id="dt 40-49" />
-                <label for="40-49">40-49</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="50-59" id="dt 50-59" />
-                <label for="50-59">50-59</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="60-69" id="dt 60-69" />
-                <label for="60-69">60-69</label>
-                <input type="radio" [(ngModel)]="age" name="age" value=">70" id="dt >70" />
-                <label for=">70">&gt;70</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="Keine Angabe" id="dt kein Alter" />
-                <label for="dt kein Alter">Keine Angabe</label>
-            </mat-grid-tile>
             <!-- Age -->
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
-                <label>Age:</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="18-29" id="en 18-29" />
+            <mat-grid-tile>
+                <label>{{translator("age")}}:</label>
+                <input type="radio" [(ngModel)]="age" name="age" value="18-29" id="18-29" />
                 <label for="ea1">18-29</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="30-39" id="en 30-39" />
+                <input type="radio" [(ngModel)]="age" name="age" value="30-39" id="30-39" />
                 <label for="ea2">30-39</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="40-49" id="en 40-49" />
+                <input type="radio" [(ngModel)]="age" name="age" value="40-49" id="40-49" />
                 <label for="ea3">40-49</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="50-59" id="en 50-59" />
+                <input type="radio" [(ngModel)]="age" name="age" value="50-59" id="50-59" />
                 <label for="ea4">50-59</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="60-69" id="en 60-69" />
+                <input type="radio" [(ngModel)]="age" name="age" value="60-69" id="60-69" />
                 <label for="60-69">60-69</label>
-                <input type="radio" [(ngModel)]="age" name="age" value=">70" id="en >70" />
+                <input type="radio" [(ngModel)]="age" name="age" value=">70" id=">70" />
                 <label for=">70">&gt;70</label>
-                <input type="radio" [(ngModel)]="age" name="age" value="prefer not to say" id="en no age" />
-                <label for="en no age">prefer not to say</label>
+                <input type="radio" [(ngModel)]="age" name="age" [value]="translator('noanswer')" id="no age" />
+                <label for="en no age">{{ translator("noanswer") }}</label>
             </mat-grid-tile>
 
-            <!-- Welche Hand benutzen Sie zum Schreiben? -->
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <label>Welche Hand benutzen Sie zum Schreiben?</label>
-                <input
-                    type="radio"
-                    [(ngModel)]="leftHandedOrRightHanded"
-                    name="leftHandedOrRightHanded"
-                    value="links"
-                    id="links"
-                />
-                <label for="links">links</label>
-                <input
-                    type="radio"
-                    [(ngModel)]="leftHandedOrRightHanded"
-                    name="leftHandedOrRightHanded"
-                    value="rechts"
-                    id="rechts"
-                />
-                <label for="rechts">rechts</label>
-            </mat-grid-tile>
             <!-- Which hand do you use for writing? -->
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
-                <label>Which hand do you use for writing?</label>
+            <mat-grid-tile>
+                <label>{{translator("hand")}}</label>
                 <input
                     type="radio"
                     [(ngModel)]="leftHandedOrRightHanded"
@@ -126,7 +73,7 @@
                     value="left"
                     id="left"
                 />
-                <label for="left">left</label>
+                <label for="left">{{translator("left")}}</label>
                 <input
                     type="radio"
                     [(ngModel)]="leftHandedOrRightHanded"
@@ -134,120 +81,65 @@
                     value="right"
                     id="right"
                 />
-                <label for="right">right</label>
+                <label for="right">{{translator("right")}}</label>
             </mat-grid-tile>
 
-         <!-- Muttersprache / Native Language -->
-        <mat-grid-tile *ngIf="language === Language.GERMAN">
-            <label>Was ist/sind Ihre Muttersprache/Muttersprachen?</label>
+        <mat-grid-tile>
+            <label>{{translator("nativeLanguage")}}</label>
             <input
                 type="text"
                 [(ngModel)]="nativeLanguage"
                 name="nativeLanguage"
-                placeholder="keine Angabe"
+                [placeholder]="translator('placeholder')"
             />
         </mat-grid-tile>
 
-        <mat-grid-tile *ngIf="language === Language.ENGLISH">
-            <label>What is/are your native language/languages?</label>
-            <input
-                type="text"
-                [(ngModel)]="nativeLanguage"
-                name="nativeLanguage"
-                placeholder="no answer"
-            />
-        </mat-grid-tile>
-
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <label>Haben Sie Erfahrung mit sprachbasierter Interaktion mit technischen Geräten?</label>
+            <mat-grid-tile>
+                <label>{{translator("experienceVoice")}}</label>
             </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <input type="radio" [(ngModel)]="anyExperienceVoice" name="anyExperienceVoice" value="keine" id="g11" />
-                <label for="g11">keine</label>
-                <input type="radio" [(ngModel)]="anyExperienceVoice" name="anyExperienceVoice" value="ein wenig" id="g12" />
-                <label for="g12">ein wenig</label>
-                <input type="radio" [(ngModel)]="anyExperienceVoice" name="anyExperienceVoice" value="viel" id="g13" />
-                <label for="g13">viel</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
-                <label>Do you have experience with voice-based interaction with technical devices?</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
+            <mat-grid-tile>
                 <input type="radio" [(ngModel)]="anyExperienceVoice" name="anyExperienceVoice" value="none" id="e11" />
-                <label for="e11">none</label>
+                <label for="e11">{{translator("none")}}</label>
                 <input type="radio" [(ngModel)]="anyExperienceVoice" name="anyExperienceVoice" value="a little" id="e12" />
-                <label for="e12">a little</label>
+                <label for="e12">{{translator("little")}}</label>
                 <input type="radio" [(ngModel)]="anyExperienceVoice" name="anyExperienceVoice" value="a lot" id="e13" />
-                <label for="e13">a lot</label>
+                <label for="e13">{{translator("lot")}}</label>
             </mat-grid-tile>
 
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <label>Haben Sie Erfahrung mit Tablets?</label>
+            <mat-grid-tile>
+                <label>{{translator("experienceTablet")}}</label>
             </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <input type="radio" [(ngModel)]="anyExperienceTablet" name="anyExperienceTablet" value="keine" id="g21" />
-                <label for="g21">keine</label>
-                <input type="radio" [(ngModel)]="anyExperienceTablet" name="anyExperienceTablet" value="ein wenig" id="g22" />
-                <label for="g22">ein wenig</label>
-                <input type="radio" [(ngModel)]="anyExperienceTablet" name="anyExperienceTablet" value="viel" id="g23" />
-                <label for="g23">viel</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
-                <label>Do you have experience with tablets?</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
+            <mat-grid-tile>
                 <input type="radio" [(ngModel)]="anyExperienceTablet" name="anyExperienceTablet" value="none" id="e21" />
-                <label for="e21">none</label>
+                <label for="e21">{{translator("none")}}</label>
                 <input type="radio" [(ngModel)]="anyExperienceTablet" name="anyExperienceTablet" value="a little" id="e22" />
-                <label for="e22">a little</label>
+                <label for="e22">{{translator("little")}}</label>
                 <input type="radio" [(ngModel)]="anyExperienceTablet" name="anyExperienceTablet" value="a lot" id="e23" />
-                <label for="e23">a lot</label>
+                <label for="e23">{{translator("lot")}}</label>
             </mat-grid-tile>
 
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <label>Haben Sie Erfahrung mit stiftbasierter Interaktion?</label>
+            <mat-grid-tile>
+                <label>{{translator("experiencePen")}}</label>
             </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <input type="radio" [(ngModel)]="anyExperiencePen" name="anyExperiencePen" value="keine" id="g31" />
-                <label for="g31">keine</label>
-                <input type="radio" [(ngModel)]="anyExperiencePen" name="anyExperiencePen" value="ein wenig" id="g32" />
-                <label for="g32">ein wenig</label>
-                <input type="radio" [(ngModel)]="anyExperiencePen" name="anyExperiencePen" value="viel" id="g33" />
-                <label for="g33">viel</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
-                <label>Do you have experience with pen-based interaction?</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
+            <mat-grid-tile>
                 <input type="radio" [(ngModel)]="anyExperiencePen" name="anyExperiencePen" value="none" id="e31" />
-                <label for="e31">none</label>
+                <label for="e31">{{translator("none")}}</label>
                 <input type="radio" [(ngModel)]="anyExperiencePen" name="anyExperiencePen" value="a little" id="e32" />
-                <label for="e32">a little</label>
+                <label for="e32">{{translator("little")}}</label>
                 <input type="radio" [(ngModel)]="anyExperiencePen" name="anyExperiencePen" value="a lot" id="e33" />
-                <label for="e33">a lot</label>
+                <label for="e33">{{translator("lot")}}</label>
             </mat-grid-tile>
 
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <label>Haben Sie Erfahrung mit Tabellenkalkulationsprogrammen?</label>
+            <mat-grid-tile>
+                <label>{{translator("experienceSpreadsheets")}}</label>
             </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.GERMAN">
-                <input type="radio" [(ngModel)]="anyExperienceSpreadsheet" name="anyExperienceSpreadsheet" value="keine" id="g41" />
-                <label for="g41">keine</label>
-                <input type="radio" [(ngModel)]="anyExperienceSpreadsheet" name="anyExperienceSpreadsheet" value="ein wenig" id="g42" />
-                <label for="g42">ein wenig</label>
-                <input type="radio" [(ngModel)]="anyExperienceSpreadsheet" name="anyExperienceSpreadsheet" value="viel" id="g43" />
-                <label for="g43">viel</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
-                <label>Do you have experience with spreadsheet programs?</label>
-            </mat-grid-tile>
-            <mat-grid-tile *ngIf="language === Language.ENGLISH">
+            <mat-grid-tile>
                 <input type="radio" [(ngModel)]="anyExperienceSpreadsheet" name="anyExperienceSpreadsheet" value="none" id="e41" />
-                <label for="e41">none</label>
+                <label for="e41">{{translator("none")}}</label>
                 <input type="radio" [(ngModel)]="anyExperienceSpreadsheet" name="anyExperienceSpreadsheet" value="a little" id="e42" />
-                <label for="e42">a little</label>
+                <label for="e42">{{translator("little")}}</label>
                 <input type="radio" [(ngModel)]="anyExperienceSpreadsheet" name="anyExperienceSpreadsheet" value="a lot" id="e43" />
-                <label for="e43">a lot</label>
+                <label for="e43">{{translator("lot")}}</label>
             </mat-grid-tile>
 
         </mat-grid-list>

@@ -5,6 +5,7 @@ import { Language } from "../../shared/model/language.enum";
 import { ActivatedRoute } from "@angular/router";
 import { DataStorageService } from "../../shared/service/data.storage.service";
 import { MessageService } from "../../shared/service/message.service";
+import {TranslationService} from "../../shared/service/translation.service";
 
 @Component({
     selector: "app-sketch",
@@ -58,13 +59,18 @@ export class SketchComponent implements OnInit {
         private route: ActivatedRoute,
         private dataStorageService: DataStorageService,
         private messageService: MessageService,
+        public TranslationService: TranslationService
     ) {
          this.language = this.taskService.chosenLanguage
+         this.TranslationService.set_language(this.language);
          this.backgroundImageUrl = `./assets/${this.language === Language.GERMAN ? 'DE' : 'EN'}/Spreadsheet.png`;
          this.backgroundImageUrlSheet2 = `./assets/${this.language === Language.GERMAN ? 'EN' : 'EN'}/Spreadsheet.png`; // fallback for Sheet 2
          this.currentBackgroundImage = this.backgroundImageUrl;// Update
     }
 
+    translator(key: string): string {
+        return this.TranslationService.translate("sketch_"+key);
+    }
 
     private sheetOriginalDimensions: { [key: string]: { width: number, height: number } } = {
         'sheet1': { width: 1440 , height: 415 },

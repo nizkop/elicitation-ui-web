@@ -32,7 +32,7 @@ export class TaskComponent implements OnInit {
         private messageService: MessageService,
         private recordingService: RecordingService,
         private dataStorageService: DataStorageService,
-        public TranslationService: TranslationService
+        public TranslationService: TranslationService,
         
     ) {}
 

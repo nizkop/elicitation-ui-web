@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { TaskService } from "../../shared/service/task.service";
 import { DataStorageService } from "../../shared/service/data.storage.service";
 import { MessageService } from "../../shared/service/message.service";
+import {TranslationService} from "../../shared/service/translation.service";
+import {raceInit} from "rxjs/internal/observable/race";
 
 @Component({
     selector: "app-demographics",
@@ -31,13 +33,14 @@ export class DemographicsComponent implements OnInit {
         private taskService: TaskService,
         private dataStorageService: DataStorageService,
         private messageService: MessageService,
+        public TranslationService: TranslationService
     ) {}
 
     ngOnInit(): void {
         this.language = this.taskService.chosenLanguage;
+         this.TranslationService.set_language(this.language);
     }
 
-    //TODO: Refactor
     checkFormCompletion(): boolean {
         if (this.gender === "" || this.age === "" || this.leftHandedOrRightHanded === "" || this.nativeLanguage == "") {
             return false;
@@ -66,6 +69,10 @@ export class DemographicsComponent implements OnInit {
         );
     }
 
+    translator(key: string): string {
+        return this.TranslationService.translate("demographics_"+key);
+    }
+
     clickPreviousPage() {
         this.router.navigate(["/questionnaire/18"]);
     }
@@ -90,4 +97,6 @@ export class DemographicsComponent implements OnInit {
     nextPage() {
         this.router.navigate(["/acknowledgement"]);
     }
+
+    protected readonly raceInit = raceInit;
 }

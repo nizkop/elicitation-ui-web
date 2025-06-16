@@ -1,10 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { TaskService } from "../../shared/service/task.service";
-import { Task } from "../../shared/model/task";
-import { Language } from "../../shared/model/language.enum";
-import { ActivatedRoute } from "@angular/router";
-import { DataStorageService } from "../../shared/service/data.storage.service";
-import { MessageService } from "../../shared/service/message.service";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {TaskService} from "../../shared/service/task.service";
+import {Task} from "../../shared/model/task";
+import {Language} from "../../shared/model/language.enum";
+import {ActivatedRoute} from "@angular/router";
+import {DataStorageService} from "../../shared/service/data.storage.service";
+import {MessageService} from "../../shared/service/message.service";
 import {TranslationService} from "../../shared/service/translation.service";
 
 @Component({
@@ -63,8 +63,20 @@ export class SketchComponent implements OnInit {
     ) {
          this.language = this.taskService.chosenLanguage
          this.TranslationService.set_language(this.language);
-         this.backgroundImageUrl = `./assets/${this.language === Language.GERMAN ? 'DE' : 'EN'}/Spreadsheet.png`;
-         this.backgroundImageUrlSheet2 = `./assets/${this.language === Language.GERMAN ? 'EN' : 'EN'}/Spreadsheet.png`; // fallback for Sheet 2
+         switch (this.language) {
+              case Language.GERMAN:
+                this.backgroundImageUrl = './assets/DE/Spreadsheet.png';
+                this.backgroundImageUrlSheet2 = './assets/DE/Spreadsheet.png';//fallback for sheet 2
+                break;
+              case Language.ICELANDIC:
+                this.backgroundImageUrl = './assets/IS/Spreadsheet.png';
+                this.backgroundImageUrlSheet2 = './assets/IS/Spreadsheet.png';//fallback for sheet 2
+                break;
+              default:
+                this.backgroundImageUrl = './assets/EN/Spreadsheet.png';
+                this.backgroundImageUrlSheet2 = './assets/EN/Spreadsheet.png';//fallback for sheet 2
+                break;
+        }
          this.currentBackgroundImage = this.backgroundImageUrl;// Update
     }
 
@@ -260,8 +272,18 @@ private formatTimestamp(timestamp: number): string {
     if (this.currentTask) {
       console.log("Current Task: ", this.currentTask.id);
       // Initialize background Image for sheet 2:
-      this.backgroundImageUrlSheet2 = `./assets/${this.language === Language.GERMAN ? 'DE' : 'EN'}/${this.currentTask?.picture_file_name}`;
-        //  TODO so far no security, if picture not there
+       switch (this.language) {    //  TODO so far no security, if picture not there
+          case Language.GERMAN:
+            this.backgroundImageUrlSheet2 = `./assets/DE/${this.currentTask?.picture_file_name}`;
+            break;
+          case Language.ICELANDIC:
+            this.backgroundImageUrlSheet2 = `./assets/IS/${this.currentTask?.picture_file_name}`;
+            break;
+          default:
+            this.backgroundImageUrlSheet2 = `./assets/EN/${this.currentTask?.picture_file_name}`;
+            break;
+      }
+
 
       this.currentTask.startTimeWatching = new Date();
       

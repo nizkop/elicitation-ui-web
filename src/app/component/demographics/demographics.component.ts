@@ -38,7 +38,7 @@ export class DemographicsComponent implements OnInit {
 
     ngOnInit(): void {
         this.language = this.taskService.chosenLanguage;
-         this.TranslationService.set_language(this.language);
+        this.TranslationService.set_language(this.language);
     }
 
     checkFormCompletion(): boolean {

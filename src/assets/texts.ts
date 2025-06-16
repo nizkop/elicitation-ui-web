@@ -98,6 +98,17 @@ export const english_texts: Record<string, string> = {
     demographics_experiencePen: "Do you have experience with pen-based interaction?",
     demographics_experienceSpreadsheets: "Do you have experience with spreadsheet programs?",
 
+    acknowledgement_header: "Acknowledgement",
+    acknowledgement_newStart: "Restart Study",
+    acknowledgement_thankYou: "Thank you for your participation and commitment to this research!",
+    acknowledgement_weThank: "We would like to thank you very much for taking part in our study. Your participation is extremely valuable to\n" +
+        "        us and helps us to gain important insights.",
+    acknowledgement_yourData: "Your data has been carefully collected and will be treated confidentially. We will use your information\n" +
+        "        exclusively for scientific purposes and will not pass it on to third parties.",
+    acknowledgement_questions: "If you have any further questions or would like to find out more about the study, please feel free to contact\n" +
+        "        us. Your opinion and feedback are important to us.",
+    acknowledgement_thanksAgain: "Thank you again for your participation!",
+    acknowledgement_team: "The research team",
 };
 
 export const german_texts: Record<string, string> = {
@@ -199,6 +210,19 @@ export const german_texts: Record<string, string> = {
     demographics_experienceTablet: "Haben Sie Erfahrung mit Tablets?",
     demographics_experiencePen: "Haben Sie Erfahrung mit stiftbasierter Interaktion?",
     demographics_experienceSpreadsheets: "Haben Sie Erfahrung mit Tabellenkalkulationsprogrammen?",
+
+    acknowledgement_header: "Danksagung",
+    acknowledgement_newStart: "Studie neustarten",
+    acknowledgement_thankYou: "Vielen Dank für Ihre Teilnahme!",
+    acknowledgement_weThank: "Wir möchten uns herzlich bei Ihnen bedanken, dass Sie an unserer Studie teilgenommen haben. Ihre Teilnahme ist\n" +
+        "        für uns äußerst wertvoll und hilft uns, wichtige Erkenntnisse zu gewinnen.",
+    acknowledgement_yourData: "Ihre Daten wurden sorgfältig erfasst und werden vertraulich behandelt. Wir verwenden Ihre Informationen\n" +
+        "        ausschließlich für wissenschaftliche Zwecke und werden sie nicht an Dritte weitergeben.",
+    acknowledgement_questions: "Falls Sie weitere Fragen haben oder mehr über die Studie erfahren möchten, können Sie uns gerne kontaktieren.\n" +
+        "        Ihre Meinung und Ihr Feedback sind uns wichtig.",
+    acknowledgement_thanksAgain: "Vielen Dank nochmals für Ihre Teilnahme!",
+    acknowledgement_team: "Das Forschungsteam",
+
 };
 
 export const icelandic_texts: Record<string, string> = {
@@ -250,4 +274,16 @@ export const icelandic_texts: Record<string, string> = {
     sketch_before: "",
     sketch_after: "",
     sketch_hint: "",
+
+    acknowledgement_header: "Acknowledgement",
+    acknowledgement_newStart: "Restart Study",
+    acknowledgement_thankYou: "Thank you for your participation and commitment to this research!",
+    acknowledgement_weThank: "We would like to thank you very much for taking part in our study. Your participation is extremely valuable to\n" +
+        "        us and helps us to gain important insights.",
+    acknowledgement_yourData: "Your data has been carefully collected and will be treated confidentially. We will use your information\n" +
+        "        exclusively for scientific purposes and will not pass it on to third parties.",
+    acknowledgement_questions: "If you have any further questions or would like to find out more about the study, please feel free to contact\n" +
+        "        us. Your opinion and feedback are important to us.",
+    acknowledgement_thanksAgain: "Thank you again for your participation!",
+    acknowledgement_team: "The research team",
 };

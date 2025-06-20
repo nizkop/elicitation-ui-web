@@ -9,6 +9,7 @@ export const tasks_definition = [
         english_description: "Increase the row height of row 2.",
         german_hint: "",//Format",
         english_hint: "",//Formatting",
+        icelandic_hint: "",
         group: Group.P,
         picture_file_name: "task_C.png",
     },
@@ -19,6 +20,7 @@ export const tasks_definition = [
         english_description: "Calculate the average hours per month for each person.",
         german_hint: "Berechnung, z.B. K7 = SUMME(E7:J7)/6",
         english_hint: "Calculation, e.g. K7 = SUM(E7:J7)/6",
+        icelandic_hint: "Reikningur, t.d. K7 = SUM(E7:J7)/6",
         group: Group.P,
         picture_file_name: "task_G.png",
     },
@@ -28,6 +30,7 @@ export const tasks_definition = [
     german_description: "Tragen Sie den Wert 100 in die Zelle F9 ein.",
     german_hint: "",//Datenbearbeitung",
     english_hint: "",//Data Edit",
+    icelandic_hint: "",
     english_description: "Enter the value 100 into cell F9.",
     group: Group.A,
     picture_file_name: "task_1.png",
@@ -39,6 +42,7 @@ export const tasks_definition = [
     english_description: "Delete the contents of cell E8.",
     german_hint: "",//Datenbearbeitung",
     english_hint: "",//Data Edit",
+    icelandic_hint: "",
     group: Group.A,
     picture_file_name: "task_2.png",
   },
@@ -49,6 +53,7 @@ export const tasks_definition = [
     english_description: "Delete the contents of cells J7-J11.",
     german_hint: "",//Datenbearbeitung: etwas fehlt",
     english_hint: "",//Data Edit: Something is missing",
+    icelandic_hint: "",
     group: Group.A,
     picture_file_name: "task_3.png",
   },
@@ -59,6 +64,7 @@ export const tasks_definition = [
     english_description: "Calculate the sum of cells I9 and J9 in cell K9.",
     german_hint: "Berechnung: K9 = I9 + J9",//: Was sind die Stunden für Johnson im Mai und Juni? K8 =I8+J8",
     english_hint: "Calculation: K9 = I9 + J9",//: What are the hours for Johnson in May and June? K8 =I8+J8 ",
+    icelandic_hint: "Reikningur: K9 = I9 + J9",
     group: Group.A,
     picture_file_name: "task_4.png",
   },
@@ -89,6 +95,7 @@ export const tasks_definition = [
     english_description: "Remove the whole column B from the table.",
     german_hint: "",//Strukturänderung: etwas fehlt",
     english_hint: "",//Structure Change: something is missing",
+    icelandic_hint: "",
     group: Group.A,
     picture_file_name: "task_6.png",
   },
@@ -99,6 +106,7 @@ export const tasks_definition = [
     english_description: "Move cells A15-C15 to H3.",
     german_hint: "",//Strukturänderung",
     english_hint: "",//Structure Change",
+    icelandic_hint: "",
     group: Group.A,
     picture_file_name: "task_7.png",
   },
@@ -109,6 +117,7 @@ export const tasks_definition = [
     english_description: "Calculate the sum of cells E7-E11 in cell E13.",
     german_hint: "Berechnung: E13 = SUMME(E7:E11)",
     english_hint: "Calculation: E13 = SUM(E7:E11)",
+    icelandic_hint: "Reikningur: E13 = SUM(E7:E11)",
     group: Group.B,
     picture_file_name: "task_8.png",
   },
@@ -119,6 +128,7 @@ export const tasks_definition = [
     english_description: "Format the values in cells C7-C11 as Dollar amounts with two decimal places.",
     german_hint: "",//Format",
     english_hint: "",//Formatting",
+    icelandic_hint: "",
     group: Group.B,
     picture_file_name: "task_9.png",
   },
@@ -129,6 +139,7 @@ export const tasks_definition = [
     english_description: "Add a single frame around cells A15-C15.",
     german_hint: "",//Format",
     english_hint: "",//Formatting",
+    icelandic_hint: "",
     group: Group.B,
     picture_file_name: "task_10.png",
   },
@@ -160,6 +171,7 @@ export const tasks_definition = [
         english_description: "Exchange the entries of B7 and B8.",
         german_hint: "",//Strukturänderung: veränderter Ort",
         english_hint: "",//Structure Change: Changed location",
+        icelandic_hint: "",
         group: Group.B,
         picture_file_name: "task_E.png",
     },
@@ -170,6 +182,7 @@ export const tasks_definition = [
     english_description: "Create a bar chart from the value in cells C7-C11.",
     german_hint: "",//,Veranschaulichung",
     english_hint: "",//Visualization",
+    icelandic_hint: "",
     group: Group.C,
     picture_file_name: "task_13.png",
   },
@@ -180,6 +193,7 @@ export const tasks_definition = [
     english_description: "Continue the series of values in row 6 (E6-J6) up to cell M6.",
     german_hint: "",//Strukturänderung",
     english_hint: "",//Structure Change",
+    icelandic_hint: "",
     group: Group.B,
     picture_file_name: "task_14.png",
   },
@@ -190,6 +204,7 @@ export const tasks_definition = [
     english_description: "Transpose the names in cells A7-A11 to row 17.",
     german_hint: "",//Strukturänderung: Datenbearbeitung in A17:E17",
     english_hint: "",//Structure Change: Data Edit in A17:E17",
+    icelandic_hint: "",
     group: Group.B,
     picture_file_name: "task_15.png",
   },
@@ -201,6 +216,7 @@ export const tasks_definition = [
     english_description: "Sort the data in rows 7-11 alphabetically by the employee names in column A.",
     german_hint: "Inwiefern wurden die Namen umgestellt?",//Strukturänderung",
     english_hint: "In what way have the names been rearranged?",//Structure Change",
+    icelandic_hint: "Hvernig hafa nöfnin verið endurröðuð?",
     group: Group.C,
     picture_file_name: "task_16.png",
   },
@@ -216,6 +232,7 @@ export const tasks_definition = [
         // " H13=SUM(H7:H11)\n" +
         // " I13=SUM(I7:I11)\n" +
         // " J13=SUM(J7:J11)\n",
+    icelandic_hint: "Reikningur: Samtals klukkutímar/mánuður, t.d. G13 = SUM(G7:G11)",
     group: Group.C,
     picture_file_name: "task_17.png",
   },
@@ -232,6 +249,7 @@ export const tasks_definition = [
         // " D9=C9+C$15*C9\n" +
         // " D10=C10+C$15*C10\n" +
         // " D11=C11+C$15*C11",
+    icelandic_hint: "Reikningur: brúttó tímakaup, t.d. D10 = C10+C15*C10",
     group: Group.C,
     picture_file_name: "task_18.png",
   },
@@ -242,6 +260,7 @@ export const tasks_definition = [
     english_description: "Define a conditional formatting rule for cells C7-11 so values greater than 200 are displayed in red but others in green.",
     german_hint: "Bedingtes Format",//: Bis zu welcher Zahl sind die Zellen grün? Ab welcher sind sie rot?",
     english_hint: "Conditional Formatting",//: Up to which number are the cells green? From which number are they red?",conditional
+    icelandic_hint: "Skilyrt snið",
     group: Group.C,
     picture_file_name: "task_19.png",
   },
@@ -252,6 +271,7 @@ export const tasks_definition = [
     english_description: "Calculate the total salary of employee Smith in cell L7.",
     german_hint: "Berechnung: Gesamtgehalt des Mitarbeiters Smith, L7 = C7*SUMME(E7:J7)",
     english_hint: "Calculation: total salary of employee Smith, L7 = C7*SUM(E7:J7)",
+    icelandic_hint: "Reikningur: samtals laun Smiths, L7 = C7*SUM(E7:J7)",
     group: Group.C,
     picture_file_name: "task_20.png",
   },
@@ -259,7 +279,7 @@ export const tasks_definition = [
 
 
 
-export function splitTasks(combinedTasks: any[]): { germanTasks: any[], englishTasks: any[] } {
+export function splitTasks(combinedTasks: any[]): { germanTasks: any[], englishTasks: any[], icelandicTasks: any[]  } {
   const germanTasks = combinedTasks.map((task, index) => ({
     title: "",
     description: task.german_hint,
@@ -274,7 +294,14 @@ export function splitTasks(combinedTasks: any[]): { germanTasks: any[], englishT
     picture_file_name: task.picture_file_name
   }));
 
-  return { germanTasks, englishTasks };
+  const icelandicTasks = combinedTasks.map((task, index) => ({
+    title: "",
+    description: task.icelandic_hint,
+    group: task.group,
+    picture_file_name: task.picture_file_name
+  }));
+
+  return { germanTasks, englishTasks, icelandicTasks };
 }
 
 

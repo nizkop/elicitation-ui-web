@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Task } from "../model/task";
-import { Group } from "../model/group.enum";
-import { Language } from "../model/language.enum";
+import {Injectable} from "@angular/core";
+import {Task} from "../model/task";
+import {Group} from "../model/group.enum";
+import {Language} from "../model/language.enum";
 import {splitTasks, tasks_definition} from "./tasks_definiton";
 
 @Injectable({
@@ -19,11 +19,15 @@ export class TaskService {
         const resets = 0;
         let tasks = [];
 
-        const {germanTasks, englishTasks} = splitTasks(tasks_definition);
+        const {germanTasks, englishTasks, icelandicTasks} = splitTasks(tasks_definition);
         if (this.chosenLanguage == Language.GERMAN) {
             tasks = germanTasks;
         } else {
-            tasks = englishTasks;
+            if(this.chosenLanguage == Language.ICELANDIC){
+                tasks = icelandicTasks
+            } else{
+                tasks = englishTasks;
+            }
         }
 
         for (const task of tasks) {

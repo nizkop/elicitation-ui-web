@@ -32,6 +32,16 @@ export class TranslationService {
         }
     }
 
+    get_english_value(key: string): string {
+        const value = english_texts[key];
+        if (value === undefined) {
+            console.log(`[Translation misssing] Key: "${key}" in language: ${this.chosenLanguage}`);
+            // alert(`[Translation missing] Key: "${key}" in language: ${this.chosenLanguage}`);
+            return '';
+        }
+        return value;
+    }
+
     get availableLanguages(): string[] {
         const languageValues: string[] = Object.keys(Language)
           .filter(key => isNaN(Number(key))) // Nur echte Keys, nicht numerische Rückverweise

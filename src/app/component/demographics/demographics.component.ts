@@ -53,6 +53,7 @@ export class DemographicsComponent implements OnInit {
 
     saveData(): void {
         const data = {
+            chosenlanguage: this.language,
             gender: this.gender,
             age: this.age,
             leftHandedOrRightHanded: this.leftHandedOrRightHanded,

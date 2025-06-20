@@ -26,17 +26,27 @@ export class AcknowledgementComponent implements OnInit {
 
     async ngOnInit() {
         this.TranslationService.set_language(this.language);
+        let fileName: string;
+        const randomId = Math.floor(Math.random() * 1000000).toString();
+        switch (this.language) {
+          case Language.GERMAN:
+            fileName = `GERMAN_${randomId}`;
+            break;
+          case Language.ICELANDIC:
+            fileName = `ISLANDIC_${randomId}`;
+            break;
+          case Language.ENGLISH:
+          default:
+            fileName = `ENGLISH_${randomId}`;
+            break;
+        }
         try {
             if (this.recordingService.recordingNotSupported()) {
-                const randomId = Math.floor(Math.random() * 1000000).toString();
-                const fileName = this.language === Language.GERMAN ? `GERMAN_${randomId}` : `ENGLISH_${randomId}`;
                 this.dataStorageService.downloadAllData(fileName);
             } else {
                 await this.recordingService.stopRecording();
 
                 this.recordingService.getRecordingStoppedEvent().subscribe(async () => {
-                    const randomId = Math.floor(Math.random() * 1000000).toString();
-                    const fileName = this.language === Language.GERMAN ? `GERMAN_${randomId}` : `ENGLISH_${randomId}`;
                     this.dataStorageService.downloadAllData(fileName);
                 });
             }

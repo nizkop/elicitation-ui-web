@@ -51,7 +51,7 @@ export const english_texts: Record<string, string> = {
     welcome_contact_firstSentence: "The principal investigators for this research project are",
     welcome_contact1: "Dr. Matthias Book, professor at the Department of\n" +
         "            Computer Science at the University of Iceland (book@hi.is),",
-    welcome_contact2: "Dr. Marc Hesenius, professor at\n" +
+    welcome_contact2: "Dr. Marc Hesenius, post-doctoral researcher at\n" +
         "            the Engineering Interactive Applications Chair of the University of Hildesheim, Germany (hesenius@uni-hildesheim.de),",
     welcome_contact3: "and Marvin Bachert, phd student at the Software Engineering Chair of the University\n" +
         "            Duisburg-Essen, Germany (marvin.bachert@uni-due.de).",
@@ -164,7 +164,7 @@ export const german_texts: Record<string, string> = {
     welcome_contactHeader: "Kontaktinformationen",
     welcome_contact_firstSentence: "Die Hauptverantwortlichen für dieses Forschungsprojekt sind",
     welcome_contact1: "Dr. Matthias Book, Professor an der Fakultät für Informatik der Universität von Island (book@hi.is),",
-    welcome_contact2: "Dr. Marc Hesenius, Professor am Lehrstuhl für\n" +
+    welcome_contact2: "Dr. Marc Hesenius, Post-Doc am Lehrstuhl für\n" +
         "                dem Lehrstuhl für Interaktive Ingenieuranwendungen der Universität Hildesheim, Deutschland (hesenius@uni-hildesheim.de),",
     welcome_contact3: "und Marvin Bachert, Promotionsstudent am Lehrstuhl Software Engineering der Universität Duisburg-Essen,\n" +
         "                Deutschland (marvin.bachert@uni-due.de).",
@@ -226,9 +226,9 @@ export const german_texts: Record<string, string> = {
 
 
 export const icelandic_texts: Record<string, string> = {
-    welcome_WELCOME: "Velkomin(n)",
+    welcome_WELCOME: "Velkomin",
     welcome_thankInterest: 'Takk fyrir áhugann',
-    welcome_studyBasics: 'Þessi rannsókn kannar hversu vel töflureikna forrit geta verið stjórnað með talmáta eða teikningum.',
+    welcome_studyBasics: 'Þessi rannsókn kannar hvernig vel töflureikna forrit geta verið stjórnað með talmáta eða teikningum.',
     welcome_furtherInformationButton: 'Ýttu á takkann fyrir neðan til að fá frekar upplýsingar.',
     welcome_GERMAN: "Skipta yfir á þýsku",
     welcome_ENGLISH: "Skipta yfir á ensku",
@@ -254,7 +254,7 @@ export const icelandic_texts: Record<string, string> = {
     welcome_contactHeader: "Tengiliðar",
     welcome_contact_firstSentence: "Aðalrannsakendur í þessu verkefni er:",
     welcome_contact1: "Dr. Matthias Book, prófessor hjá tölvunarfræðideild Háskóla Íslands (book@hi.is),",
-    welcome_contact2: "Dr. Marc Hesenius, prófessor hjá University of Hildesheim, Þýskalandi (hesenius@uni-hildesheim.de),",
+    welcome_contact2: "Dr. Marc Hesenius, nýdóktor hjá University of Hildesheim, Þýskalandi (hesenius@uni-hildesheim.de),",
     welcome_contact3: "og Marvin Bachert, doktorsnemi hjá University Duisburg-Essen, Þýskalandi (marvin.bachert@uni-due.de).",
     welcome_contactFunding: "Þessi rannsókn er studd af Rannsóknarmiðstöð Íslands (styrkur nr. 2410725).",
     welcome_contactQuestions: "Ef þú hefur einhverjar spurningar um rannsóknina eða þátttöku þína, vinsamlegast ekki hika við að spyrja rannsakandann hvenær sem er.",
@@ -281,15 +281,15 @@ export const icelandic_texts: Record<string, string> = {
     demographics_gender: "Kyn",
     demographics_female: "Kvenkyns",
     demographics_male: "Karlkyns",
-    demographics_nonbinary: "non-binary",
+    demographics_nonbinary: "Tvíkynja",
     demographics_noanswer: "Vil helst ekki segja",
     demographics_age: "Aldur",
     demographics_hand: "Hvaða hönd notar þú til þess að skrifa?",
     demographics_left: "Vinstri",
     demographics_right: "Hægri",
     demographics_nativeLanguage: "Hvert er móðurmál þitt?",
-    demographics_placeholder: "Ekkert svar",
-    demographics_experienceVoice: "Hefur þú reynslu af því að nota rödd þína til að eiga samskipti við tæknibúnað?",
+    demographics_placeholder: "nenginn svar",
+    demographics_experienceVoice: "Hefur þú reynslu af því að nota rödd til að hafa samskipti með tæknibúnaði?",
     demographics_none: "Enga",
     demographics_little: "Smá",
     demographics_lot: "Mikla",
@@ -324,6 +324,7 @@ export const icelandic_texts: Record<string, string> = {
     feb: "feb",
     mar: "mar",
     apr: "apr",
-    may: "maí",
-    jun: "jún"
+    may: "may",
+    jun: "jun"
 };
+
